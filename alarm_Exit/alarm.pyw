@@ -11,10 +11,14 @@ current_time = {
 }
 file_path = 'C:\\Users\\student\\TIL\\alarm_Exit\\alarm_img.png'
 
-while True:
-    if alarm_time['hour'] == current_time['hour']:
-        os.startfile(file_path)
-        while True:
-            if alarm_time['minute'] == current_time['minute']:
-                os.startfile(file_path)
-                break
+def alarm():
+    while True:
+        if alarm_time['hour'] == current_time['hour']:
+            os.startfile(file_path)
+            while True:
+                if alarm_time['minute'] == current_time['minute']:
+                    os.startfile(file_path)
+                    return
+
+
+alarm()
