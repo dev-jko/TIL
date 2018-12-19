@@ -2,7 +2,7 @@ import time
 import os
 
 alarm_time = {
-    'hour':10,
+    'hour':18,
     'minute':2
 }
 current_time = {
