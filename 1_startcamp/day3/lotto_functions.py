@@ -39,14 +39,3 @@ def am_i_lucky(my_numbers, real_numbers):
         print('꽝')
     print('맞춘 갯수 :', count)
     return check
-
-
-game_number = int(input('회차 입력 : '))
-real_numbers = get_real_lotto(game_number)
-count = 0
-while(True):
-    my_numbers = pick_lotto()
-    count += 1
-    if am_i_lucky(my_numbers, real_numbers):
-        break
-print(count)

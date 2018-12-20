@@ -1,8 +1,6 @@
 import time
 import os
-from pywinauto.application import Application
-from pywinauto.win32functions import SetForegroundWindow
-from pywinauto.win32functions import SetFocus
+import win32gui, win32con
 
 def getCurrentTIme():
     current_time = {
@@ -11,14 +9,16 @@ def getCurrentTIme():
     }
     return current_time
 
+def enumHandler(hwnd, lParam):
+    if win32gui.IsWindowVisible(hwnd):
+        if ('사진' in win32gui.GetWindowText(hwnd)):
+            win32gui.ShowWindow(hwnd, win32con.SW_MAXIMIZE)
+            # win32gui.SetForegroundWindow(hwnd)
+
 def openfile(file_path):
-    # os.startfile(path)
-    # app = Application().connect(path=file_path)
-    app = Application().start('mspaint.exe' + ' ' + file_path)
-    w = app.top_window()
-    # Application().win
-    # SetFocus(w.wrapper_object())
-    # SetForegroundWindow(w.wrapper_object())
+    os.startfile(file_path)
+    time.sleep(0.5)
+    win32gui.EnumWindows(enumHandler, None)
     
 
 def alarm(alarm_time, start_file_path, end_file_path):
