@@ -37,14 +37,22 @@ for key, value in cities_temp.items():
 # Hottest: ?, Coldest: ?
 hottest = {'name': '', 'temp': -999}
 coldest = {'name': '', 'temp': 999}
+
+hottest_result = []
+coldest_result = []
+
 for key, value in cities_temp.items():
     for temp in value:
         if hottest['temp'] < temp:
             hottest['name'] = key
             hottest['temp'] = temp
+            hottest_result.append(key)
         if coldest['temp'] > temp:
             coldest['name'] = key
             coldest['temp'] = temp
+            coldest_result.append(key)
+
 print('Hottest:', hottest['name'])
 print('Coldest:', coldest['name'])
-
+print('Hottest:', hottest_result)
+print('Coldest:', coldest_result)
