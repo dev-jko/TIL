@@ -3,7 +3,6 @@ import random
 
 def get_real_lotto(game_number):
     real_numbers = {'numbers':[], 'bonus':0}
-    game_number = 837
     url = 'https://www.dhlottery.co.kr/common.do?method=getLottoNumber&drwNo='
     response = requests.get(url+str(game_number)).json()
     real_numbers['bonus'] = response['bnusNo']
