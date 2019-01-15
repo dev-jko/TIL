@@ -1,0 +1,26 @@
+a {
+    color: red;
+}
+
+
+div a {
+    color: green;
+}
+
+
+#exec-bio {
+    background-color: lightgray;
+}
+
+.bio-box {
+    border: 1px solid black;
+}
+
+
+#link-google {
+    background: orange;
+}
+
+.my-box {
+    background: aqua;
+}

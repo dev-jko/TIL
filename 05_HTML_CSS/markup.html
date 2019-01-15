@@ -133,6 +133,52 @@
         </tr>
     </table>
 
+    <hr>
+
+    <h3>Form</h3>
+    <p>자기소개하기</p>
+    <form action="./index.html">
+        <div>이름: <input type="text" name="name" placeholder="이름"></div>
+        <div>나이: <input type="number" name="age" min="0" value="20"></div>
+        <div>폰 : <input type="text" name="phone" id=""></div>
+        <div>자기소개: <textarea name="intro" id="" cols="30" rows="10"></textarea></div>
+        <div><input type="submit" value="제출"></div>
+    </form>
+
+    <hr>
+
+    <h3>주문서를 작성해 주세요</h3>
+    <form action="">
+        <div>이름: <input type="text" name="name" placeholder="이름" autofocus></div>
+        <div>날짜: <input type="date" name="date" id=""></div>
+        <p><strong>1. 샌드위치 선택</strong></p>
+        <div>
+            <input type="radio" name="sandwich" value="1" id="스테이크"><label for="스테이크">스테이크</label><br>
+            <input type="radio" name="sandwich" value="2" id="터키 아보카도"><label for="터키 아보카도">터키 아보카도</label><br>
+            <input type="radio" name="sandwich" value="3" id="미트볼"><label for="미트볼">미트볼</label><br>
+        </div>
+        <p><strong>2. 사이즈 선택</strong></p>
+        <div>
+            <input type="number" min="15" max="30" step="15" value="15">
+        </div>
+        <p><strong>3. 빵</strong></p>
+        <div>
+            <select name="bread" id="">
+                <option value="1">허니오트</option>
+                <option value="2">플랫브래드</option>
+                <option value="3">하티 이탈리안</option>
+            </select>
+        </div>
+        <p><strong>4. 소스</strong></p>
+        <div>
+            <input type="checkbox" name="option" id="핫칠리" value="1"><label for="핫칠리">핫칠리</label><br>
+            <input type="checkbox" name="option" id="랜치" value="2"><label for="랜치">랜치</label><br>
+            <input type="checkbox" name="option" id="스위트 어니언" value="3"><label for="스위트 어니언">스위트 어니언</label><br>
+        </div>
+        <div>
+            <input type="submit" value="Subway!">
+        </div>
+    </form>
 
 
 </body>

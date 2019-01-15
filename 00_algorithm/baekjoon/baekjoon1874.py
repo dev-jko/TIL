@@ -1,5 +1,3 @@
-# TODO 시간초과
-
 from sys import stdin
 n = int(stdin.readline())
 inputs = []
@@ -7,17 +5,22 @@ for _ in range(n):
     inputs.append(int(stdin.readline()))
 stack = [1]
 i = 1
-result = '+\n'
-while len(inputs) > 0:
-    if len(stack) == 0 or stack[-1] < inputs[0]:
+top = 0
+index = 0
+result = ['+']
+while i <= n:
+    if top < 0 or stack[top] < inputs[index]:
         i += 1
         stack.append(i)
-        result += '+\n'
-    elif stack[-1] == inputs[0]:
-        result += '-\n'
-        inputs = inputs[1:]
+        result.append('+')
+        top += 1
+    elif stack[top] == inputs[index]:
+        result.append('-')
+        index += 1
         stack.pop()
+        top -= 1
     else:
-        result = 'NO'
+        result = ['NO', None]
         break
-print(result)
+result = result[:-1]
+print(*result, sep="\n")
