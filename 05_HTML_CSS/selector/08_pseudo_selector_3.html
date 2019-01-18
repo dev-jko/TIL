@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <META HTTP-EQUIV="refresh" CONTENT="1">
+    <style>
+        /* 가상 요소 셀렉터 pseudo selector */
+        /* p의 첫 글자 */
+        p::first-letter {
+            font-size: 3em;
+        }
+
+        /* p의 첫 줄 */
+        p::first-line {
+            color: aqua;
+        }
+
+        /* h1 요소 앞에 추가 */
+        h1::before {
+            content: " HTML & CSS ";
+            color:blue;
+        }
+
+        /* h1 요소 뒤에 추가 */
+        h1::after {
+            content: " !!! CSS ";
+            color: lightsalmon;
+        }
+
+        /* 블럭된 것 */
+        ::selection {
+            color: maroon;
+            background: palegoldenrod;
+        }
+
+
+    </style>
+</head>
+
+<body>
+    <h1>this is heading</h1>
+
+    <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+        magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+        consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+        pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est
+        laborum."</p>
+
+
+
+
+</body>
+
+</html>

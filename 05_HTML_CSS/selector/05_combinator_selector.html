@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <META HTTP-EQUIV="refresh" CONTENT="1">
+    <style>
+        /* 후손 / 자식 셀렉터 */
+        /* div 요소의 후손(n level) 요소 중 p 요소 전체 */
+        div p {
+            background: lightblue;
+        }
+
+        /* div 요소의 자식(1 level) 요소 중 p 요소 전체 */
+        div>p {
+            background: lightyellow;
+        }
+
+
+        /* siblings 셀렉터 */
+        /* p의 sibling 요소 중에 바로 뒤에 오는 ul 요소 */
+        p+ul {
+            background: lightsalmon;
+        }
+
+        /* div의 sibling 요소 중에 뒤에 오는 p 요소 */
+        div~p {
+            background: lime;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>heading</h1>
+    <div>
+        <p>p1p1p1p1</p>
+        <p>p2p2p2p2</p>
+        <spap>
+            <p>p3p3p3p3</p>
+        </spap>
+    </div>
+    <p>p4p4p4p4p4</p>
+
+    <div>
+        A div element.
+    </div>
+    <ul>
+        <li>Coffe</li>
+        <li>Tea</li>
+        <li>Milk</li>
+    </ul>
+    <p>First Paragraph</p>
+    <ul>
+        <li>Latte</li>
+        <li>Choco</li>
+        <li>Water</li>
+    </ul>
+
+    <h2>Another list</h2>
+    <ul>
+        <li>Mango</li>
+        <li>Grape</li>
+        <li>Apple</li>
+    </ul>
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <META HTTP-EQUIV="refresh" CONTENT="1">
+    <style>
+        
+        .visible {
+            visibility: visible;
+        }
+
+        /* hidden은 content만 숨김 / 공간은 남음 */
+        .hidden {
+            visibility: hidden;
+        }
+
+        table, td {
+            border: 1px solid black;
+        }
+
+        /* collapse는 table에서만 사용하고, 행이나 열을 숨김 */
+        .collapse {
+            visibility: collapse;
+            /* visibility: hidden; */
+        }
+
+        /* display: none은 공간도 숨긴다. */
+
+
+        div, img {
+            float: left;
+            width: 300px;
+            margin: 30px;
+            background: darkblue;
+            color: white;
+            opacity: 0.5;
+            transition: opacity 0.5s;
+        }
+
+        div:hover, img:hover {
+            opacity: 1;
+        }
+        
+    </style>
+</head>
+
+<body>
+
+    <h2 class="visible">visibility: visible</h2>
+    <h2 class="hidden">visibility: hidden</h2>
+    <h2 style="display:none">display: none</h2>
+
+    <table>
+        <tr>
+            <td>A</td>
+            <td>B</td>
+        </tr>
+        <tr class="collapse">
+            <td>C</td>
+            <td>D</td>
+        </tr>
+    </table>
+
+    <hr>
+
+    <div>opacity 0.5</div>
+    <img src="../images/header.jpg" alt="header">
+
+</body>
+
+</html>

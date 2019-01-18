@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <META HTTP-EQUIV="refresh" CONTENT="1">
+    <style>
+
+        /* a에 마우스를 올리면 */
+        a:hover {
+            background: lightblue;
+            font-weight: bold;
+        }
+
+        /* input에 포커스가 가면 */
+        input:focus {
+            background: lightcoral;
+        }
+
+        /* a 링크를 방문하지 않았을 때 */
+        a:link {
+            color: red;
+        }
+
+        /* a 링크를 방문 했을 때 */
+        a:visited {
+            color: green;
+        }
+
+        /* a 요소를 클릭하고 있는 상태일 때 */
+        a:active {
+            color: yellow;
+        }
+
+        /* input 타입이 text, password인 요소들에 포커스가 갔을 때 */
+        input[type="text"]:focus,
+        input[type="password"]:focus {
+            color : red;
+        }
+
+        /* input이 사용 가능할 때 input 요소 바로 뒤에 오는 형제 span을 선택 */
+        input:enabled + span {
+            background: blue;
+        }
+        
+        /* input이 사용 불가능할 때 input 요소 바로 뒤에 오는 형제 span을 선택 */
+            input:disabled + span {
+            color: grey;
+            text-decoration: line-through;
+        }
+
+        /* input이 체크 상태일 때 input 요소 바로 뒤에 오는 span을 선택 */
+        input:checked + span {
+            background: greenyellow;
+        }
+
+        /* 첫번째 자식이 p일 때 선택 */
+        p:first-child {
+            color: aqua;
+        }
+
+        /* 마지막 자식이 p일 때 선택 */
+        p:last-child {
+            color: blueviolet;
+        }
+
+        /* ol의 자식 중에서 짝수번째 요소가 li 일 때 */
+        ol > li:nth-child(2n) {
+            color: red;
+        }
+
+        /* ol의 자식 중에서 홀수번째 요소가 li 일 때 */
+        ol> li:nth-child(2n+1){
+            color: blue;
+        }
+
+        /* ol의 요소 중 첫번째 자식이 li 일 때 */
+        ol > li:first-child {
+            color: peru;
+        }
+
+        /* ol의 요소 중 마지막 자식이 li 일 때 */  
+        ol > li:last-child {
+            color: yellow;
+        }
+
+        /* ol의 요소 중 네번째 자식이 li 일 때 */  
+        ol > li:nth-child(4) {
+            background: brown;
+        }
+
+        /* ul의 요소 중 뒤에서부터 홀수번째 자식일 때 */  
+        ul > :nth-last-child(2n+1) {
+            color: deeppink;
+        }
+
+        /* ul의 요소 중 뒤에서부터 짝수번째 자식일 때 */  
+        ul > :nth-last-child(2n) {
+            color: yellowgreen;
+        }
+
+        /* p 요소의 부모 요소의 자식 요소 중 첫번째 등장하는 p */
+        p:first-of-type {
+            background: rebeccapurple;
+        }
+
+        /* p 요소의 부모 요소의 자식 요소 중 마지막 등장하는 p */
+        p:last-of-type {
+            background: sienna;
+        }
+
+        /* p 요소의 부모 요소의 자식 요소 중 2번째 등장하는 p */
+        p:nth-of-type(2) {
+            background: green;
+        }
+
+        p:nth-last-of-type(2) {
+            background: lightgreen;
+        }
+
+
+
+        input:not([type="password"]) {
+            background: black;
+        }
+        
+
+
+    </style>
+</head>
+
+<body>
+    <p>이 p 태그는 부모(body)의 첫째 자식입니다.</p>
+
+    <h1>Welcome to my homepage</h1>
+
+    <p>요 p 태그는 부모(body)의 첫째도 마지막 자식도 아닙니다. ㅠㅠ</p>
+
+    <div>
+        <p>이 p 태그는 부모(div)의 첫째 자식 입니다.</p>
+        <p>요 p 태그는 부모(div)의 첫째 자식이 아닙니다. ㅠㅠ</p>
+    </div>
+
+    <div>
+        <h2>this is heading2</h2>
+        <p>1 1 1 1 1 1 1 </p>
+        <p>2 2 2 2 2 2 2 2</p>
+        <p>3 3 3 3 3 3 3</p>
+        <p>4 4 4 4 4 4 4 4</p>
+
+        <div>
+            <h3>this is heading3</h3>
+            <p>d1d1d11d1d11</p>
+            <p>d22d2d2d2d2d</p>
+            <p>d33d3d3d3d3d3</p>
+            <p>d4d4d4d4d4d4</p>
+        </div>
+    </div>
+
+    <div>
+        <ol>
+            <li>1111111</li>
+            <li>222222</li>
+            <li>333333</li>
+            <li>444444</li>
+            <li>5555555</li>
+            <li>6666666</li>
+        </ol>
+
+        <ul>
+            <li>1111111</li>
+            <li>222222</li>
+            <li>333333</li>
+            <li>444444</li>
+            <li>5555555</li>
+            <li>6666666</li>
+        </ul>
+
+    </div>
+
+
+
+    <hr>
+
+    <h1>heading</h1>
+
+    <a href="#">Hover me</a>
+    <br><br>
+    <input type="text" placeholder="Focus me">
+    <br><br>
+    <div>
+        <input type="text" value="I'll bi red when focused">
+        <input type="password" value="I'll bi red when focused">
+    </div>
+    <hr>
+    <form action="#">
+        <input type="radio" name="menu" value="메뉴A" checked="checked"><span> 메뉴A</span> <br>
+        <input type="radio" name="menu" value="메뉴B"><span> 메뉴B</span> <br>
+        <input type="radio" name="menu" value="굶기" disabled><span> 굶기 </span><br>
+        <br>
+        <input type="checkbox" value="taxi" checked="checked"> <span>집에 택시</span> <br>
+        <input type="checkbox" value="BM"> <span>집에 대중교통</span> <br>
+        <input type="checkbox" value="Walk" disabled> <span>집에 걸어가기</span> <br>
+
+    </form> 
+
+
+
+</body>
+
+</html>
