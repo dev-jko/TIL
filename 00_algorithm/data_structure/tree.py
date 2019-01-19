@@ -52,7 +52,6 @@ queue = []
 levelorder(root, queue)
 
 
-
 class BinarySearchTree:
     def __init__(self):
         self.root = None
@@ -71,7 +70,6 @@ class BinarySearchTree:
                 node.left = self._insert_value(node.left, data)
         return node
 
-
     def find(self, key):
         return self._find_key(self.root, key)
 
@@ -84,31 +82,51 @@ class BinarySearchTree:
             return self._find_key(node.right, key)
         else:
             return self._find_key(node.left, key)
-        
 
     def delete(self, key):
         return self._delete_value(self.root, key)
 
     def _delete_value(self, node, key):
         if node == None:
-            return False
+            return None
         if node.data == key:
-
             if node.left and node.right:
-                # 자식이 2 모두 있을떄
-
+                # TODO 자식이 2 모두 있을떄
+                parent = node
+                child = node.right
+                while parent and child:
+                    parent = child
+                    child = parent.left
+                child.left = node.left
+                if parent != node:
+                    parent.left = child.right
+                    child.right = node.right
+                node = child
             elif node.left != None:
                 node = node.left
             elif node.right != None:
                 node = node.right
             else:
                 node = None
-            return True
         elif node.data <= key:
-            return self._delete_value(node.right, key)
+            node.left = self._delete_value(node.right, key)
         else:
-            return self._delete_value(node.left, key)
+            node.right = self._delete_value(node.left, key)
+        return node
 
 
+nums = [40, 4, 34, 45, 14, 55, 48, 13, 15, 49, 47]
 
-    
+bst = BinarySearchTree()
+for i in nums:
+    bst.insert(i)
+inorder(bst.root)
+
+print(bst.find(15))
+print(bst.find(17))
+
+print(bst.delete(55))
+print(bst.delete(14))
+print(bst.delete(11))
+
+levelorder(bst.root, queue)
