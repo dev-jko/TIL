@@ -16,8 +16,8 @@ def preorder(tree):
 def inorder(tree):
     if tree == None:
         return
-    print(tree.data)
     inorder(tree.left)
+    print(tree.data)
     inorder(tree.right)
 
 
@@ -84,17 +84,17 @@ class BinarySearchTree:
             return self._find_key(node.left, key)
 
     def delete(self, key):
-        return self._delete_value(self.root, key)
+        self.root = self._delete_value(self.root, key)
+        return self.root
 
     def _delete_value(self, node, key):
         if node == None:
             return None
         if node.data == key:
             if node.left and node.right:
-                # TODO 자식이 2 모두 있을떄
                 parent = node
                 child = node.right
-                while parent and child:
+                while child.left:
                     parent = child
                     child = parent.left
                 child.left = node.left
@@ -109,24 +109,26 @@ class BinarySearchTree:
             else:
                 node = None
         elif node.data <= key:
-            node.left = self._delete_value(node.right, key)
+            node.right = self._delete_value(node.right, key)
         else:
-            node.right = self._delete_value(node.left, key)
+            node.left = self._delete_value(node.left, key)
         return node
 
 
-nums = [40, 4, 34, 45, 14, 55, 48, 13, 15, 49, 47]
+nums = [21, 14, 11, 18, 5, 12, 15, 19, 28, 25, 32, 23, 27, 30, 37]
 
 bst = BinarySearchTree()
 for i in nums:
     bst.insert(i)
-inorder(bst.root)
+print('bst pre')
+preorder(bst.root)
 
 print(bst.find(15))
 print(bst.find(17))
 
-print(bst.delete(55))
 print(bst.delete(14))
-print(bst.delete(11))
+print(bst.delete(5))
+print(bst.delete(25))
 
-levelorder(bst.root, queue)
+print('bst pre')
+preorder(bst.root)
