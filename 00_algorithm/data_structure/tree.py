@@ -132,3 +132,4 @@ print(bst.delete(25))
 
 print('bst pre')
 preorder(bst.root)
+
