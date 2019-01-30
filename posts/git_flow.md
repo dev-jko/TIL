@@ -50,16 +50,16 @@
 
 2. `Github` -> `Pull requests` -> `New pull request` 를 누른다.
 
-    ![pull_request](./git_flow_imgs/pull_request_01.PNG)
+    ![pull_request](./images/git_flow/pull_request_01.PNG)
 
 3. `base: develop <- compare: <브랜치 이름>`을 선택하고 `Create pull request` 버튼을 누른다.
 
-    ![pull_request](./git_flow_imgs/pull_request_02.PNG)
+    ![pull_request](./images/git_flow/pull_request_02.PNG)
 
 
 4. 브랜치 관련된 정보를 적고 `Create pull request`버튼을 누른다.
 
-    ![pull_request](./git_flow_imgs/pull_request_03.PNG)
+    ![pull_request](./images/git_flow/pull_request_03.PNG)
 
 
 ## github pull request / code review / merge
@@ -68,7 +68,7 @@
 
 2. 리뷰를 하기 위해 풀 리퀘스트에서 `Add your review` 버튼을 누른다.
 
-    ![pull_request](./git_flow_imgs/pull_request_04.PNG)
+    ![pull_request](./images/git_flow/pull_request_04.PNG)
 
 3. `Review changes` 버튼을 누르고 의견을 적는다.
 
@@ -76,19 +76,19 @@
     * Approve - 브랜치 머지를 승인하고 의견 게시
     * Request changes - 브랜치를 머지하기 전에 해결해야 하는 의견 게시
 
-    ![pull_request](./git_flow_imgs/pull_request_05.PNG)
+    ![pull_request](./images/git_flow/pull_request_05.PNG)
 
 4. 리뷰가 완료되면 풀 리퀘스트 페이지로 이동해서 `초록색 ▼`버튼을 누르고 `Squash and merge`를 선택한다. 그리고 `초록색 Squash and merge`버튼을 누른다.
 
-    ![pull_request](./git_flow_imgs/pull_request_06.PNG)
+    ![pull_request](./images/git_flow/pull_request_06.PNG)
 
 5. 브랜치의 정보를 작성하고 `Confirm squash merge`버튼을 누른다.
 
-    ![pull_request](./git_flow_imgs/pull_request_07.PNG)
+    ![pull_request](./images/git_flow/pull_request_07.PNG)
 
 6. 풀 리퀘스트가 완료되면 `Delete branch`버튼을 눌러 머지한 브랜치를 삭제
 
-    ![pull_request](./git_flow_imgs/pull_request_08.PNG)
+    ![pull_request](./images/git_flow/pull_request_08.PNG)
 
 7. 머지된 `develop`을 `pull` 명령어로 최신화 한다.
 
