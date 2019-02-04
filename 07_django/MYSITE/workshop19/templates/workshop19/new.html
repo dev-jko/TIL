@@ -1,0 +1,17 @@
+{% extends 'workshop19/base.html' %}
+{% block title %}new{% endblock title %}
+
+{% block content %}
+<hr>
+<form action="{% url 'workshop19:student_new' %}" method="post">
+{% csrf_token %}
+<label for="name">name : </label><input type="text" name="name" placeholder="홍길동"><br>
+<label for="email">email : </label><input type="email" name="email" placeholder="mymail@ss3.com"><br>
+<label for="birthday">birthday : </label><input type="date" name="birthday"><br>
+<label for="age">age : </label><input type="number" name="age" value=20><br>
+<hr>
+<input class="btn btn-success" type="submit" value="추가">
+<a class='btn btn-primary' href="{% url 'workshop19:student_index' %}">목록</a>
+</form>
+
+{% endblock content %}
