@@ -1,0 +1,28 @@
+{% extends 'simple_board/base.html' %}
+{% block title %}{% endblock %}
+
+{% block content %}
+    <h1>{{ article.title }}</h1>
+    <p>
+        {{ article.content }}
+    </p>
+    <hr>
+    <div>
+        <a href="{% url 'simple_board:article_list' %}">
+            <button>목록</button>
+        </a>
+    </div>
+    <div>
+        <a href="{% url 'simple_board:article_update' article_id=article.id %}">
+            <button>수정</button>
+        </a>
+    </div>
+    <form action="{% url 'simple_board:article_delete' article_id=article.id %}" method="post">
+        {% csrf_token %}
+        <input type="submit" value="삭제">
+    </form>
+
+    {% include 'simple_board/_comment.html' with title=article.title %}
+
+
+{% endblock %}

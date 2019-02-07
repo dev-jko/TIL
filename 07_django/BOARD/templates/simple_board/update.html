@@ -1,0 +1,13 @@
+{% extends 'simple_board/base.html' %}
+{% block title %}update{% endblock %}
+
+{% block content %}
+    <form action="{% url 'simple_board:article_update' article.id %}" method="post">
+        {% csrf_token %}
+        <label for="title">title : </label>
+        <input type="text" name="title" id="title" value="{{ article.title }}"> <br>
+        <label for="content">content : </label>
+        <textarea name="content" id="content" cols="30" rows="15">{{ article.content }}</textarea> <br>
+        <input type="submit" value="작성">
+    </form>
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends 'simple_board/base.html' %}
+{% load static %}
+{% block title %}index{% endblock %}
+
+{% block content %}
+    <img src="{% static 'simple_board/images/header.jpg' %}" alt="" width="500" height="300">
+    <h1>simple board</h1>
+    <h2>article index</h2>
+    <ul>
+        {% for article in articles %}
+            <li><a href="{% url 'simple_board:article_detail' article_id=article.id %}">{{ article.title }}</a></li>
+        {% endfor %}
+    </ul>
+
+    <a href="{% url 'simple_board:article_create' %}">
+        <button>추가</button>
+    </a>
+{% endblock %}
