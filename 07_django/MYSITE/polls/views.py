@@ -36,3 +36,10 @@ def vote(request, question_id):
         context = {'question': question, 'error_message': 'Pick right choice'}
         return render(request, 'polls/detail.html', context)
     return redirect(resolve_url('polls:question_detail', question_id=question.id))
+
+
+def workshop21(request, question_id):
+    context = {
+        'question': Question.objects.get(id=question_id)
+    }
+    return render(request, 'polls/workshop21.html', context)

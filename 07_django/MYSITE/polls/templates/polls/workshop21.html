@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>workshop21</title>
+</head>
+<body>
+    <h1>{{ question.question_text }}</h1>
+    <ul>
+        {% for choice in question.choice_set.all %}
+            <li>
+            {{ choice.choice_text }} : {{ choice.votes }}표
+            </li>
+        {% endfor %}
+    </ul>
+
+</body>
+</html>
