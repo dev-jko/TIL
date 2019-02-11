@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>js</title>
+</head>
+
+<body>
+    <h1 id="demo"></h1>
+    <button onclick="button1()">button</button>
+
+
+    <script>
+        var a, b, c;
+        a = 5;
+        b = 6;
+        c = a + b;
+        document.getElementById("demo").innerHTML = c;
+        function button1() {
+            demo = document.getElementById("demo")
+            if (demo.innerHTML == "hello world") {
+                demo.innerHTML = "hello js";
+            } else {
+                document.getElementById("demo").innerHTML = "hello world";
+            }
+        }
+    </script>
+</body>
+
+</html>
