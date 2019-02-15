@@ -193,5 +193,5 @@ fabric.properties
 !.vscode/extensions.json
 
 *.iml
-
+.idea/
 media/
