@@ -1,6 +1,3 @@
-import my_std
-
-
 def binary_search(arr, key):
     cnt = 0
     start = 0

@@ -1,5 +1,3 @@
-import my_std
-
 BRACKETS = {
     'start': '{(',
     '}': '{',

@@ -1,5 +1,3 @@
-# import my_std
-
 arr = [n for n in range(16)]
 for T in range(1, int(input()) + 1):
     N = int(input())

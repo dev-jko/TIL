@@ -1,5 +1,3 @@
-import my_std
-
 arr = (1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12)
 for T in range(1, int(input()) + 1):
     result = 0

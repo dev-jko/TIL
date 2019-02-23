@@ -1,5 +1,3 @@
-import my_std
-
 for T in range(1, int(input()) + 1):
     result = 0
     boxes = []
