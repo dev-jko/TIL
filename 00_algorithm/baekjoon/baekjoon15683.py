@@ -1,5 +1,3 @@
-import copy
-
 d = [0,
      [[[-1, 0]], [[0, 1]], [[1, 0]], [[0, -1]]],
      [[[-1, 0], [1, 0]], [[0, -1], [0, 1]]],
@@ -12,23 +10,33 @@ d = [0,
 
 def setbound():
     global data, N, M, cctv
-    data_copy = copy.deepcopy(data)
     for tv in cctv:
-        for a in d[data_copy[tv[0]][tv[1]]][tv[2]]:
+        for a in d[data[tv[0]][tv[1]]][tv[2]]:
             x, y = tv[0], tv[1]
             while True:
                 x += a[0]
                 y += a[1]
-                if not 0 <= x < N or not 0 <= y < M or data_copy[x][y] == 6:
+                if not 0 <= x < N or not 0 <= y < M or data[x][y] == 6:
                     break
-                if data_copy[x][y] != 0:
+                if data[x][y] != 0:
                     continue
-                data_copy[x][y] = -1
+                data[x][y] = -1
     cnt = 0
     for i in range(N):
         for j in range(M):
-            if data_copy[i][j] == 0:
+            if data[i][j] == 0:
                 cnt += 1
+    for tv in cctv:
+        for a in d[data[tv[0]][tv[1]]][tv[2]]:
+            x, y = tv[0], tv[1]
+            while True:
+                x += a[0]
+                y += a[1]
+                if not 0 <= x < N or not 0 <= y < M or data[x][y] == 6:
+                    break
+                if data[x][y] != -1:
+                    continue
+                data[x][y] = 0
     return cnt
 
 
