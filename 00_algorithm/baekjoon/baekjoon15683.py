@@ -4,7 +4,8 @@ d = [0,
      [[[-1, 0]], [[0, 1]], [[1, 0]], [[0, -1]]],
      [[[-1, 0], [1, 0]], [[0, -1], [0, 1]]],
      [[[-1, 0], [0, 1]], [[0, 1], [1, 0]], [[1, 0], [0, -1]], [[-1, 0], [0, -1]]],
-     [[], [], [], []],
+     [[[0, -1], [-1, 0], [0, 1]], [[-1, 0], [0, 1], [1, 0]],
+      [[0, -1], [1, 0], [0, 1]], [[0, -1], [-1, 0], [1, 0]]],
      [[[-1, 0], [0, 1], [1, 0], [0, -1]]]
      ]
 
@@ -13,10 +14,16 @@ def setbound():
     global data, N, M, cctv
     data_copy = copy.deepcopy(data)
     for tv in cctv:
-        # 0 위, 1 오른쪽, 2 아래, 3 왼쪽
-        # data_copy[tv[0]][tv[1]]
-        # for xxxx in d[]
-
+        for a in d[data_copy[tv[0]][tv[1]]][tv[2]]:
+            x, y = tv[0], tv[1]
+            while True:
+                x += a[0]
+                y += a[1]
+                if not 0 <= x < N or not 0 <= y < M or data_copy[x][y] == 6:
+                    break
+                if data_copy[x][y] != 0:
+                    continue
+                data_copy[x][y] = -1
     cnt = 0
     for i in range(N):
         for j in range(M):
@@ -26,11 +33,11 @@ def setbound():
 
 
 def dfs(k, n):
-    global result, cctv
+    global result, cctv, data
     if k == n:
         result = min(result, setbound())
     else:
-        for i in range(4):
+        for i in range(len(d[data[cctv[k][0]][cctv[k][1]]])):
             cctv[k][2] = i
             dfs(k + 1, n)
 
@@ -43,7 +50,7 @@ for _ in range(N):
 cctv = []
 for i in range(N):
     for j in range(M):
-        if data[i][j] == [1, 2, 3, 4, 5]:
+        if data[i][j] in [1, 2, 3, 4, 5]:
             cctv.append([i, j, 0])
 dfs(0, len(cctv))
 print(result)
