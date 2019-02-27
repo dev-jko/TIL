@@ -1,8 +1,9 @@
 # TODO  실패
 
 def bind_ground(m, n, group):
-    global data, N
+    global data, N, groups
     data[m][n] = group
+    groups[group].append((m, n))
     if m > 0 and data[m - 1][n] == 1:
         bind_ground(m - 1, n, group)
     if m < N - 1 and data[m + 1][n] == 1:
@@ -27,23 +28,32 @@ def check(min_len, m, n):
 N = int(input())
 data = []
 for _ in range(N):
-    data.append([int(i) for i in sys.stdin.readline()[:-1].split()])
-    # data.append(list(map(int, input().split())))
+    data.append(list(map(int, input().split())))
 
-print(data)
+groups = [0, 0]
 
 group = 2
 for i in range(N):
     for j in range(N):
         if data[i][j] == 1:
+            groups.append([])
             bind_ground(i, j, group)
             group += 1
-result = [100000]
+result = 100000
 d = [[0, -1], [0, 1], [-1, 0], [1, 0]]
-for i in range(N):
-    for j in range(N):
-        check(result, i, j)
-print(result[0])
+
+for i in range(2, len(groups)):
+    for j in range(len(groups[i])):
+        for k in range(2, len(groups)):
+            if i == k: break
+            for l in range(len(groups[k])):
+                length = abs(groups[i][j][0] - groups[k][l][0]) + abs(groups[i][j][1] - groups[k][l][1]) - 1
+                result = min(result, length)
+
+# for i in range(N):
+#     for j in range(N):
+#         check(result, i, j)
+print(result)
 
 # def bt(min_len, m, n, group, cnt):
 #     global data, N, d
