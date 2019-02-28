@@ -1,36 +1,21 @@
-# TODO  최적화
-
 dxy = [(-1, 0), (1, 0), (0, -1), (0, 1)]
 
 
-def bt(k, n):
+def bt(k, n, sum_line):
     global result, data, cores, core_lines, states
     if k == n:
-        sum_line = set({})
-        sum_leng = 0
-        for i in range(n):
-            sum_line |= core_lines[i][states[i]]
-            sum_leng += len(core_lines[i][states[i]])
-        if len(sum_line) == sum_leng:
-            if n - states.count(0) > result[0]:
-                result[0], result[1] = n - states.count(0), sum_leng
-            elif n - states.count(0) == result[0] and result[1] > sum_leng:
-                result[1] = sum_leng
+        if n - states.count(0) > result[0]:
+            result[0], result[1] = n - states.count(0), len(sum_line)
+        elif n - states.count(0) == result[0] and result[1] > len(sum_line):
+            result[1] = len(sum_line)
     else:
-        if len(core_lines[k][states[k]] - sum_line) != len(core_lines[k][states[k]]):
-            return
-        sum_line |= core_lines[k][states[k]]
-        sum_line = set({})
-        sum_leng = 0
-        for i in range(n):
-            sum_line |= core_lines[i][states[i]]
-            sum_leng += len(core_lines[i][states[i]])
-        if len(sum_line) == sum_leng:
-
         for i in range(len(core_lines[k])):
             states[k] = i
+            if len(core_lines[k][i] & sum_line) != 0 or n - states[:k + 1].count(0) < result[0]:
+                continue
+            sum_line = sum_line.union(core_lines[k][i])
             bt(k + 1, n, sum_line)
-        sum_line -= core_lines[k][states[k]]
+            sum_line = sum_line.difference(core_lines[k][i])
 
 
 for T in range(1, int(input()) + 1):
@@ -66,7 +51,7 @@ for T in range(1, int(input()) + 1):
     for core in connected:
         cores.remove(core)
         core_lines.remove([])
-    result = [0, 999999]
+    result = [1, 999999]
     states = [0 for _ in range(len(cores))]
-    bt(0, len(cores))
+    bt(0, len(cores), set({}))
     print(f'#{T} {result[1]}')
