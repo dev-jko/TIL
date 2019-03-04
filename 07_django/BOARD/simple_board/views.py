@@ -22,6 +22,7 @@ def article_create(request):
         article.title = request.POST.get('title')
         article.content = request.POST.get('content')
         article.save()
+        # return redirect('/simple_board', article.id)
         return redirect('simple_board:article_detail', article.id)
 
 
