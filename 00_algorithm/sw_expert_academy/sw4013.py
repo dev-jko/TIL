@@ -1,28 +1,44 @@
-LEFT = -2
-RIGHT = 2
-
-
-class magnet:
+class Magnet:
     def __init__(self, mag_id, gear):
         self.mag_id = mag_id
         self.gear = gear
         self.top = 0
 
-    def turn(self, direction, num):
-        self.top = self.top - (direction * (num % 8)
+    def turn(self, direction):
+        self.top = (self.top - direction) % 8
+
+    def get_left(self):
+        return self.gear[(self.top - 2) % 8]
+
+    def get_right(self):
+        return self.gear[(self.top + 2) % 8]
 
 
-for T in range(1, int(input())):
+def calculate_score(ms):
+    score = 0
+    for m in ms:
+        score += int(m.gear[m.top]) * (2 ** m.mag_id)
+    return score
+
+
+for T in range(1, int(input()) + 1):
     K = int(input())
-    gear = []
-    for _ in range(4):
-        gear.append(list(input().split()))
+    ms = []
+    for i in range(4):
+        ms.append(Magnet(i, list(input().split())))
     turns = []
-    # 12시 방향부터 시작, 날은 8개
-    # turns[자석 번호][회전 방향] 시계방향=1, 반시계= -1
     for _ in range(K):
         turns.append(list(map(int, input().split())))
         turns[-1][0] -= 1
-    idx = [0, 0, 0, 0]
-    result = 0
-    print('#{} {}'.format(T, result))
+    for turn in turns:
+        check = [0, 0, 0, 0]
+        check[turn[0]] = turn[1]
+        for i in range(turn[0], 0, -1):
+            if ms[i].get_left() != ms[i - 1].get_right():
+                check[i - 1] = -1 * check[i]
+        for i in range(turn[0], 3):
+            if ms[i].get_right() != ms[i + 1].get_left():
+                check[i + 1] = -1 * check[i]
+        for i in range(4):
+            ms[i].turn(check[i])
+    print('#{} {}'.format(T, calculate_score(ms)))
