@@ -27,7 +27,6 @@ def break_brick(w, bricks):
     while h < H - 1 and not is_in_set(h, w, bricks):
         h += 1
     if not is_in_set(h, w, bricks):
-    # if data[h][w] == 0 or is_in_set(h, w, bricks):
         return breaked
     q.append((h, w, get_brick_n(h, w, bricks)))
     breaked.add((h, w, get_brick_n(h, w, bricks)))
@@ -51,7 +50,7 @@ def down(bricks):
     result = set({})
     for i in range(W):
         temp[i].sort(reverse=True)
-        idx = 9
+        idx = H - 1
         for j in range(len(temp[i])):
             result.add((idx, temp[i][j][1], temp[i][j][2]))
             idx -= 1
@@ -84,23 +83,10 @@ for T in range(1, int(input()) + 1):
             if data[i][j] != 0:
                 data_set.add((i, j, data[i][j]))
     result = 999999999
+    bt(data_set, 0, N)
+    print('#{} {}'.format(T, result))
 
-
-    #
-    # temp = down(data_set - break_brick(2, data_set))
+    # temp = down(data_set - break_brick(5, data_set))
     # tt = [[0 for _ in range(W)] for _ in range(H)]
     # for x, y, v in temp:
     #     tt[x][y] = v
-    #
-    # temp2 = down(temp - break_brick(2, temp))
-    # tt = [[0 for _ in range(W)] for _ in range(H)]
-    # for x, y, v in temp2:
-    #     tt[x][y] = v
-    #
-    # temp3 = down(temp2 - break_brick(6, temp2))
-    # tt = [[0 for _ in range(W)] for _ in range(H)]
-    # for x, y, v in temp3:
-    #     tt[x][y] = v
-
-    bt(data_set, 0, N)
-    print('#{} {}'.format(T, result))
