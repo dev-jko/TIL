@@ -1,53 +1,72 @@
 # swea 2383. [모의 SW 역량테스트] 점심 식사시간
 
-# TODO 실패
-
-
-# 6 45
-# 7 50
-
-
-from collections import deque
-
 
 def get_time(p, s):
     return abs(p[0] - s[0]) + abs(p[1] - s[1])
 
-def compare_ps(ps):
+
+def compare_p(ps):
     return ps['p']
+
+
+def compare_s(ps):
+    return ps['s']
+
 
 def dfs(k, n):
     global result
     if k == n:
-        S = [[[],[]], [[],[]]]
+        S = [[[], []], [[], []]]
         for i in range(n):
             if select[i] == 0:
-                S[0][0].append({'p': P[i][0], 's': s[0][1]})
+                S[0][0].append({'p': P[i][0] + 1, 's': s[0][1]})
             else:
-                S[1][0].append({'p': P[i][1], 's': s[1][1]})
-        S[0][0].sort(key=compare_ps, reverse=True)
-        S[1][0].sort(key=compare_ps, reverse=True)
-        if len(S[0]) == 0:
-            t = S[1][0][-1]['p']
-        elif len(S[1]) == 0:
-            t = S[0][0][-1]['p']
-        else:
-            t = min(S[0][0][-1]['p'], S[1][0][-1]['p'])
-        for i in range(2):
-            j = 0
-            while j < len(S[i][0]):
-                S[i][0][j]['p'] -= t
-                if S[i][0][j]['p'] == 0:
-                    S[i][1].append(S[i][0].pop(j))
-                else:
-                    j += 1
-        while len(S[0][0]) + len(S[0][1]) and len(S[1][0]) + len(S[1][1]):
+                S[1][0].append({'p': P[i][1] + 1, 's': s[1][1]})
+        S[0][0].sort(key=compare_p)
+        S[1][0].sort(key=compare_p)
+        t = 0
+        while len(S[0][0]) + len(S[0][1]) or len(S[1][0]) + len(S[1][1]):
             t += 1
             for i in S[0][0]:
-                if i['p'] == 0:
-                    S
-                if S[0]
-
+                i['p'] -= 1
+            for i in S[1][0]:
+                i['p'] -= 1
+            for i in range(len(S[0][1]) if len(S[0][1]) < 3 else 3):
+                S[0][1][i]['s'] -= 1
+            for i in range(len(S[1][1]) if len(S[1][1]) < 3 else 3):
+                S[1][1][i]['s'] -= 1
+            S[0][0].sort(key=compare_p)
+            S[1][0].sort(key=compare_p)
+            S[0][1].sort(key=compare_s)
+            S[1][1].sort(key=compare_s)
+            if len(S[0][0]) != 0:
+                temp = S[0][0][0]
+                while temp['p'] <= 0:
+                    S[0][1].append(S[0][0].pop(0))
+                    if len(S[0][0]) == 0:
+                        break
+                    temp = S[0][0][0]
+            if len(S[0][1]) != 0:
+                temp = S[0][1][0]
+                while temp['s'] <= 0:
+                    S[0][1].pop(0)
+                    if len(S[0][1]) == 0:
+                        break
+                    temp = S[0][1][0]
+            if len(S[1][0]) != 0:
+                temp = S[1][0][0]
+                while temp['p'] <= 0:
+                    S[1][1].append(S[1][0].pop(0))
+                    if len(S[1][0]) == 0:
+                        break
+                    temp = S[1][0][0]
+            if len(S[1][1]) != 0:
+                temp = S[1][1][0]
+                while temp['s'] <= 0:
+                    S[1][1].pop(0)
+                    if len(S[1][1]) == 0:
+                        break
+                    temp = S[1][1][0]
         result = min(result, t)
     else:
         select[k] = 0
@@ -61,9 +80,6 @@ for T in range(1, int(input()) + 1):
     data = []
     for _ in range(N):
         data.append(list(map(int, input().split())))
-    # 1 사람, 2 이상 계단 입구, 길이
-    # p[사람번호][x, y]
-    # s[계단번호][좌표, 길이]
     p = []
     s = []
     for i in range(N):
