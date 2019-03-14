@@ -7,7 +7,6 @@ def bt(k):
     global result
     if N == k:
         result += 1
-        print(col)
     else:
         for i in range(N):
             check = True
