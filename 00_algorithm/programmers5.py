@@ -1,3 +1,7 @@
+# TODO 실패
+# 백준 17071 숨바꼭질5
+
+
 from collections import deque
 
 q = deque()
