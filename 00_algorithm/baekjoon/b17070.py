@@ -15,10 +15,13 @@ for i in range(N):
             continue
         if data[i][j] == 0:
             result[i][j][0] = result[i][j - 1][0] + result[i][j - 1][2]
-            result[i][j][1] = result[i - 1][j][1] + result[i - 1][j][2]
-            if data[i - 1][j] == 0 and data[i][j - 1] == 0:
-                result[i][j][2] = result[i - 1][j - 1][0] + result[i - 1][j - 1][1] + result[i - 1][j - 1][2]
+            if i > 0:
+                result[i][j][1] = result[i - 1][j][1] + result[i - 1][j][2]
+                if data[i - 1][j] == 0 and data[i][j - 1] == 0:
+                    result[i][j][2] = result[i - 1][j - 1][0] + result[i - 1][j - 1][1] + result[i - 1][j - 1][2]
 print(sum(result[N - 1][N - 1]))
+
+
 
 # def dfs(x, y, state):
 #     if x == N - 1 and y == N - 1:

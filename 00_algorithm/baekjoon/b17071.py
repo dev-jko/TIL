@@ -7,84 +7,57 @@ from collections import deque
 
 N, K = map(int, input().split())
 q = deque()
-visited = [-1 for _ in range(500001)]
-visited2 = [-1 for _ in range(500001)]
-visited[N] = 0
-visited2[N] = 0
-
-test = [-1 for _ in range(500001)]
-test2 = [-1 for _ in range(500001)]
-test[N] = N
-test2[N] = N
-
-q.append(N)
+visited = [[-1, -1] for _ in range(500001)]  # 0홀수 1짝수
+visited[N][1] = 0
+q.append((N, 1))
 while len(q):
-    x = q.popleft()
-    next_t = visited[x] + 1
-    if x * 2 <= 500000:
-        if visited[x * 2] == -1:
-            visited[x * 2] = next_t
-            test[x * 2] = x
-            q.append(x * 2)
-        elif visited2[x * 2] == -1:
-            visited2[x * 2] = next_t
-            test2[x * 2] = x
-            q.append(x * 2)
-    if x > 0:
-        if visited[x - 1] == -1:
-            visited[x - 1] = next_t
-            test[x - 1] = x
-            q.append(x - 1)
-        elif visited2[x - 1] == -1:
-            visited2[x - 1] = next_t
-            test2[x - 1] = x
-            q.append(x - 1)
-    if x < 500000:
-        if visited[x + 1] == -1:
-            visited[x + 1] = next_t
-            q.append(x + 1)
-            test[x + 1] = x
-        elif visited2[x + 1] == -1:
-            visited2[x + 1] = next_t
-            q.append(x + 1)
-            test2[x + 1] = x
-
-result = 999999
+    x, y = q.popleft()
+    next_t = visited[x][y] + 1
+    ny = 1 if next_t % 2 == 0 else 0
+    if x * 2 <= 500000 and visited[x * 2][ny] == -1:
+            visited[x * 2][ny] = next_t
+            q.append((x * 2, ny))
+    if x > 0 and visited[x - 1][ny] == -1:
+            visited[x - 1][ny] = next_t
+            q.append((x - 1, ny))
+    if x < 500000 and visited[x + 1][ny] == -1:
+            visited[x + 1][ny] = next_t
+            q.append((x + 1, ny))
 t = 0
-
 temp = False
-
+result = 9999999
 while K <= 500000:
-    if t == visited[K]:
-        result = t
-        break
-    elif t > visited[K]:
-        if (t - visited[K]) % 2 == 0:
-            result = t
-            break
-    elif t == visited2[K]:
-        result = t
+    if t == visited[K][0]:
+        result = min(result, t)
+    if t > visited[K][0]:
+        if visited[K][0] != -1 and (t - visited[K][0]) % 2 == 0:
+            result = min(result, t)
+    if t == visited[K][1]:
+        result = min(result, t)
         temp = True
-        break
-    elif t > visited2[K]:
-        if (t - visited2[K]) % 2 == 0:
+    if t > visited[K][1]:
+        if visited[K][1] != -1 and (t - visited[K][1]) % 2 == 0:
             temp = True
-            result = t
-            break
+            result = min(result, t)
     t += 1
     K += t
-print(result if result != 999999 else -1)
-
-result = ''
-s = K
-print('---------')
-while True:
-    print(s, end=' - ')
-    if s == N:
-        break
-    if temp:
-        s = test2[s]
-    else:
-        s = test[s]
+print(result if result != 9999999 else -1)
 
 
+
+# 13 14
+
+# 4
+# (13 - 12 - 24 - 25 - 24)
+
+
+# 15 23
+#
+# 3
+# (15 - 14 - 28 - 29)
+#
+#
+# 18 29
+#
+# 3
+# (18 - 17 - 34 - 35)
