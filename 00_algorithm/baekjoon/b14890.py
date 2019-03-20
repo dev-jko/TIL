@@ -3,7 +3,6 @@
 
 
 def check(arr):
-    global result
     used = [False for _ in range(N)]
     leng = 1
     start = 1
@@ -17,8 +16,7 @@ def check(arr):
                 used[j] = True
             leng = 1
         elif arr[start - 1] == arr[start] + 1:
-            start -= 1
-            break
+            leng = 1
         else:
             return
         start += 1
@@ -36,27 +34,23 @@ def check(arr):
                 used[j] = True
             leng = 1
         elif arr[end + 1] == arr[end] + 1:
-            end += 1
-            break
+            leng = 1
         else:
             return
         end -= 1
-    if start >= end:
-        result += 1
+    global result
+    result += 1
 
 
 N, L = map(int, input().split())
 data = [list(map(int, input().split())) for _ in range(N)]
-
 result = 0
 for arr in data:
     check(arr)
-
 t_d = [[0 for _ in range(N)] for _ in range(N)]
 for i in range(N):
     for j in range(N):
         t_d[j][N - i - 1] = data[i][j]
 for arr in t_d:
     check(arr)
-
 print(result)

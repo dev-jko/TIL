@@ -1,3 +1,6 @@
+# https://codeforces.com/problemset/problem/1141/B
+# B. Maximal Continuous Rest
+
 n = int(input())
 data = list(map(int, input().split()))
 data += data

@@ -1,3 +1,9 @@
+# https://codeforces.com/problemset/problem/1141/D
+# D. Colored Boots
+
+
+# TODO 실패 타임오버
+
 n = int(input())
 a = input()
 b = input()
@@ -7,11 +13,11 @@ for i in range(n):
     if a[i] == '?':
         data1[26].append(i + 1)
     else:
-        data1[ord(a[i])-97].append(i + 1)
+        data1[ord(a[i]) - 97].append(i + 1)
     if b[i] == '?':
         data2[26].append(i + 1)
     else:
-        data2[ord(b[i])-97].append(i + 1)
+        data2[ord(b[i]) - 97].append(i + 1)
 idx = 0
 cnt = 0
 result = ''

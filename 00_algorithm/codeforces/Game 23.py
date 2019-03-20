@@ -1,3 +1,6 @@
+# https://codeforces.com/problemset/problem/1141/A
+# A. Game 23
+
 n, m = map(int, input().split())
 num = m // n
 result = m % n
