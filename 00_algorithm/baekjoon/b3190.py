@@ -56,7 +56,6 @@ while True:
         snake.turn(data[t])
 print(t)
 
-
 # from collections import deque
 #
 # dxy = [(-1, 0), (0, 1), (1, 0), (0, -1)]
