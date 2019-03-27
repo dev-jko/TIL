@@ -1,3 +1,6 @@
+# 5203. [파이썬 S/W 문제해결 구현] 3일차 - 베이비진 게임
+
+
 def is_run_or_triplet(card_cnt):
     for i in range(len(card_cnt)):
         if card_cnt[i] >= 3:

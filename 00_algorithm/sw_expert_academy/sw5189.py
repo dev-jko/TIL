@@ -1,3 +1,6 @@
+# 5189. [파이썬 S/W 문제해결 구현] 2일차 - 전자카트
+
+
 def perm(n, k):
     if k == n:
         global result

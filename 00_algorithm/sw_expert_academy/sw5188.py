@@ -1,3 +1,6 @@
+# 5188. [파이썬 S/W 문제해결 구현] 2일차 - 최소합
+
+
 for T in range(1, int(input()) + 1):
     N = int(input())
     arrs = []

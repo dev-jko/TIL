@@ -1,3 +1,6 @@
+# 5202. [파이썬 S/W 문제해결 구현] 3일차 - 화물 도크
+
+
 for T in range(1, int(input()) + 1):
     N = int(input())
     se = []
