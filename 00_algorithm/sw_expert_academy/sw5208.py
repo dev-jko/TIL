@@ -1,3 +1,6 @@
+# 5208. [파이썬 S/W 문제해결 구현] 5일차 - 전기버스2
+
+
 def bt(data, start, cnt):
     global min_cnt
     if start == data[0]:

@@ -1,3 +1,6 @@
+# 5209. [파이썬 S/W 문제해결 구현] 5일차 - 최소 생산 비용
+
+
 def bt(data, k, selected, cost, result):
     if len(data) == k:
         result[0] = min(result[0], cost)
