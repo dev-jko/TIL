@@ -1,5 +1,6 @@
-dxy = [(-1, 0), (1, 0), (0, -1), (0, 1)]
+# 1767. [SW Test 샘플문제] 프로세서 연결하기
 
+dxy = [(-1, 0), (1, 0), (0, -1), (0, 1)]
 
 def bt(k, n, sum_line):
     global result, data, cores, core_lines, states

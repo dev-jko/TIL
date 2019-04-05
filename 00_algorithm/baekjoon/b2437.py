@@ -2,12 +2,14 @@
 # 저울
 
 
-# TODO   못 풀었음
-
 N = int(input())
 data = sorted(list(map(int, input().split())))
-print(data[0] + (-1 if data[0] > 1 else ))
-if data[0] > 1:
-    print(data[0] - 1)
-elif data[1] - data[0]:
-    print(MIN + 1)
+sums = data[0]
+if sums > 1:
+    print(1)
+else:
+    for i in range(1, N):
+        if sums + 2 <= data[i]:
+            break
+        sums += data[i]
+    print(sums + 1)
