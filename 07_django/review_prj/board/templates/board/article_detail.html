@@ -1,0 +1,11 @@
+{% extends 'board/base.html' %}
+
+{% block body %}
+    <h1> {{ article.id }} : {{ article.title }} </h1>
+    <p> {{ article.content }}</p>
+
+    <a href="/board/articles"><button>List</button></a>
+    <a href="/board/articles/{{ article.id }}/edit"><button>Edit</button></a>
+    <a href="/board/articles/{{ article.id }}/delete"><button>Delete</button></a>
+
+{% endblock %}
