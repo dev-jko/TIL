@@ -5,15 +5,15 @@ from .models import Movie
 
 def board_list(request):
     movies = Movie.objects.all()
-    return render(request, 'board/list.html', {'movies': movies})
+    return render(request, 'board_ad/list.html', {'movies': movies})
 
 
 def board_detail(request, id):
     movie = Movie.objects.get(id=id)
-    return render(request, 'board/detail.html', {'movie': movie})
+    return render(request, 'board_ad/detail.html', {'movie': movie})
 
 
 def board_delete(request, id):
     movie = Movie.objects.get(id=id)
     movie.delete()
-    return redirect('board:board_list')
+    return redirect('board_ad:board_list')
