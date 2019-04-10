@@ -6,7 +6,7 @@ package baekjoon
 
 import java.io.*
 
-fun main() {
+fun main(args:Array<String>) {
     val n = Integer.parseInt(BufferedReader(InputStreamReader(System.`in`)).readLine())
     val sb = StringBuffer()
     for (i in 1..n) {

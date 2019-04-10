@@ -7,7 +7,7 @@ package baekjoon
 
 import java.io.*
 
-fun main() {
+fun main(args:Array<String>) {
     val s = BufferedReader(InputStreamReader(System.`in`)).readLine()
     val sb = StringBuffer()
     for (i in 0 until s.length step 10) {

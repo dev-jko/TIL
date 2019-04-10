@@ -6,7 +6,7 @@ package baekjoon
 
 import java.io.*
 
-fun main() {
+fun main(args:Array<String>) {
     val n = Integer.parseInt(BufferedReader(InputStreamReader(System.`in`)).readLine())
     when (n) {
         in 90..100 -> println("A")

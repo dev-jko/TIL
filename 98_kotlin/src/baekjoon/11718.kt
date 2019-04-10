@@ -6,7 +6,7 @@ package baekjoon
 
 import java.io.*
 
-fun main() {
+fun main(args:Array<String>) {
     val br = BufferedReader(InputStreamReader(System.`in`))
     var s: String? = br.readLine()
     while (s != null) {
