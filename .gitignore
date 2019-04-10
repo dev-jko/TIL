@@ -195,3 +195,5 @@ fabric.properties
 *.iml
 .idea/
 media/
+
+98_kotlin/output
