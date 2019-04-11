@@ -193,7 +193,6 @@ fabric.properties
 !.vscode/extensions.json
 
 *.iml
-.idea/
 media/
 
 98_kotlin/output
