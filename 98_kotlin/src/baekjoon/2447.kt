@@ -14,7 +14,6 @@ fun main(args: Array<String>) {
     val result = ArrayList<String>()
     val sb = StringBuffer()
     result.add("*")
-
     for (i in 0 until k) {
         star2447(result)
     }
