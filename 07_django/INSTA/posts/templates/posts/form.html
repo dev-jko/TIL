@@ -4,9 +4,12 @@
     <h1> New post</h1>
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
-        {% bootstrap_form form %}
-    {% buttons %}
-        <button type="submit" class="btn btn-primary">Submit</button>
-    {% endbuttons %}
+        {% bootstrap_form post_form %}
+        {% if image_form %}
+            {% bootstrap_form image_form show_label=False %}
+        {% endif %}
+        {% buttons %}
+            <button type="submit" class="btn btn-primary">Submit</button>
+        {% endbuttons %}
     </form>
 {% endblock %}
