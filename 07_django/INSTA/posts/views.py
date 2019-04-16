@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.decorators.http import require_http_methods
-from .forms import PostModelForm
-from .models import Post
+from django.contrib.auth.decorators import login_required
+from .models import Post, Image
+from .forms import PostModelForm, ImageModelForm
 
 
 @require_http_methods(['GET'])
@@ -12,17 +13,28 @@ def post_list(request):
     })
 
 
+@login_required
 @require_http_methods(['GET', 'POST'])
 def create_post(request):
     if request.method == 'POST':
-        form = PostModelForm(request.POST, request.FILES)
-        if form.is_valid():
-            form.save()
+        post_form = PostModelForm(request.POST)
+        image_form = ImageModelForm(request.FILES)
+        if post_form.is_valid():
+            post = post_form.save()
+            for image in request.FILES.getlist('file'):
+                request.FILES['file'] = image
+                image_form = ImageModelForm(files=request.FILES)
+                if image_form.is_valid():
+                    image = image_form.save(commit=False)
+                    image.post = post
+                    image.save()
             return redirect('posts:post_list')
     else:
-        form = PostModelForm()
+        post_form = PostModelForm()
+        image_form = ImageModelForm()
     return render(request, 'posts/form.html', {
-        'form': form,
+        'post_form': post_form,
+        'image_form': image_form,
     })
 
 
@@ -30,12 +42,12 @@ def create_post(request):
 def update_post(request, post_id):
     post = get_object_or_404(Post, id=post_id)
     if request.method == 'POST':
-        form = PostModelForm(request.POST, instance=post)
-        if form.is_valid():
-            form.save()
+        post_form = PostModelForm(request.POST, instance=post)
+        if post_form.is_valid():
+            post_form.save()
             return redirect('posts:post_list')
     else:
-        form = PostModelForm(instance=post)
+        post_form = PostModelForm(instance=post)
     return render(request, 'posts/form.html', {
-        'form': form,
+        'post_form': post_form,
     })
