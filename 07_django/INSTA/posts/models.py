@@ -2,6 +2,7 @@ from django.db import models
 from django_extensions.db.models import TimeStampedModel
 from imagekit.models import ProcessedImageField
 from imagekit.processors import ResizeToFill
+from django.conf import settings
 import os
 
 ENV = os.environ.get('ENVIRONMENT', 'development')
@@ -10,6 +11,7 @@ if ENV == 'development':
 
 
 class Post(TimeStampedModel):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     content = models.CharField(max_length=140)
 
     if ENV == 'development':
@@ -29,3 +31,10 @@ class Image(TimeStampedModel):
         format='JPEG',
         options={'quality': 90}
     )
+
+
+class Comment(TimeStampedModel):
+    content = models.CharField(max_length=100)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+

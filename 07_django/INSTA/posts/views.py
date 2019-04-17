@@ -1,15 +1,17 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.decorators.http import require_http_methods
 from django.contrib.auth.decorators import login_required
-from .models import Post, Image
-from .forms import PostModelForm, ImageModelForm
+from .models import Post, Image, Comment
+from .forms import PostModelForm, ImageModelForm, CommentModelForm
 
 
 @require_http_methods(['GET'])
 def post_list(request):
     posts = Post.objects.all()
+    comment_form = CommentModelForm()
     return render(request, 'posts/list.html', {
         'posts': posts,
+        'comment_form': comment_form,
     })
 
 
@@ -20,7 +22,9 @@ def create_post(request):
         post_form = PostModelForm(request.POST)
         image_form = ImageModelForm(request.FILES)
         if post_form.is_valid():
-            post = post_form.save()
+            post = post_form.save(commit=False)
+            post.user = request.user
+            post.save()
             for image in request.FILES.getlist('file'):
                 request.FILES['file'] = image
                 image_form = ImageModelForm(files=request.FILES)
@@ -38,9 +42,12 @@ def create_post(request):
     })
 
 
+@login_required
 @require_http_methods(['GET', 'POST'])
 def update_post(request, post_id):
     post = get_object_or_404(Post, id=post_id)
+    if request.user != post.user:
+        return redirect('posts:post_list')  # forbidden 금지됨
     if request.method == 'POST':
         post_form = PostModelForm(request.POST, instance=post)
         if post_form.is_valid():
@@ -51,3 +58,20 @@ def update_post(request, post_id):
     return render(request, 'posts/form.html', {
         'post_form': post_form,
     })
+
+
+@login_required
+@require_http_methods(['GET', 'POST'])
+def create_comment(request, post_id):
+    post = get_object_or_404(Post, id=post_id)
+    if request.method == 'POST':
+        comment_form = CommentModelForm(data=request.POST)
+        if comment_form.is_valid():
+            comment = comment_form.save(commit=False)
+            comment.post = post
+            comment.user = request.user
+            comment.save()
+            return redirect('posts:post_list')
+    # else:
+    #     comment_form = CommentModelForm()
+    # return render()
