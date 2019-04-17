@@ -44,4 +44,11 @@
     </LinearLayout>
 
 
+    <fragment
+        android:id="@+id/main_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:name="com.example.helloworld.MyFragment"
+        tools:layout="@layout/activity_main" />
+
 </LinearLayout>

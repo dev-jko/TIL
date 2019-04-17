@@ -1,6 +1,8 @@
 package com.example.helloworld
 
 import android.os.Bundle
+import android.support.v4.app.FragmentManager
+import android.support.v4.app.FragmentTransaction
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.widget.TextView
@@ -48,6 +50,11 @@ class Main2Activity : AppCompatActivity() {
         mainListView.layoutManager = layoutManager
         mainListView.adapter = dogAdapter
 
+
+        val fm: FragmentManager = supportFragmentManager
+        val ft: FragmentTransaction = fm.beginTransaction()
+        ft.add(R.id.main2_fragment, MyFragment())
+        ft.commit()
     }
 
 

@@ -3,6 +3,8 @@ package com.example.helloworld
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v4.app.FragmentManager
+import android.support.v4.app.FragmentTransaction
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -27,6 +29,11 @@ class MainActivity : AppCompatActivity() {
         main_button3.setOnClickListener {
             main_textView.text = main_editText.text
         }
+
+        val fm: FragmentManager = supportFragmentManager
+        val ft: FragmentTransaction = fm.beginTransaction()
+        ft.add(R.id.main_fragment, MyFragment())
+        ft.commit()
 
     }
 }
