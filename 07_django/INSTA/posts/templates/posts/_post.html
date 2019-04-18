@@ -25,10 +25,22 @@
         <p class="card-text">작성자 : {{ post.user.username }}</p>
         {% if post.user == request.user %}
             <a href="{% url 'posts:update_post' post.id %}" class="btn btn-warning">수정</a>
-        {% else %}
-            <a href="{% url 'posts:update_post' post.id %}" class="btn btn-warning disabled"
-               disabled="disabled">수정</a>
+            {#        {% else %}#}
+            {#            <a href="{% url 'posts:update_post' post.id %}" class="btn btn-warning disabled"#}
+            {#               disabled="disabled">수정</a>#}
         {% endif %}
+    </div>
+
+    <div class="card-body">
+        <p>좋아요 : {{ post.like_users.count }}명</p>
+        <form action="{% url 'posts:toggle_like' post.id %}" method="post">
+            {% csrf_token %}
+            {% if user in post.like_users.all %}
+                <input type="submit" class="btn btn-danger" value="싫어요!">
+            {% else %}
+                <input type="submit" class="btn btn-success" value="좋아요!">
+            {% endif %}
+        </form>
     </div>
 
     <div class="card-body">
@@ -43,7 +55,7 @@
         <form action="{% url 'posts:create_comment' post.id %}" method="post">
             {% csrf_token %}
             {{ comment_form.content }}
-            <input type="submit" value="댓글 달기" class="btn btn-light">
+            <input type="submit" value="댓글 달기" class="btn btn-dark">
         </form>
     </div>
 </div>

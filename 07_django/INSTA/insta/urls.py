@@ -20,9 +20,9 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('mton/', include('mton.urls')),
+    # path('mton/', include('mton.urls')),
     path('insta/', include('posts.urls')),
-    path('otom/', include('onetomany.urls')),
+    # path('otom/', include('onetomany.urls')),
     path('accounts/', include('accounts.urls')),
 ]
 

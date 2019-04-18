@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 
 class MyRecyclerViewAdapter(val context: Context, val dogList: ArrayList<Dog>) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -26,16 +27,19 @@ class MyRecyclerViewAdapter(val context: Context, val dogList: ArrayList<Dog>) :
             dogGender!!.text = dogList[p1].gender
             val resourceId = context.resources.getIdentifier(dogList[p1].photo, "drawable", context.packageName)
             dogPhoto!!.setImageResource(resourceId)
+            v!!.setOnClickListener { Toast.makeText(context, "breed : ${dogBreed!!.text}", Toast.LENGTH_SHORT).show() }
         }
     }
 
     private class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        var v: View? = null
         var dogBreed: TextView? = null
         var dogAge: TextView? = null
         var dogGender: TextView? = null
         var dogPhoto: ImageView? = null
 
         init {
+            v = itemView
             dogBreed = itemView.findViewById(R.id.dogBreedTextView)
             dogAge = itemView.findViewById(R.id.dogAgeTextView)
             dogGender = itemView.findViewById(R.id.dogGenderTextView)

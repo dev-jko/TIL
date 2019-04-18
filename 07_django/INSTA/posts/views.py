@@ -75,3 +75,15 @@ def create_comment(request, post_id):
     # else:
     #     comment_form = CommentModelForm()
     # return render()
+
+
+@login_required
+@require_http_methods(['POST'])
+def toggle_like(request, post_id):
+    post = get_object_or_404(Post, id=post_id)
+    user = request.user
+    if user in post.like_users.all():
+        post.like_users.remove(user)
+    else:
+        post.like_users.add(user)
+    return redirect('posts:post_list')

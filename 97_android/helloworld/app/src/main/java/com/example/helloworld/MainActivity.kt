@@ -27,7 +27,8 @@ class MainActivity : AppCompatActivity() {
         }
 
         main_button3.setOnClickListener {
-            main_textView.text = main_editText.text
+            val intent = Intent(this, Main3Activity::class.java)
+            startActivity(intent)
         }
 
         val fm: FragmentManager = supportFragmentManager
