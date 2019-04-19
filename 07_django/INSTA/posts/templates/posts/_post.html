@@ -22,7 +22,8 @@
     {% endif %}
     <div class="card-body">
         <p class="card-text">내용 : {{ post.content }}</p>
-        <p class="card-text">작성자 : {{ post.user.username }}</p>
+        <p class="card-text">작성자 : <a href="{% url 'accounts:user_detail' post.user.username %}">{{ post.user.username }}</a>
+        </p>
         {% if post.user == request.user %}
             <a href="{% url 'posts:update_post' post.id %}" class="btn btn-warning">수정</a>
             {#        {% else %}#}
@@ -44,8 +45,8 @@
     </div>
 
     <div class="card-body">
-        {% for comment in post.comment_set.all %}
-            <p class="card-text"><strong>{{ comment.user.username }}</strong> : {{ comment.content }}</p>
+        {% for comment in post.comment_set.all.reverse %}
+            <p class="card-text"><strong><a class="text-dark" href="{% url 'accounts:user_detail' comment.user.username %}">{{ comment.user.username }}</a></strong> : {{ comment.content }}</p>
         {% empty %}
             <p class="card-text">댓글을 달아주세요!</p>
         {% endfor %}
