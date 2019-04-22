@@ -5,6 +5,7 @@ from django.contrib.auth import login, logout
 from .forms import CustomAuthenticationForm, CustomUserCreationForm
 from .models import User
 from posts.forms import CommentModelForm
+from django.contrib import messages
 
 
 @require_http_methods(['GET', 'POST'])
@@ -40,6 +41,7 @@ def log_in(request):
 @require_http_methods(['GET'])
 def log_out(request):
     logout(request)
+    messages.add_message(request, messages.SUCCESS, '로그아웃 성공')
     return redirect('posts:post_list')
 
 

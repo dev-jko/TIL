@@ -1,8 +1,9 @@
 from django.shortcuts import render, redirect, get_object_or_404, HttpResponseRedirect
 from django.views.decorators.http import require_http_methods
 from django.contrib.auth.decorators import login_required
-from .models import Post, Image, Comment
+from .models import Post, Image, Comment, HashTag
 from .forms import PostModelForm, ImageModelForm, CommentModelForm
+from django.contrib import messages
 
 
 @require_http_methods(['GET'])
@@ -25,6 +26,15 @@ def create_post(request):
             post = post_form.save(commit=False)
             post.user = request.user
             post.save()
+
+            content = post_form.cleaned_data.get('content')
+            words = content.split()
+            for word in words:
+                if word[0] == '#':
+                    word = word[1:]
+                    tag = HashTag.objects.get_or_create(content=word)
+                    post.tags.add(tag[0])
+
             for image in request.FILES.getlist('file'):
                 request.FILES['file'] = image
                 image_form = ImageModelForm(files=request.FILES)
@@ -52,6 +62,16 @@ def update_post(request, post_id):
         post_form = PostModelForm(request.POST, instance=post)
         if post_form.is_valid():
             post_form.save()
+
+            post.tags.clear()
+            content = post_form.cleaned_data.get('content')
+            words = content.split()
+            for word in words:
+                if word[0] == '#':
+                    word = word[1:]
+                    tag = HashTag.objects.get_or_create(content=word)
+                    post.tags.add(tag[0])
+
             return redirect('posts:post_list')
     else:
         post_form = PostModelForm(instance=post)
@@ -88,3 +108,14 @@ def toggle_like(request, post_id):
     else:
         post.like_users.add(user)
     return redirect('posts:post_list')
+
+
+@require_http_methods(['GET'])
+def tag_posts(request, tag_name):
+    tag = get_object_or_404(HashTag, content=tag_name)
+    posts = tag.posts.all()
+    comment_form = CommentModelForm()
+    return render(request, 'posts/list.html', {
+        'posts': posts,
+        'comment_form': comment_form,
+    })
