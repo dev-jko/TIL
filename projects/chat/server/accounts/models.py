@@ -1,0 +1,16 @@
+from django.db import models
+from django.contrib.auth.models import AbstractUser
+from django.conf import settings
+from django.db.models.signals import post_save
+from rest_framework.authtoken.models import Token
+from django.dispatch import receiver
+
+
+class User(AbstractUser):
+    friendings = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='friendeds')
+
+    @receiver(post_save, sender=settings.AUTH_USER_MODEL)
+    def created_auth_token(sender):
+
+# https: // cjh5414.github.io / django - rest - framework - token - authentication /
+# https: // www.django - rest - framework.org / api - guide / authentication /  # tokenauthentication

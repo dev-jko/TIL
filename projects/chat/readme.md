@@ -4,9 +4,10 @@
 - 서버
     - django(python)
     - mosquitto(MQTT broker)
+    - paho(MQTT pub)
 - 클라이언트
     - android(kotlin)
-    - paho(MQTT libaray)
+    - paho(MQTT sub)
 
 ## 통신
 - 클라이언트에서 서버로 채팅 메세지를 보낼 때 -> HTTP
