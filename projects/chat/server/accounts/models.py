@@ -7,10 +7,12 @@ from django.dispatch import receiver
 
 
 class User(AbstractUser):
-    friendings = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='friendeds')
+    friendings = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='friendeds', blank=True)
 
     @receiver(post_save, sender=settings.AUTH_USER_MODEL)
-    def created_auth_token(sender):
+    def created_auth_token(sender, instance=None, created=False, **kwargs):
+        if created:
+            Token.objects.create(user=instance)
 
-# https: // cjh5414.github.io / django - rest - framework - token - authentication /
-# https: // www.django - rest - framework.org / api - guide / authentication /  # tokenauthentication
+#  https://cjh5414.github.io/django-rest-framework-token-authentication/
+#  https://www.django-rest-framework.org/api-guide/authentication/#tokenauthentication
