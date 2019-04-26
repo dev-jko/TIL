@@ -1,6 +1,8 @@
 Django==2.1.8
 django-extensions==2.1.6
+django-rest-auth==0.9.5
 djangorestframework==3.9.2
 paho-mqtt==1.4.0
 pytz==2019.1
 six==1.12.0
+sqlparse==0.3.0

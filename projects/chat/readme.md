@@ -15,3 +15,10 @@
     - 포어그라운드 : socket
     - 백그라운드 : MQTT(pub/sub), longPolling, FMS
 
+
+## Authentication
+- token 방식
+- accounts.User
+    - username(unique)
+    - password
+

@@ -7,6 +7,7 @@ from django.dispatch import receiver
 
 
 class User(AbstractUser):
+    username = models.CharField(max_length=100, unique=True, blank=False)
     friendings = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='friendeds', blank=True)
 
     @receiver(post_save, sender=settings.AUTH_USER_MODEL)
