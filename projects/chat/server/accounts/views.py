@@ -1,8 +1,8 @@
-from django.shortcuts import render, get_object_or_404
-from django.views.decorators.http import require_http_methods
-from django.contrib.auth.decorators import login_required
-from django.contrib.auth import login
-from rest_framework.decorators import api_view
+from django.shortcuts import get_object_or_404
+from django.contrib.auth import authenticate
+from rest_framework.authentication import TokenAuthentication
+from rest_framework.decorators import api_view, authentication_classes, permission_classes
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from .models import User
 from .serializer import UserSerializer
@@ -18,25 +18,29 @@ def signup(request):
     return Response(serialized.errors)
 
 
-# @api_view(['POST'])
-# def log_in(request):
-#     login(request)
-#     if
-#         token = get_object_or_404(Token, user=user)
-#         return Response(token)
-#     print('로그인 실패')
-#     print('로그인 실패')
-#     print('로그인 실패')
-#     print('로그인 실패')
-#     return Response(status=401)
+@api_view(['POST'])
+def log_in(request):
+    # print(request.POST)
+    # print(request.POST.get('username'))
+    # print(request.POST.get('password'))
+    # user = authenticate(username=request.POST.get('username'), password=request.POST.get('password'))
+    # print('**********************************************************')
+    # print('**********************************************************')
+    # print('**********************************************************')
+    # print('**********************************************************')
+    # print('**********************************************************')
+    # print(user)
+    # print(request.user)
+    # token = get_object_or_404(Token, user=request.user)
+    # return Response({'token': token}, status=200)
+    return None
 
 
-@login_required
-@require_http_methods(['POST'])
+@api_view(['POST'])
+@authentication_classes((TokenAuthentication, ))
+@permission_classes((IsAuthenticated, ))
 def toggle_friend(request, user_id):
     me = request.user
     friend = get_object_or_404(User, id=user_id)
 
     return None
-
-

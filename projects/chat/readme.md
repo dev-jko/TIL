@@ -57,14 +57,21 @@
     | token       | char, PK |
     | user_id | int, FK(User, id) |
 
-3. Friend, Block 
+3. RelationshipType
 
-    | Friend, Block     |          |
+    | RelationshipType     |          |
+    |----------|----------|
+    | id       | int, PK, AUTOINCREMENT |
+    | type_name(1친구, 2차단) | char, unique |
+
+3. Relationship
+
+    | Relationship     |          |
     |----------|----------|
     | id       | int, PK, AUTOINCREMENT |
     | user_id | int, FK(User, id) |
-    | target_id | int, FK(User, id) |
-    | type(1친구, 2차단)->type 테이블 나누기 | int |
+    | target_user_id | int, FK(User, id) |
+    | relationship_type_id | int, FK(RelationshipType, id) |
 
 4. Chat
 
@@ -78,6 +85,8 @@
     |----------|----------|
     | id       | int, PK |
     | content | char |
+    | chat_id | int, FK(Chat, id) |
+    | user_id | int, FK(User, id) |
 
 6. User-Chat
 

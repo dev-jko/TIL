@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'rest_auth',
     'accounts',
-    'chat_api',
+    'chats',
 ]
 
 REST_FRAMEWORK = {

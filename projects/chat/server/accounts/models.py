@@ -6,14 +6,20 @@ from rest_framework.authtoken.models import Token
 from django.dispatch import receiver
 
 
+class RelationshipType(models.Model):
+    type_name = models.CharField(max_length=50, unique=True)
+
+
+class Relationship(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    target_user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='targeted')
+    relationship_type = models.ForeignKey(RelationshipType, on_delete=models.SET_DEFAULT, default=0)
+
+
 class User(AbstractUser):
     username = models.CharField(max_length=100, unique=True, blank=False)
-    friendings = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='friendeds', blank=True)
 
     @receiver(post_save, sender=settings.AUTH_USER_MODEL)
     def created_auth_token(sender, instance=None, created=False, **kwargs):
         if created:
-            Token.objects.create(user=instance)
-
-#  https://cjh5414.github.io/django-rest-framework-token-authentication/
-#  https://www.django-rest-framework.org/api-guide/authentication/#tokenauthentication
+            Token.objects.get_or_create(user=instance)
