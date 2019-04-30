@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+<button id="button">클릭</button>
+<div id="result-area">
+</div>
+
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script>
+    const getDogAndPush = () => {
+        axios.get('https://dog.ceo/api/breeds/image/random')
+            .then(response => response.data)
+            .then(data => `<img src="${data.message}">`)
+            .then(imgTag => document.querySelector('#result-area').innerHTML = imgTag)
+            .catch(err => console.error(err));
+    };
+    const button = document.querySelector('#button');
+    button.addEventListener('click', e => {
+        getDogAndPush()
+    });
+
+    const getDogAndPushAsync = async () => {
+        try {
+            const response = await axios.get('https://dog.ceo/api/breeds/image/random');
+            const data = response.data;
+            const imgTag = `<img src="${data.message}">`;
+            document.querySelector('#result-area').innerHTML = imgTag;
+        } catch (e) {
+            console.error(e);
+        }
+    };
+
+
+</script>
+</body>
+</html>
