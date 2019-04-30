@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import User
+from .models import User, Relationship
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
@@ -14,3 +14,9 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
             instance.set_password(password)
         instance.save()
         return instance
+
+
+class RelationshipSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Relationship
+        fields = '__all__'

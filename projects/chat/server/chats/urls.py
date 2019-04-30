@@ -10,7 +10,9 @@ urlpatterns = [
     path('<int:chat_id>/messages/', views.message),
     path('<int:chat_id>/messages/<int:message_id>/', views.delete_message),
 
-    path('<int:chat_id>/users/', views.user),
+    path('<int:chat_id>/users/', views.get_users),
+    path('<int:chat_id>/users/<int:user_id>/', views.user),
 
+    path('<int:chat_id>/users/<user_id>/messages/<int:message_id>/', views.update_last_message),
 
 ]

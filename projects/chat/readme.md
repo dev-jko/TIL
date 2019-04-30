@@ -20,7 +20,11 @@
         - `signup/` POST, 회원가입
         - `<int:user_id>/` GET, 유저 정보 가져오기
         - `<int:user_id>/friends/` GET, 유저의 친구 목록 가져오기
-        - `<int:user_id>/friends/<int:friend_id>/` POST, 친구 추가/삭제하기
+        - `<int:user_id>/friends/<int:friend_id>/` POST, 친구 추가하기
+        - `<int:user_id>/friends/<int:friend_id>/` DELETE, 친구 삭제하기
+        - `<int:user_id>/blocks/` GET, 유저의 차단 목록 가져오기
+        - `<int:user_id>/blocks/<int:block_id>/` POST, 차단 추가하기
+        - `<int:user_id>/blocks/<int:block_id>/` DELETE, 차단 삭제하기
         - `<int:user_id>/chats/` GET, 유저의 채팅방 목록 가져오기
     2. `chats/`
         - `''` POST, 채팅방 추가하기
@@ -30,7 +34,7 @@
         - `<int:chat_id>/messages/<int:message_id>/` PATCH, 메세지 삭제하기('삭제된 메세지 입니다.'로 내용 변경)
         - `<int:chat_id>/users/` GET, 채팅방에 있는 유저 목록 가져오기
         - `<int:chat_id>/users/<int:user_id>/` POST, 채팅방에 유저 추가하기
-        - `<int:chat_id>/users/<int:user_id>/` DELETE, 채팅방에 유저 나가기/강제 퇴장 시키기
+        - `<int:chat_id>/users/<int:user_id>/` DELETE, 채팅방에 유저 나가기
         - `<int:chat_id>/users/<int:user_id>/messages/<int:message_id>/` PATCH, 채팅방에서 유저가 확인한 마지막 메세지 갱신하기
 
 
