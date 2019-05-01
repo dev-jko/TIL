@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
+             android:layout_width="match_parent"
+             android:layout_height="80dp"
+             tools:context=".fragments.TabMenuFragment">
+
+
+    <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <Button
+                android:text="친구"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                app:layout_constraintWidth_percent="0.25"
+                android:id="@+id/tabMenuButton1"/>
+
+        <Button
+                android:text="채팅"
+                app:layout_constraintStart_toEndOf="@id/tabMenuButton1"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                app:layout_constraintWidth_percent="0.25"
+                android:id="@+id/tabMenuButton2"/>
+
+        <Button
+                android:text="Button3"
+                app:layout_constraintStart_toEndOf="@id/tabMenuButton2"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                app:layout_constraintWidth_percent="0.25"
+                android:id="@+id/tabMenuButton3"/>
+
+        <Button
+                android:text="Button4"
+                app:layout_constraintStart_toEndOf="@id/tabMenuButton3"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                app:layout_constraintWidth_percent="0.25"
+                android:id="@+id/tabMenuButton4"/>
+
+    </android.support.constraint.ConstraintLayout>
+
+</FrameLayout>
