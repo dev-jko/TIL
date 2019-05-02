@@ -194,3 +194,5 @@ fabric.properties
 
 *.iml
 media/
+
+node_modules/

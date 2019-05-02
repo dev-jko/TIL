@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404, HttpResponseRedirect
 from django.views.decorators.http import require_http_methods
 from django.contrib.auth.decorators import login_required
+from django.http import JsonResponse, HttpResponseBadRequest
 from .models import Post, Image, Comment, HashTag
 from .forms import PostModelForm, ImageModelForm, CommentModelForm
 from django.contrib import messages
@@ -101,13 +102,22 @@ def create_comment(request, post_id):
 @login_required
 @require_http_methods(['POST'])
 def toggle_like(request, post_id):
-    post = get_object_or_404(Post, id=post_id)
-    user = request.user
-    if user in post.like_users.all():
-        post.like_users.remove(user)
+    if request.is_ajax():
+        post = get_object_or_404(Post, id=post_id)
+        user = request.user
+        is_active = True
+        if user in post.like_users.all():
+            post.like_users.remove(user)
+            is_active = False
+        else:
+            post.like_users.add(user)
+        return JsonResponse(data={
+            'status': 'ok',
+            'likeCount': post.like_users.count(),
+            'is_active': is_active
+        })
     else:
-        post.like_users.add(user)
-    return redirect('posts:post_list')
+        return HttpResponseBadRequest()
 
 
 @require_http_methods(['GET'])

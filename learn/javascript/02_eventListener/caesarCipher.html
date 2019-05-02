@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+<label for="user-input">입력 : </label><input type="text" id="user-input" autofocus><br>
+<label for="user-n">밀기 : </label><input type="number" id="user-n" min="0" value="1">
+
+<h1 id="user-output"></h1>
+
+<script>
+    const inputArea = document.querySelector("#user-input");
+    const inputN = document.querySelector("#user-n");
+    const resultArea = document.querySelector("#user-output");
+    const push = (s, n) => Array.from(s).map(c => String.fromCharCode(c.charCodeAt() + (n - '0'))).join("");
+    inputArea.addEventListener("input", e => {
+        resultArea.innerHTML = push(inputArea.value, inputN.value);
+    });
+
+
+</script>
+
+
+</body>
+</html>

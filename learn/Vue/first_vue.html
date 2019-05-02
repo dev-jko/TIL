@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+<div id="app">
+    {{ message }} - {{ count }}
+    <button v-on:click="reverseMessage">Reverse</button>
+    <p>{{ count }}</p>
+    <button v-on:click="plus">up</button>
+    <button v-on:click="down">down</button>
+</div>
+
+<div id="app2">
+    <ol>
+        <li v-for="todo in todos">
+            {{ todo.content }}
+        </li>
+    </ol>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+
+    const app = new Vue({
+        el: '#app',
+        data: {
+            message: 'Hello Vue JS!',
+            count: 0,
+        },
+        methods: {
+            plus: function () {
+                this.count++;
+            },
+            down: function(){
+                this.count--;
+            },
+            reverseMessage: function () {
+                this.message = Array.from(this.message).reverse().join('')
+            },
+        }
+    });
+    const app2 = new Vue({
+        el: '#app2',
+        data: {
+            todos: [
+                {content: 'js 배우기'},
+                {content: 'vue 배우기'},
+                {content: '짱짱한거 만들기'},
+            ],
+        },
+    });
+
+    app.plus();
+    console.log(app.count);
+    console.log(app.$data.count);
+
+</script>
+</body>
+</html>
