@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+
+<div id="app">
+    <button v-on:click="getDogImage">멍 - {{ dogCount }}</button>
+    <button v-on:click="getCatImage">냥 - {{ catCount }}</button>
+    <br>
+    <div v-for="image in images">
+        <img v-bind:src="image" alt="cat-or-dog" width="150px">
+    </div>
+</div>
+
+<script src="vue.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script>
+
+    new Vue({
+        el: '#app',
+        data: {
+            images: [],
+            dogCount: 0,
+            catCount: 0,
+        },
+        methods: {
+            getDogImage() {
+                const URL = 'https://dog.ceo/api/breeds/image/random';
+                axios.get(URL)
+                    .then(response => this.images.push(response.data.message))
+                    .then(() => this.dogCount++)
+                    .catch(e => console.error(e));
+            },
+            async getCatImage() {
+                try {
+                    const URL = 'https://api.thecatapi.com/v1/images/search';
+                    const response = await axios.get(URL);
+                    this.images.push(response.data[0].url);
+                    this.catCount++;
+                } catch (e) {
+                    console.error(e);
+                }
+            }
+        }
+    });
+
+</script>
+</body>
+</html>

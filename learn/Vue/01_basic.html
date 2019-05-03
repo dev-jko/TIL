@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<div id="app">
+    {{ msg }}
+    <br>
+    {{ greet() }}
+    <br>
+    {{ greet2('bye') }}
+    <br>
+    <ol>
+        <li v-for="e in array">{{ e }}</li>
+    </ol>
+    <hr>
+    <input type="text" v-on:input="change($event, '따봉')">
+    <p>{{msg}}</p>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+    const app = new Vue({
+        el: '#app',
+        data: {
+            msg: 'Hi',
+            array: ['a', 'b', 'c'],
+        },
+        methods: {
+            greet() {
+                return 'hello';
+            },
+            greet2(msg) {
+                return "this.msg : " + this.msg + " / msg : " + msg;
+            },
+            change(e, word) {
+                this.msg = e.target.value + word
+            }
+        }
+    });
+</script>
+
+</body>
+</html>
