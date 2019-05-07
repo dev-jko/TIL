@@ -9,7 +9,7 @@
 <div id="app">
     <h1 v-once>{{ title }}</h1>
     <p>{{ sayHello() }}</p>
-    <a v-bind:href="link">Google</a>
+    <a :href="link">Google</a>
     <div v-html="rawHTML"></div>  <!-- XSS: Cross Site Scripting -->
 
 </div>

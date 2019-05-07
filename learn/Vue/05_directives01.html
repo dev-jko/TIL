@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+
+<div id="app">
+    {{ message }}
+    {{ status ? 'Good' : 'Bad'}}
+    <hr>
+    {{ message | capitalize }}
+    <hr>
+    <ul>
+        <li v-for="n in numbers" v-if="n % 2 === 0">{{ n }}</li>
+    </ul>
+
+    <template v-if="status">
+        <h5>status</h5>
+    </template>
+
+    <h2 v-if="eng"> eng </h2>
+    <h2 v-show="kor"> kor </h2>
+
+</div>
+
+<script src="vue.js"></script>
+<script>
+
+    const app = new Vue({
+        el: '#app',
+        data: {
+            message: 'hi, abcd, ssafy',
+            status: true,
+            numbers: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+            eng: true,
+            kor: false,
+        },
+        methods: {},
+        filters: {
+            capitalize(value) {
+                if (!value) return "";
+                value = value.toString();
+                return value.charAt(0).toUpperCase() + value.slice(1);
+            }
+        }
+    })
+
+</script>
+</body>
+</html>

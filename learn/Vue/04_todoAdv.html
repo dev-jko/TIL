@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+
+    <style>
+        .completed {
+            text-decoration: line-through;
+            opacity: 0.6;
+        }
+    </style>
+</head>
+<body>
+
+<div id="app">
+
+    <select v-model="status">
+        <option value="all">모두</option>
+        <option value="active" selected>할 일</option>
+        <option value="completed">한 일</option>
+    </select>
+    <hr>
+
+    <input type="text" v-model="newTodo" @keyup.enter="addTodo()">
+    <button @click="addTodo()">+</button>
+    <hr>
+    <button v-on:click="clearCompleted()">Clear Completed</button>
+    <hr>
+    <ol v-if="todos.length">
+        <li v-for="todo in groupTodosByStatus()" v-on:click="check(todo)"
+            v-bind:class="todo.completed ? 'completed':'' " v-bind:key="todo.id">
+            <!--        <li v-for="todo in todos" v-on:click="check(todo)" v-bind:class="{completed: todo.completed}">-->
+            <input type="checkbox" v-model="todo.completed">
+            <span>{{ todo.content }}</span>
+        </li>
+    </ol>
+</div>
+
+<script src="vue.js"></script>
+<script>
+
+    const app = new Vue({
+        el: '#app',
+        data: {
+            todos: [
+                {id: 1, content: '저녁 메뉴 고민하기', completed: false},
+                {id: 2, content: '시험 공부 하기', completed: false},
+                {id: 3, content: '집 살 걱정 하기', completed: false},
+                {id: 4, content: '행복하기', completed: false},
+            ],
+            newTodo: '',
+            status: 'all',
+        },
+        methods: {
+            check(todo = {}) {
+                todo.completed = !todo.completed;
+            },
+            addTodo() {
+                if (this.newTodo) {
+                    this.todos.push({
+                        id: Date.now(),
+                        content: this.newTodo,
+                        completed: false,
+                    });
+                    this.newTodo = '';
+                }
+            },
+            clearCompleted() {
+                this.todos = this.todos.filter(todo => !todo.completed);
+            },
+
+        },
+        computed: {
+            groupTodosByStatus() {
+                if (this.status === 'active') {
+                    return this.todos.filter(todo => !todo.completed)
+                } else if (this.status === 'completed') {
+                    return this.todos.filter(todo => todo.completed)
+                } else {
+                    return this.todos
+                }
+            },
+        }
+    });
+
+</script>
+</body>
+</html>

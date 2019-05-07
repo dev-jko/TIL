@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<script src="https://unpkg.com/rxjs/bundles/rxjs.umd.min.js"></script>
+<script>
+
+    const {range} = rxjs;
+    const {map, filter, just} = rxjs.operators;
+
+    range(1, 200).pipe(
+        filter(x => x % 2 === 1),
+        map(x => x + x)
+    ).subscribe(x => console.log(x));
+
+    const observable = new Observable();
+    observable.just(10);
+
+
+</script>
+</body>
+</html>
