@@ -31,31 +31,37 @@
         <li v-for="todo in groupTodosByStatus" v-on:click="check(todo)"
             v-bind:class="todo.completed ? 'completed':'' " v-bind:key="todo.id">
             <!--        <li v-for="todo in todos" v-on:click="check(todo)" v-bind:class="{completed: todo.completed}">-->
-            <input type="checkbox" v-model="todo.completed">
+            <input type="checkbox" v-model="todo.completed" @change="updateTodo(todo)">
             <span>{{ todo.content }}</span>
         </li>
     </ol>
 </div>
 
 <script src="vue.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.9.1/firebase.js"></script>
+<script src="https://unpkg.com/vuefire/dist/vuefire.js"></script>
+<script>
+    // Initialize Firebase
+    const config = {
+        apiKey: "AIzaSyBiuSTqEw1Kt529Uattx7yx2PD01lK1o0Y",
+        databaseURL: "https://todo-vue-c4a70.firebaseio.com/",
+        projectId: "todo-vue-c4a70",
+    };
+    firebase.initializeApp(config);
+</script>
 <script>
 
-    const todosApp = {
-        storageKey: 'my-todos',
-        fetch() {
-            return JSON.parse(localStorage.getItem(this.storageKey)) || [];
-        },
-        save(todos) {
-            localStorage.setItem(this.storageKey, JSON.stringify(todos))
-        }
-    };
+    const database = firebase.database();
 
     const app = new Vue({
         el: '#app',
         data: {
-            todos: todosApp.fetch(),
+            todos: database.ref('todos'),
             newTodo: '',
             status: 'all',
+        },
+        firebase: {
+            todos: database.ref('todos'),
         },
         methods: {
             check(todo = {}) {
@@ -63,7 +69,7 @@
             },
             addTodo() {
                 if (this.newTodo) {
-                    this.todos.push({
+                    this.$firebaseRefs.todos.push({
                         id: Date.now(),
                         content: this.newTodo,
                         completed: false,
@@ -72,7 +78,16 @@
                 }
             },
             clearCompleted() {
-                this.todos = this.todos.filter(todo => !todo.completed);
+                const completedTodos = this.todos.filter(todo => todo.completed);
+                completedTodos.forEach(todo => {
+                    this.$firebaseRefs.todos.child(todo['.key']).remove();
+                });
+
+            },
+            updateTodo(todo) {
+                const newTodo = {...todo};
+                delete newTodo['.key'];
+                this.$firebaseRefs.todos.child(todo['.key']).set(newTodo);
             },
 
         },
@@ -88,13 +103,12 @@
             },
         },
         watch: {
-            todos: {
-                deep: true,
-                handler(value) {
-                    todosApp.save(value);
-                }
-            },
-
+            // todos: {
+            //     deep: true,
+            //     handler(value) {
+            //         // todosApp.save(value);
+            //     }
+            // },
         }
     });
 
