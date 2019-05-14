@@ -1,10 +1,11 @@
 package com.myproject.myapplication
 
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentStatePagerAdapter
+import android.support.v7.app.AppCompatActivity
+import android.view.View
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -16,8 +17,17 @@ class MainActivity : AppCompatActivity() {
         pager.adapter = MyPagerAdapter(supportFragmentManager)
         pager.currentItem = 0
 
-        movePageListener =
+        val movePageListener: View.OnClickListener = View.OnClickListener {
+            val tag: Int = it.tag as Int
+            pager.currentItem = tag
+        }
 
+        btn_first.setOnClickListener(movePageListener)
+        btn_first.tag = 0
+        btn_second.setOnClickListener(movePageListener)
+        btn_second.tag = 1
+        btn_third.setOnClickListener(movePageListener)
+        btn_third.tag = 2
     }
 
     class MyPagerAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
