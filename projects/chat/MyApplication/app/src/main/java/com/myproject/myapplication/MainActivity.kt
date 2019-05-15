@@ -10,9 +10,14 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
+    lateinit var dbHelper: CalendarOpenHelper
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        dbHelper = CalendarOpenHelper(this)
+
 
         pager.adapter = MyPagerAdapter(supportFragmentManager)
         pager.currentItem = 0
@@ -29,6 +34,7 @@ class MainActivity : AppCompatActivity() {
         btn_third.setOnClickListener(movePageListener)
         btn_third.tag = 2
     }
+
 
     class MyPagerAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
         override fun getItem(p0: Int): Fragment {

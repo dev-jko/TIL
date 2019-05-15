@@ -1,11 +1,11 @@
 package com.myproject.myapplication
 
 import android.os.Bundle
+import android.support.constraint.ConstraintLayout
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.RelativeLayout
 
 
 class OneFragment : Fragment() {
@@ -14,7 +14,7 @@ class OneFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_one, container, false) as RelativeLayout
+        return inflater.inflate(R.layout.fragment_one, container, false) as ConstraintLayout
     }
 
 }
