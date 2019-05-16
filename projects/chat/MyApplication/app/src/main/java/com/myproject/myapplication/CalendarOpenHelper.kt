@@ -17,8 +17,8 @@ class CalendarOpenHelper(
         val TABLE_NAME = "calendar"
         val createTable = "CREATE TABLE IF NOT EXISTS $TABLE_NAME (" +
                 "ID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT," +
-                "START_DATE DATE," +
-                "END_DATE DATE," +
+                "START_DATE INTEGER," +
+                "END_DATE INTEGER," +
                 "CONTENT TEXT" +
                 ");"
         db!!.execSQL(createTable)
