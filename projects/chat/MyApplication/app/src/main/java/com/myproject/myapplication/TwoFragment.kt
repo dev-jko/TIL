@@ -50,7 +50,7 @@ class TwoFragment : Fragment() {
         val arrayList = ArrayList<CalendarData>()
         val db = (activity as MainActivity).dbHelper.readableDatabase
 
-//
+
 //        val db2 = (activity as MainActivity).dbHelper.writableDatabase
 //        for (i in 1..20) {
 //            val gregorianCalendar = GregorianCalendar()
