@@ -1,5 +1,6 @@
 package com.myproject.myapplication
 
+import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
@@ -18,23 +19,29 @@ class MainActivity : AppCompatActivity() {
 
         dbHelper = CalendarOpenHelper(this)
 
-
         pager.adapter = MyPagerAdapter(supportFragmentManager)
-        pager.currentItem = 0
+        pager.currentItem = this.getSharedPreferences("settings", Context.MODE_PRIVATE).getInt("pagerItem", 0)
 
         val movePageListener: View.OnClickListener = View.OnClickListener {
             val tag: Int = it.tag as Int
             pager.currentItem = tag
         }
 
-        btn_first.setOnClickListener(movePageListener)
-        btn_first.tag = 0
-        btn_second.setOnClickListener(movePageListener)
-        btn_second.tag = 1
-        btn_third.setOnClickListener(movePageListener)
-        btn_third.tag = 2
+        btn_monthly_tab.setOnClickListener(movePageListener)
+        btn_monthly_tab.tag = 0
+        btn_daily_tab.setOnClickListener(movePageListener)
+        btn_daily_tab.tag = 1
+        btn_weekly_tab.setOnClickListener(movePageListener)
+        btn_weekly_tab.tag = 2
     }
 
+    override fun onPause() {
+        super.onPause()
+
+        this.getSharedPreferences("settings", Context.MODE_PRIVATE).edit()
+            .putInt("pagerItem", pager.currentItem)
+            .apply()
+    }
 
     class MyPagerAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
         override fun getItem(p0: Int): Fragment {

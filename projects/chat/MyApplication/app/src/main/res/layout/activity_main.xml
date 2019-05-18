@@ -18,25 +18,28 @@
             android:orientation="horizontal">
 
         <Button
-                android:id="@+id/btn_first"
+                style="?android:attr/buttonBarButtonStyle"
+                android:id="@+id/btn_monthly_tab"
                 android:layout_width="0dip"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="first tab"/>
+                android:text="@string/monthly_tab"/>
 
         <Button
-                android:id="@+id/btn_second"
+                style="?android:attr/buttonBarButtonStyle"
+                android:id="@+id/btn_daily_tab"
                 android:layout_width="0dip"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="second tab"/>
+                android:text="@string/daily_tab"/>
 
         <Button
-                android:id="@+id/btn_third"
+                style="?android:attr/buttonBarButtonStyle"
+                android:id="@+id/btn_weekly_tab"
                 android:layout_width="0dip"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="third tab"/>
+                android:text="@string/weekly_tab"/>
 
     </LinearLayout>
 
