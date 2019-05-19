@@ -14,7 +14,7 @@ class DailyTodoAdapter(val mData: List<CalendarData>) : RecyclerView.Adapter<Dai
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val context = parent.context
         val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-        val view = inflater.inflate(R.layout.daily_todo_item, parent, false)
+        val view = inflater.inflate(R.layout.recyclerview_item_daily_todo, parent, false)
         return ViewHolder(view)
     }
 

@@ -4,27 +4,26 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.RelativeLayout
 import com.myproject.myapplication.myrecyclerview.DailyAdapter
 import io.reactivex.Observable
-import kotlinx.android.synthetic.main.fragment_two.*
+import kotlinx.android.synthetic.main.fragment_daily_calendar.*
 import java.sql.Date
 import java.util.*
 
 import kotlin.collections.ArrayList
 
 
-class TwoFragment : Fragment() {
+class DailyCalendarFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_two, container, false) as RelativeLayout
+        return inflater.inflate(R.layout.fragment_daily_calendar, container, false) as RelativeLayout
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

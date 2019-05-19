@@ -10,7 +10,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import com.myproject.myapplication.CalendarData
 import com.myproject.myapplication.R
-import kotlinx.android.synthetic.main.recycler_view_daily_item.view.*
+import kotlinx.android.synthetic.main.recyclerview_item_daily.view.*
 import java.sql.Date
 
 class DailyAdapter(val dateList: List<Date>, val todoList: List<CalendarData>) :
@@ -19,7 +19,7 @@ class DailyAdapter(val dateList: List<Date>, val todoList: List<CalendarData>) :
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val context = parent.context
         val inflater: LayoutInflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-        val view = inflater.inflate(R.layout.recycler_view_daily_item, parent, false)
+        val view = inflater.inflate(R.layout.recyclerview_item_daily, parent, false)
         return ViewHolder(view)
     }
 

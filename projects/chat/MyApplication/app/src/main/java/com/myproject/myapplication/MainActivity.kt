@@ -46,9 +46,9 @@ class MainActivity : AppCompatActivity() {
     class MyPagerAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
         override fun getItem(p0: Int): Fragment {
             return when (p0) {
-                0 -> OneFragment()
-                1 -> TwoFragment()
-                else -> ThreeFragment()
+                0 -> MonthlyCalendarFragment()
+                1 -> DailyCalendarFragment()
+                else -> WeeklyCalendarFragment()
             }
         }
 
