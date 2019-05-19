@@ -41,7 +41,7 @@ class DailyCalendarFragment : Fragment() {
 
         recycler_daily.addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
         recycler_daily.layoutManager = LinearLayoutManager(activity)
-        val adapter = DailyAdapter(dayList, todoList)
+        val adapter = DailyAdapter(dayList, todoList, context!!)
         recycler_daily.adapter = adapter
     }
 
