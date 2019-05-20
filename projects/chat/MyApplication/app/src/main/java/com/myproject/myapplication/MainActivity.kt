@@ -1,23 +1,26 @@
 package com.myproject.myapplication
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentStatePagerAdapter
 import android.support.v7.app.AppCompatActivity
+import android.util.Log
 import android.view.View
 import kotlinx.android.synthetic.main.activity_main.*
+import java.sql.Date
 
 class MainActivity : AppCompatActivity() {
 
-    lateinit var dbHelper: CalendarOpenHelper
+    lateinit var dbHelper: DataBaseOpenHelper
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        dbHelper = CalendarOpenHelper(this)
+        dbHelper = DataBaseOpenHelper(this)
 
         pager.adapter = MyPagerAdapter(supportFragmentManager)
         pager.currentItem = this.getSharedPreferences("settings", Context.MODE_PRIVATE).getInt("pagerItem", 0)
@@ -57,4 +60,17 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == resultCode){
+            val cd = CalendarData(
+                data!!.getIntExtra("id", 0),
+                data.getSerializableExtra("startDate") as Date,
+                data.getSerializableExtra("endDate") as Date,
+                data.getStringExtra("content")
+            )
+            (supportFragmentManager.findFragmentByTag("1") as DailyCalendarFragment).updateRecycler(cd)
+        }
+    }
 }

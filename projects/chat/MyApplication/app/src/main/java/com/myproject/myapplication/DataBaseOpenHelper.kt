@@ -4,9 +4,9 @@ import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 
-class CalendarOpenHelper(
+class DataBaseOpenHelper(
     context: Context,
-    DATABASE_NAME: String = "myApp.sqlite3",
+    DATABASE_NAME: String = "Calendar.db",
     DATABASE_VERSION: Int = 1
 ) : SQLiteOpenHelper(
     context, DATABASE_NAME,
@@ -14,14 +14,7 @@ class CalendarOpenHelper(
 ) {
 
     override fun onCreate(db: SQLiteDatabase?) {
-        val TABLE_NAME = "calendar"
-        val createTable = "CREATE TABLE IF NOT EXISTS $TABLE_NAME (" +
-                "ID INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT," +
-                "START_DATE INTEGER," +
-                "END_DATE INTEGER," +
-                "CONTENT TEXT" +
-                ");"
-        db!!.execSQL(createTable)
+        db!!.execSQL(CalendarDBContract.SQL_CREATE_TABLE)
     }
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {

@@ -99,7 +99,7 @@
                 android:layout_height="350dp"
                 android:inputType="textMultiLine"
                 android:ems="10"
-                android:id="@+id/editText"/>
+                android:id="@+id/edit_text_todo_editing_content"/>
 
     </LinearLayout>
 

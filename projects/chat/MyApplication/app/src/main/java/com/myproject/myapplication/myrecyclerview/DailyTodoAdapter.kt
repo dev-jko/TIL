@@ -10,13 +10,14 @@ import com.myproject.myapplication.CalendarData
 import com.myproject.myapplication.R
 
 
-class DailyTodoAdapter(val mData: List<CalendarData>) : RecyclerView.Adapter<DailyTodoAdapter.ViewHolder>() {
+class DailyTodoAdapter(val mData: ArrayList<CalendarData>) : RecyclerView.Adapter<DailyTodoAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val context = parent.context
         val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         val view = inflater.inflate(R.layout.recyclerview_item_daily_todo, parent, false)
         return ViewHolder(view)
     }
+
 
     override fun getItemCount(): Int {
         return mData.size

@@ -1,23 +1,29 @@
 package com.myproject.myapplication
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.RelativeLayout
 import com.myproject.myapplication.myrecyclerview.DailyAdapter
 import io.reactivex.Observable
+import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_daily_calendar.*
 import java.sql.Date
 import java.util.*
-
 import kotlin.collections.ArrayList
 
 
 class DailyCalendarFragment : Fragment() {
+
+    lateinit var dateList:ArrayList<Date>
+    lateinit var todoList:ArrayList<CalendarData>
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,43 +35,64 @@ class DailyCalendarFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        val todoList: List<CalendarData> = getData()
-        val gregorianCalendar = GregorianCalendar()
-        gregorianCalendar.add(Calendar.DATE, -10)
-        val dayList: List<Date> = Observable.range(0, 50)
+        todoList = getData() as ArrayList<CalendarData>
+        val gregorianCalendar = GregorianCalendar(TimeZone.getTimeZone("Asia/Seoul"))
+        gregorianCalendar.add(GregorianCalendar.DATE, -3)
+        dateList = Observable.range(0, 50)
             .map {
-                gregorianCalendar.add(Calendar.DATE, 1)
+                gregorianCalendar.add(GregorianCalendar.DATE, 1)
                 Date(gregorianCalendar.time.time)
             }
-            .toList().blockingGet()
+            .toList().blockingGet() as ArrayList<Date>
 
         recycler_daily.addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
         recycler_daily.layoutManager = LinearLayoutManager(activity)
-        val adapter = DailyAdapter(dayList, todoList, context!!)
+        val adapter = DailyAdapter(dateList, todoList, context!!)
         recycler_daily.adapter = adapter
+        recycler_daily.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                super.onScrollStateChanged(recyclerView, newState)
+                if (!recyclerView.canScrollVertically(-1)) {
+                    gregorianCalendar.time = dateList.first()
+                    val disposable = Observable.range(0, 10)
+                        .observeOn(Schedulers.computation())
+                        .map {
+                            gregorianCalendar.add(GregorianCalendar.DATE, -1)
+                            Date(gregorianCalendar.time.time)
+                        }.subscribe { dateList.add(0, it) }
+                    recyclerView.adapter?.notifyDataSetChanged()
+                    disposable.dispose()
+
+                } else if (!recyclerView.canScrollVertically(1)) {
+                    gregorianCalendar.time = dateList.last()
+                    val disposable = Observable.range(0, 10)
+                        .observeOn(Schedulers.computation())
+                        .map {
+                            gregorianCalendar.add(GregorianCalendar.DATE, 1)
+                            Date(gregorianCalendar.time.time)
+                        }.subscribe { dateList.add(it) }
+                    recyclerView.adapter?.notifyDataSetChanged()
+                    disposable.dispose()
+                }
+            }
+        })
+
+
     }
 
     fun getData(): List<CalendarData> {
         val arrayList = ArrayList<CalendarData>()
         val db = (activity as MainActivity).dbHelper.readableDatabase
+        val cursor = db.query(
+            CalendarDBContract.TABLE_NAME,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+        )
 
-
-//        val db2 = (activity as MainActivity).dbHelper.writableDatabase
-//        for (i in 1..20) {
-//            val gregorianCalendar = GregorianCalendar()
-//            val start = gregorianCalendar.time.time.toString()
-//            gregorianCalendar.add(Calendar.DATE, i)
-//            val end = gregorianCalendar.time.time.toString()
-//            val content = "할일$i"
-//            val query1 = "INSERT INTO calendar (START_DATE, END_DATE, CONTENT) " +
-//                    "VALUES($start, $end, '$content')"
-//            Log.d("/*-/*-/*-/*-", query1)
-//            db2.execSQL(query1)
-//        }
-
-
-        val query = "SELECT * FROM calendar"
-        val cursor = db.rawQuery(query, null)
         while (cursor.moveToNext()) {
             val temp = CalendarData(
                 cursor.getInt(0),
@@ -75,7 +102,13 @@ class DailyCalendarFragment : Fragment() {
             )
             arrayList.add(temp)
         }
-        return arrayList.toList()
+        cursor.close()
+        return arrayList.toMutableList()
     }
 
+    fun updateRecycler(calendarData: CalendarData) {
+        todoList.add(calendarData)
+        recycler_daily.adapter?.notifyDataSetChanged()
+
+    }
 }
