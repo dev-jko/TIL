@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <variable name="viewmodel" type="com.example.calculator.MyViewModel"/>
+    </data>
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:autoSizeTextType="uniform"
+                android:textAlignment="viewEnd"
+                android:text="@{viewmodel.display}"/>
+
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:weightSum="100">
+            <Button
+                    android:onClick="@{() -> viewmodel.clearEntry()}"
+                    android:autoSizeTextType="uniform"
+                    android:text="CE"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent" android:layout_weight="25"/>
+
+            <Button
+                    android:onClick="@{() -> viewmodel.clear()}"
+                    android:autoSizeTextType="uniform"
+                    android:text="C"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent" android:layout_weight="25"/>
+
+            <Button
+                    android:onClick="@{() -> viewmodel.deleteLastDisplayNum()}"
+                    android:autoSizeTextType="uniform"
+                    android:text="←"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent" android:layout_weight="25"/>
+
+            <Button
+                    android:onClick="@{() -> viewmodel.setOperator(3)}"
+                    android:autoSizeTextType="uniform"
+                    android:text="÷"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent" android:layout_weight="25"/>
+        </LinearLayout>
+
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:weightSum="100">
+            <Button
+                    android:onClick="@{() -> viewmodel.appendNumberToDisplay(7)}"
+                    android:autoSizeTextType="uniform"
+                    android:text="7"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent" android:layout_weight="25"/>
+
+            <Button
+                    android:onClick="@{() -> viewmodel.appendNumberToDisplay(8)}"
+                    android:autoSizeTextType="uniform"
+                    android:text="8"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent" android:layout_weight="25"/>
+
+            <Button
+                    android:onClick="@{() -> viewmodel.appendNumberToDisplay(9)}"
+                    android:autoSizeTextType="uniform"
+                    android:text="9"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent" android:layout_weight="25"/>
+
+            <Button
+                    android:onClick="@{() -> viewmodel.setOperator(2)}"
+                    android:autoSizeTextType="uniform"
+                    android:text="×"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent" android:layout_weight="25"/>
+        </LinearLayout>
+
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:weightSum="100">
+            <Button
+                    android:onClick="@{() -> viewmodel.appendNumberToDisplay(4)}"
+                    android:autoSizeTextType="uniform"
+                    android:text="4"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent" android:layout_weight="25"/>
+
+            <Button
+                    android:onClick="@{() -> viewmodel.appendNumberToDisplay(5)}"
+                    android:autoSizeTextType="uniform"
+                    android:text="5"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent" android:layout_weight="25"/>
+
+            <Button
+                    android:onClick="@{() -> viewmodel.appendNumberToDisplay(6)}"
+                    android:autoSizeTextType="uniform"
+                    android:text="6"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent" android:layout_weight="25"/>
+
+            <Button
+                    android:onClick="@{() -> viewmodel.setOperator(1)}"
+                    android:autoSizeTextType="uniform"
+                    android:text="-"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent" android:layout_weight="25"/>
+        </LinearLayout>
+
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:weightSum="100">
+            <Button
+                    android:onClick="@{() -> viewmodel.appendNumberToDisplay(1)}"
+                    android:autoSizeTextType="uniform"
+                    android:text="1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent" android:layout_weight="25"/>
+
+            <Button
+                    android:onClick="@{() -> viewmodel.appendNumberToDisplay(2)}"
+                    android:autoSizeTextType="uniform"
+                    android:text="2"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent" android:layout_weight="25"/>
+
+            <Button
+                    android:onClick="@{() -> viewmodel.appendNumberToDisplay(3)}"
+                    android:autoSizeTextType="uniform"
+                    android:text="3"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent" android:layout_weight="25"/>
+
+            <Button
+                    android:onClick="@{() -> viewmodel.setOperator(0)}"
+                    android:autoSizeTextType="uniform"
+                    android:text="+"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent" android:layout_weight="25"/>
+        </LinearLayout>
+
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:weightSum="100">
+            <Button
+                    android:onClick="@{() -> viewmodel.appendNumberToDisplay(0)}"
+                    android:autoSizeTextType="uniform"
+                    android:text="0"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent" android:layout_weight="50"/>
+
+            <Button
+                    android:onClick="@{() -> viewmodel.appendNumberToDisplay(10)}"
+                    android:autoSizeTextType="uniform"
+                    android:text="."
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent" android:layout_weight="25"/>
+
+            <Button
+                    android:onClick="@{() -> viewmodel.calculate()}"
+                    android:autoSizeTextType="uniform"
+                    android:text="="
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent" android:layout_weight="25"/>
+        </LinearLayout>
+
+    </LinearLayout>
+</layout>
