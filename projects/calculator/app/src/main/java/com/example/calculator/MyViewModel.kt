@@ -33,10 +33,8 @@ class MyViewModel : ViewModel() {
             }
             return
         }
-        if (_display.value == "0") {
-            _display.postValue(number.toString())
-            return
-        }
+        if (_display.value == "0")
+            return _display.postValue(number.toString())
         _display.postValue(_display.value + number.toString())
     }
 
@@ -62,10 +60,8 @@ class MyViewModel : ViewModel() {
     fun deleteLastDisplayNum() {
         if (_display.value == "0")
             return
-        if (_display.value!!.length <= 1) {
-            _display.postValue("0")
-            return
-        }
+        if (_display.value!!.length <= 1)
+            return _display.postValue("0")
         if (_display.value!![_display.value!!.length - 1] == '.')
             isDecimalPointUsed = false
         _display.postValue(_display.value!!.substring(0, _display.value!!.length - 1))
