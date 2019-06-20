@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <variable name="myData" type="com.example.mvvmrecyclerview2.MyData"/>
+        <variable name="callback" type="com.example.mvvmrecyclerview2.MyClickCallback"/>
+    </data>
+    <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:onClick="@{()->callback.onClick(myData)}">
+
+        <TextView
+                android:text="@{myData.name}"
+                android:layout_width="60dp"
+                android:layout_height="match_parent" android:id="@+id/textView2"/>
+        <TextView
+                android:text="@{String.valueOf(myData.age)}"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" android:id="@+id/textView"/>
+    </LinearLayout>
+</layout>
