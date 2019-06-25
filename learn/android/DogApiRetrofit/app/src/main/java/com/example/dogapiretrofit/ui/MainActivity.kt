@@ -1,6 +1,8 @@
 package com.example.dogapiretrofit.ui
 
 import android.os.Bundle
+import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.example.dogapiretrofit.R
@@ -18,6 +20,14 @@ class MainActivity : AppCompatActivity() {
 
         binding.lifecycleOwner = this
         binding.vm = DogViewModel()
-        binding.vm!!.text.value = "test"
+        binding.adapter = DogAdapter(mCallback)
     }
+
+    private val mCallback = object : DogClickCallback {
+        override fun onClick(position: Int, url: String) {
+            Toast.makeText(applicationContext, url, Toast.LENGTH_SHORT).show()
+        }
+    }
+
+
 }
