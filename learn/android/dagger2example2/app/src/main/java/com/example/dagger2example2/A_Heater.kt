@@ -1,6 +1,8 @@
 package com.example.dagger2example2
 
-class A_Heater : Heater {
+import javax.inject.Inject
+
+class A_Heater @Inject constructor() : Heater {
 
     private var heating: Boolean = false
 

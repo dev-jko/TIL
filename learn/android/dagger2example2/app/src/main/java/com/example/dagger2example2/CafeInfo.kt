@@ -1,15 +1,20 @@
 package com.example.dagger2example2
 
-class CafeInfo() {
+import javax.inject.Inject
 
-    private lateinit var name: String
+class CafeInfo(private val name: String) {
+    @Inject
+    lateinit var coffeeMaker: CoffeeMaker
 
-    constructor(name: String) : this() {
-        this.name = name
+    @Inject
+    lateinit var coffeeBean: CoffeeBean
+
+    fun welcome() {
+        println("Welcome $name")
     }
 
-    fun welcome(){
-        println("Welcome $name")
+    fun brew() {
+        coffeeMaker.brew(coffeeBean)
     }
 
 }

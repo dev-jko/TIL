@@ -4,8 +4,8 @@ import javax.inject.Inject
 
 class CoffeeMaker
 @Inject constructor(
-    @Inject private val heater: Heater,
-    @Inject private val pump: Pump
+    private val heater: Heater,
+    private val pump: Pump
 ) {
     fun brew(coffeeBean: CoffeeBean) {
         heater.on()

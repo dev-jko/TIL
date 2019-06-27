@@ -1,6 +1,8 @@
 package com.example.dagger2example2
 
-class A_Pump(private val heater: Heater): Pump {
+import javax.inject.Inject
+
+class A_Pump @Inject constructor(private val heater: Heater) : Pump {
 
     override fun pump() {
         if (heater.isHot()) {
