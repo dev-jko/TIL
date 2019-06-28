@@ -23,6 +23,9 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    dataBinding{
+        enabled = true
+    }
 }
 
 dependencies {
@@ -39,5 +42,7 @@ dependencies {
     implementation 'com.google.dagger:dagger-android:2.23.2'
     implementation 'com.google.dagger:dagger-android-support:2.23.2'
     kapt 'com.google.dagger:dagger-android-processor:2.23.2'
+
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0-alpha01'
 
 }

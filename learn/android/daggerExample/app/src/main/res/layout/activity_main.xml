@@ -1,23 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".MainActivity"
-        android:orientation="vertical">
-
-    <TextView
+<layout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable name="vm" type="com.example.daggerexample.TestViewModel"/>
+    </data>
+    <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:text="Hello World!"
-            android:id="@+id/tv1"
-    />
-    <TextView
-            android:text="TextView2"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:id="@+id/tv2"
-    />
+            android:layout_height="match_parent"
+            tools:context=".MainActivity"
+            android:orientation="vertical">
 
-</LinearLayout>
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:text="Hello World!"
+                android:id="@+id/tv1"
+        />
+        <TextView
+                android:text="TextView2"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:id="@+id/tv2"
+        />
+        <TextView
+                android:text="@{vm.testString}"
+                android:onClick="@{()->vm.onClicked()}"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:id="@+id/textView"/>
+
+    </LinearLayout>
+</layout>
