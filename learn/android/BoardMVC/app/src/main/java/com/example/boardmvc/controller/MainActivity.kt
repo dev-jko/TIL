@@ -33,12 +33,17 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         rv_article.adapter = adapter
-
         db.articleDao().getAllArticles()
-            .observeOn(Schedulers.io())
-            .subscribeOn(AndroidSchedulers.mainThread())
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
             .subscribe { adapter.updateArticles(it) }
             .addTo(compositeDisposable)
+
+
+        floatingActionButton.setOnClickListener {
+            val intent = Intent(this, NewArticleActivity::class.java)
+            startActivity(intent)
+        }
 
     }
 

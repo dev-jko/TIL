@@ -13,7 +13,7 @@ abstract class ArticlesDatabase : RoomDatabase() {
     companion object {
         private var INSTANCE: ArticlesDatabase? = null
 
-        fun getInstance(context: Context):ArticlesDatabase {
+        fun getInstance(context: Context): ArticlesDatabase {
             return INSTANCE ?: synchronized(this) {
                 INSTANCE ?: buildDatabase(context).also { INSTANCE = it }
             }
@@ -23,7 +23,7 @@ abstract class ArticlesDatabase : RoomDatabase() {
             return Room.databaseBuilder(
                 context.applicationContext,
                 ArticlesDatabase::class.java, "board.db"
-            ).allowMainThreadQueries()
+            )
                 .build()
         }
 

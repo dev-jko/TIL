@@ -6,6 +6,7 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import io.reactivex.Completable
 import io.reactivex.Flowable
+import io.reactivex.Single
 
 @Dao
 interface ArticleDao {
@@ -13,6 +14,7 @@ interface ArticleDao {
     fun getAllArticles(): Flowable<List<Article>>
 
     @Query("SELECT * FROM articles WHERE articleId = :articleId")
+    fun getArticle(articleId: Long): Single<Article>
 
     @Insert(onConflict = OnConflictStrategy.ABORT)
     fun insertArticle(article: Article): Completable

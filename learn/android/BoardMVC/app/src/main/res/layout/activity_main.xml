@@ -14,12 +14,14 @@
             android:layout_height="match_parent"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
             android:clickable="true" app:srcCompat="@android:drawable/ic_input_add"
             android:id="@+id/floatingActionButton"
             app:layout_constraintEnd_toEndOf="parent" android:layout_marginBottom="32dp"
             app:layout_constraintBottom_toBottomOf="parent" android:layout_marginEnd="24dp"
-            android:backgroundTint="@color/design_default_color_primary" android:focusable="true"/>
+            android:backgroundTint="?attr/colorAccent" android:focusable="true" app:maxImageSize="80dp"
+            app:fabSize="normal" android:background="@color/design_default_color_primary"
+            app:backgroundTint="@color/colorAccent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
