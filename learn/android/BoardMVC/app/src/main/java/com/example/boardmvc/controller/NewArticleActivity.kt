@@ -6,9 +6,9 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.boardmvc.ArticleRepository
 import com.example.boardmvc.R
 import com.example.boardmvc.model.Article
-import com.example.boardmvc.model.ArticlesDatabase
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -20,14 +20,12 @@ import java.util.concurrent.TimeUnit
 class NewArticleActivity : AppCompatActivity() {
 
     private val TAG = NewArticleActivity::class.java.simpleName
-    private val db: ArticlesDatabase by lazy { ArticlesDatabase.getInstance(this) }
+    private val repository: ArticleRepository by lazy { ArticleRepository(application) }
     private val compositeDisposable = CompositeDisposable()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_new_article)
-//        setSupportActionBar(toolbar)
-
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -52,19 +50,19 @@ class NewArticleActivity : AppCompatActivity() {
     }
 
     private fun insertArticle(article: Article) {
-        db.articleDao().insertArticle(article)
+        repository.insertArticle(article)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
                 {
                     Log.i(TAG, "insertion completed")
-                    onCompletedInsertion()
+                    onInsertionCompleted()
                 },
                 { it.printStackTrace() }
             ).addTo(compositeDisposable)
     }
 
-    private fun onCompletedInsertion() {
+    private fun onInsertionCompleted() {
         Toast.makeText(this, "글이 작성됐습니다.", Toast.LENGTH_SHORT).show()
         Observable.just(1)
             .subscribeOn(Schedulers.computation())

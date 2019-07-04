@@ -11,7 +11,7 @@ import com.example.boardmvc.model.Article
 
 class ArticleAdapter(private val callback: MyClickCallback) : RecyclerView.Adapter<ArticleAdapter.ViewHolder>() {
 
-    lateinit var articles: List<Article>
+    private var articles: List<Article> = emptyList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val inflater = parent.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater

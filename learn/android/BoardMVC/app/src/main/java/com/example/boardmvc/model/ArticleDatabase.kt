@@ -6,23 +6,23 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 
 @Database(entities = [Article::class], version = 1)
-abstract class ArticlesDatabase : RoomDatabase() {
+abstract class ArticleDatabase : RoomDatabase() {
 
     abstract fun articleDao(): ArticleDao
 
     companion object {
-        private var INSTANCE: ArticlesDatabase? = null
+        private var INSTANCE: ArticleDatabase? = null
 
-        fun getInstance(context: Context): ArticlesDatabase {
+        fun getInstance(context: Context): ArticleDatabase {
             return INSTANCE ?: synchronized(this) {
                 INSTANCE ?: buildDatabase(context).also { INSTANCE = it }
             }
         }
 
-        private fun buildDatabase(context: Context): ArticlesDatabase {
+        private fun buildDatabase(context: Context): ArticleDatabase {
             return Room.databaseBuilder(
                 context.applicationContext,
-                ArticlesDatabase::class.java, "board.db"
+                ArticleDatabase::class.java, "board.db"
             )
                 .build()
         }

@@ -10,7 +10,7 @@ import io.reactivex.Single
 
 @Dao
 interface ArticleDao {
-    @Query("SELECT * FROM articles")
+    @Query("SELECT * FROM articles ORDER BY articleId DESC")
     fun getAllArticles(): Flowable<List<Article>>
 
     @Query("SELECT * FROM articles WHERE articleId = :articleId")
