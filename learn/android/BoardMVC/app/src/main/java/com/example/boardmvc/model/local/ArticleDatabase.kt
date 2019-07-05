@@ -1,9 +1,10 @@
-package com.example.boardmvc.model
+package com.example.boardmvc.model.local
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.example.boardmvc.model.Article
 
 @Database(entities = [Article::class], version = 1)
 abstract class ArticleDatabase : RoomDatabase() {
@@ -15,7 +16,8 @@ abstract class ArticleDatabase : RoomDatabase() {
 
         fun getInstance(context: Context): ArticleDatabase {
             return INSTANCE ?: synchronized(this) {
-                INSTANCE ?: buildDatabase(context).also { INSTANCE = it }
+                INSTANCE
+                    ?: buildDatabase(context).also { INSTANCE = it }
             }
         }
 

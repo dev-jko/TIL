@@ -4,6 +4,9 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.boardmvc.ArticleRepository
 import com.example.boardmvc.R
+import com.example.boardmvc.model.local.ArticleDatabase
+import com.example.boardmvc.model.local.ArticleLocalDataSource
+import com.example.boardmvc.model.remote.ArticleRemoteDataSource
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.addTo
@@ -13,7 +16,10 @@ import kotlinx.android.synthetic.main.activity_detail.*
 class DetailActivity : AppCompatActivity() {
 
     private val repository: ArticleRepository by lazy {
-        ArticleRepository(application)
+        ArticleRepository(
+            ArticleLocalDataSource.getInstance(ArticleDatabase.getInstance(application).articleDao()),
+            ArticleRemoteDataSource
+        )
     }
     private val compositeDisposable = CompositeDisposable()
 

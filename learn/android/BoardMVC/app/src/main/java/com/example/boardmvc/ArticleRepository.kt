@@ -1,30 +1,49 @@
 package com.example.boardmvc
 
-import android.app.Application
 import com.example.boardmvc.model.Article
-import com.example.boardmvc.model.ArticleDao
-import com.example.boardmvc.model.ArticleDatabase
 import io.reactivex.Completable
 import io.reactivex.Flowable
 import io.reactivex.Single
 
-class ArticleRepository(application: Application) {
+class ArticleRepository(
+    val articleLocalDataSource: ArticleDataSource,
+    val articleRemoteDataSource: ArticleDataSource
+) : ArticleDataSource {
 
-    private val articleDao: ArticleDao by lazy {
-        ArticleDatabase.getInstance(application).articleDao()
+
+    override fun getAllArticles(): Flowable<List<Article>> {
+        return Flowable.concatArray(
+            articleLocalDataSource.getAllArticles(),
+            articleRemoteDataSource.getAllArticles()
+        )
+
     }
 
-    fun getAllArticles(): Flowable<List<Article>> {
-        return articleDao.getAllArticles()
+    override fun getArticle(articleId: Long): Single<Article> {
+        // TODO add remote
+        return articleLocalDataSource.getArticle(articleId)
     }
 
-    fun getArticle(articleId: Long): Single<Article> {
-        return articleDao.getArticle(articleId)
+    override fun insertArticle(article: Article): Completable {
+        // TODO add remote
+        return articleLocalDataSource.insertArticle(article)
     }
 
-    fun insertArticle(article: Article): Completable {
-        return articleDao.insertArticle(article)
-    }
 
+    companion object {
+        private var INSTANCE: ArticleRepository? = null
+
+        fun getInstance(
+            articleLocalDataSource: ArticleDataSource,
+            articleRemoteDataSource: ArticleDataSource
+        ): ArticleRepository {
+            if (INSTANCE == null) {
+                synchronized(this) {
+                    INSTANCE = ArticleRepository(articleLocalDataSource, articleRemoteDataSource)
+                }
+            }
+            return INSTANCE!!
+        }
+    }
 
 }

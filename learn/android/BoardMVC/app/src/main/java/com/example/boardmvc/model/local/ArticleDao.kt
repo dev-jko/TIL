@@ -1,9 +1,10 @@
-package com.example.boardmvc.model
+package com.example.boardmvc.model.local
 
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import com.example.boardmvc.model.Article
 import io.reactivex.Completable
 import io.reactivex.Flowable
 import io.reactivex.Single

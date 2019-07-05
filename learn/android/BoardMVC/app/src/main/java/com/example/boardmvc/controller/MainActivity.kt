@@ -3,9 +3,13 @@ package com.example.boardmvc.controller
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.example.boardmvc.ArticleDataSource
 import com.example.boardmvc.ArticleRepository
 import com.example.boardmvc.R
 import com.example.boardmvc.model.Article
+import com.example.boardmvc.model.local.ArticleDatabase
+import com.example.boardmvc.model.local.ArticleLocalDataSource
+import com.example.boardmvc.model.remote.ArticleRemoteDataSource
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.addTo
@@ -16,7 +20,10 @@ class MainActivity : AppCompatActivity() {
 
     private val TAG = MainActivity::class.java.simpleName
     private val repository: ArticleRepository by lazy {
-        ArticleRepository(application)
+        ArticleRepository(
+            ArticleLocalDataSource.getInstance(ArticleDatabase.getInstance(application).articleDao()),
+            ArticleRemoteDataSource
+            )
     }
     private val callback = object : MyClickCallback {
         override fun onClick(article: Article) {
