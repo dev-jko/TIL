@@ -5,9 +5,9 @@ import io.reactivex.Completable
 import io.reactivex.Flowable
 import io.reactivex.Single
 
-class ArticleRepository(
-    val articleLocalDataSource: ArticleDataSource,
-    val articleRemoteDataSource: ArticleDataSource
+class ArticleRepository private constructor(
+    private val articleLocalDataSource: ArticleDataSource,
+    private val articleRemoteDataSource: ArticleDataSource
 ) : ArticleDataSource {
 
 

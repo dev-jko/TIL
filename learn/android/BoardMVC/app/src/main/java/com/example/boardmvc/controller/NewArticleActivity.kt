@@ -24,7 +24,7 @@ class NewArticleActivity : AppCompatActivity() {
 
     private val TAG = NewArticleActivity::class.java.simpleName
     private val repository: ArticleRepository by lazy {
-        ArticleRepository(
+        ArticleRepository.getInstance(
             ArticleLocalDataSource.getInstance(ArticleDatabase.getInstance(application).articleDao()),
             ArticleRemoteDataSource
         )

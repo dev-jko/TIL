@@ -16,7 +16,7 @@ import kotlinx.android.synthetic.main.activity_detail.*
 class DetailActivity : AppCompatActivity() {
 
     private val repository: ArticleRepository by lazy {
-        ArticleRepository(
+        ArticleRepository.getInstance(
             ArticleLocalDataSource.getInstance(ArticleDatabase.getInstance(application).articleDao()),
             ArticleRemoteDataSource
         )

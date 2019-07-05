@@ -20,7 +20,7 @@ class MainActivity : AppCompatActivity() {
 
     private val TAG = MainActivity::class.java.simpleName
     private val repository: ArticleRepository by lazy {
-        ArticleRepository(
+        ArticleRepository.getInstance(
             ArticleLocalDataSource.getInstance(ArticleDatabase.getInstance(application).articleDao()),
             ArticleRemoteDataSource
             )
