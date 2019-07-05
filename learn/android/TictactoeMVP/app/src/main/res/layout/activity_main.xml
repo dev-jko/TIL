@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".view.MainActivity" android:orientation="vertical">
+
+    <TableLayout
+            android:id="@+id/table"
+            android:layout_width="match_parent"
+            android:layout_height="0dp" android:layout_weight="1">
+
+        <TableRow android:layout_width="match_parent" android:layout_height="match_parent">
+            <Button
+                    android:width="0dp"
+                    android:layout_weight="1"
+                    android:height="100dp"
+                    android:tag="00"
+                    android:onClick="onCellClicked"
+                    android:text="Button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/button"/>
+            <Button
+                    android:width="0dp"
+                    android:layout_weight="1"
+                    android:height="100dp"
+                    android:tag="01"
+                    android:onClick="onCellClicked"
+                    android:text="Button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/button2"/>
+            <Button
+                    android:width="0dp"
+                    android:layout_weight="1"
+                    android:height="100dp"
+                    android:tag="02"
+                    android:onClick="onCellClicked"
+                    android:text="Button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/button3"/>
+        </TableRow>
+        <TableRow android:layout_width="match_parent" android:layout_height="match_parent">
+            <Button
+                    android:width="0dp"
+                    android:layout_weight="1"
+                    android:height="100dp"
+                    android:tag="10"
+                    android:onClick="onCellClicked"
+                    android:text="Button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/button4"/>
+            <Button
+                    android:width="0dp"
+                    android:layout_weight="1"
+                    android:height="100dp"
+                    android:tag="11"
+                    android:onClick="onCellClicked"
+                    android:text="Button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/button5"/>
+            <Button
+                    android:width="0dp"
+                    android:layout_weight="1"
+                    android:height="100dp"
+                    android:tag="12"
+                    android:onClick="onCellClicked"
+                    android:text="Button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/button6"/>
+        </TableRow>
+        <TableRow android:layout_width="match_parent" android:layout_height="match_parent">
+            <Button
+                    android:width="0dp"
+                    android:layout_weight="1"
+                    android:height="100dp"
+                    android:tag="20"
+                    android:onClick="onCellClicked"
+                    android:text="Button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/button7"/>
+            <Button
+                    android:width="0dp"
+                    android:layout_weight="1"
+                    android:height="100dp"
+                    android:tag="21"
+                    android:onClick="onCellClicked"
+                    android:text="Button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/button8"/>
+            <Button
+                    android:width="0dp"
+                    android:layout_weight="1"
+                    android:height="100dp"
+                    android:tag="22"
+                    android:onClick="onCellClicked"
+                    android:text="Button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/button9"/>
+        </TableRow>
+    </TableLayout>
+    <TextView
+            android:id="@+id/winnerLabel"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:text="Hello World!"
+    />
+    <Button
+            android:text="reset"
+            android:onClick="onResetButtonClicked"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:id="@+id/button10"/>
+
+</LinearLayout>
