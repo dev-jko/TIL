@@ -6,11 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.boardmvp.R
 import com.example.boardmvp.MyClickCallback
+import com.example.boardmvp.R
 import com.example.boardmvp.data.Article
 
-class ArticleAdapter(private val callback: MyClickCallback) : RecyclerView.Adapter<ArticleAdapter.ViewHolder>() {
+class ArticleAdapter(private val callback: MyClickCallback) : RecyclerView.Adapter<ArticleAdapter.ViewHolder>(),
+    ArticleAdapterContract.Model, ArticleAdapterContract.View {
 
     private var articles: List<Article> = emptyList()
 
