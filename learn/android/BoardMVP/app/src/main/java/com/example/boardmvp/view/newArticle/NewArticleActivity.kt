@@ -1,35 +1,22 @@
 package com.example.boardmvp.view.newArticle
 
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.boardmvp.ArticleRepository
+import com.example.boardmvp.BasicApp
 import com.example.boardmvp.R
-import com.example.boardmvp.data.Article
-import com.example.boardmvp.data.local.ArticleDatabase
-import com.example.boardmvp.data.local.ArticleLocalDataSource
-import com.example.boardmvp.data.remote.ArticleRemoteDataSource
-import io.reactivex.Observable
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.rxkotlin.addTo
-import io.reactivex.schedulers.Schedulers
+import com.example.boardmvp.view.newArticle.presenter.NewArticleContract
+import com.example.boardmvp.view.newArticle.presenter.NewArticlePresenter
 import kotlinx.android.synthetic.main.activity_new_article.*
-import java.util.concurrent.TimeUnit
 
-class NewArticleActivity : AppCompatActivity() {
+class NewArticleActivity : AppCompatActivity(), NewArticleContract.View {
 
     private val TAG = NewArticleActivity::class.java.simpleName
-    private val repository: ArticleRepository by lazy {
-        ArticleRepository.getInstance(
-            ArticleLocalDataSource.getInstance(ArticleDatabase.getInstance(application).articleDao()),
-            ArticleRemoteDataSource
-        )
+    private val presenter: NewArticleContract.Presenter by lazy {
+        NewArticlePresenter(this, (application as BasicApp).getRepository())
     }
-    private val compositeDisposable = CompositeDisposable()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,41 +31,26 @@ class NewArticleActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         if (item!!.itemId == R.id.save_actionbar) {
-            val newArticle = getNewArticle()
-            insertArticle(newArticle)
+            presenter.onSaveButtonClicked()
         }
         return super.onOptionsItemSelected(item)
     }
 
-    private fun getNewArticle(): Article {
-        return Article(
-            new_title_et.text.toString(),
-            new_content_et.text.toString()
-        )
+    override fun onDestroy() {
+        super.onDestroy()
+        presenter.onDestroy()
     }
 
-    private fun insertArticle(article: Article) {
-        repository.insertArticle(article)
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(
-                {
-                    Log.i(TAG, "insertion completed")
-                    onInsertionCompleted()
-                },
-                { it.printStackTrace() }
-            ).addTo(compositeDisposable)
+    override fun getTitleText(): String {
+        return new_title_et.text.toString()
     }
 
-    private fun onInsertionCompleted() {
-        Toast.makeText(this, "글이 작성됐습니다.", Toast.LENGTH_SHORT).show()
-        Observable.just(1)
-            .subscribeOn(Schedulers.computation())
-            .delay(1, TimeUnit.SECONDS)
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe { finish() }
-            .addTo(compositeDisposable)
+    override fun getContentText(): String {
+        return new_content_et.text.toString()
     }
 
+    override fun makeToast(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+    }
 
 }

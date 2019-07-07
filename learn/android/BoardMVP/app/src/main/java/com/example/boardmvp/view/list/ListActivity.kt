@@ -19,9 +19,9 @@ import io.reactivex.rxkotlin.addTo
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity() {
+class ListActivity : AppCompatActivity() {
 
-    private val TAG = MainActivity::class.java.simpleName
+    private val TAG = ListActivity::class.java.simpleName
     private val repository: ArticleRepository by lazy {
         ArticleRepository.getInstance(
             ArticleLocalDataSource.getInstance(ArticleDatabase.getInstance(application).articleDao()),
@@ -30,7 +30,7 @@ class MainActivity : AppCompatActivity() {
     }
     private val callback = object : MyClickCallback {
         override fun onClick(article: Article) {
-            val intent = Intent(this@MainActivity, DetailActivity::class.java)
+            val intent = Intent(this@ListActivity, DetailActivity::class.java)
             intent.putExtra("articleId", article.articleId)
             startActivity(intent)
         }
