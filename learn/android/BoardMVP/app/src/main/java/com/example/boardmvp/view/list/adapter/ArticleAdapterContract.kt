@@ -1,11 +1,14 @@
 package com.example.boardmvp.view.list.adapter
 
-interface ArticleAdapterContract {
-    interface View{
+import com.example.boardmvp.data.Article
 
+interface ArticleAdapterContract {
+    interface View {
+        fun refresh()
     }
 
-    interface Model{
-
+    interface Model {
+        fun getItemCount(): Int
+        fun changeList(list: List<Article>)
     }
 }

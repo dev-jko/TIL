@@ -15,6 +15,10 @@ class ArticleAdapter(private val callback: MyClickCallback) : RecyclerView.Adapt
 
     private var articles: List<Article> = emptyList()
 
+    override fun refresh() {
+        notifyDataSetChanged()
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val inflater = parent.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         val view = inflater.inflate(R.layout.article_item, parent, false)
@@ -23,17 +27,16 @@ class ArticleAdapter(private val callback: MyClickCallback) : RecyclerView.Adapt
 
     override fun getItemCount(): Int {
         return articles.size
+
+    }
+
+    override fun changeList(list: List<Article>) {
+        articles = list
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(articles[position], callback)
     }
-
-    fun updateArticles(articles: List<Article>) {
-        this.articles = articles
-        notifyDataSetChanged()
-    }
-
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 

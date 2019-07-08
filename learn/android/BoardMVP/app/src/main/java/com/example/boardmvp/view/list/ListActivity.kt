@@ -9,21 +9,16 @@ import com.example.boardmvp.R
 import com.example.boardmvp.data.Article
 import com.example.boardmvp.view.detail.DetailActivity
 import com.example.boardmvp.view.list.adapter.ArticleAdapter
+import com.example.boardmvp.view.list.adapter.ArticleAdapterContract
 import com.example.boardmvp.view.list.presenter.ListContract
 import com.example.boardmvp.view.list.presenter.ListPresenter
 import com.example.boardmvp.view.newArticle.NewArticleActivity
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_main.*
 
 class ListActivity : AppCompatActivity(), ListContract.View {
 
     private val TAG = ListActivity::class.java.simpleName
-    private val presenter: ListContract.Presenter by lazy {
-        ListPresenter(this, (application as BasicApp).getRepository())
-    }
-
+    private lateinit var presenter: ListContract.Presenter
     private val callback = object : MyClickCallback {
         override fun onClick(article: Article) {
             val intent = Intent(this@ListActivity, DetailActivity::class.java)
@@ -31,25 +26,32 @@ class ListActivity : AppCompatActivity(), ListContract.View {
             startActivity(intent)
         }
     }
-    private val adapter: ArticleAdapter =
-        ArticleAdapter(this.callback)
+    private lateinit var adapterView: ArticleAdapterContract.View
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        val adapter: ArticleAdapter = ArticleAdapter(callback)
         rv_article.adapter = adapter
-        repository.getAllArticles()
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe { adapter.updateArticles(it) }
-            .addTo(compositeDisposable)
+        adapterView = adapter
+
+        presenter = ListPresenter(this, adapter, (application as BasicApp).getRepository())
 
         floatingActionButton.setOnClickListener {
-            val intent = Intent(this, NewArticleActivity::class.java)
-            startActivity(intent)
+            presenter.onAddButtonClick()
         }
 
+        presenter.onCreate()
+    }
+
+    override fun startNewArticleActivity() {
+        val intent = Intent(this, NewArticleActivity::class.java)
+        startActivity(intent)
+    }
+
+    override fun refresh() {
+        adapterView.refresh()
     }
 
     override fun onDestroy() {
