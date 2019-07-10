@@ -2,35 +2,30 @@ package com.example.boardmvvm.view
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.example.boardmvvm.BasicApp
+import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModelProviders
 import com.example.boardmvvm.R
-import com.example.boardmvvm.viewModel.DetailPresenter
-import kotlinx.android.synthetic.main.activity_detail.*
+import com.example.boardmvvm.databinding.ActivityDetailBinding
+import com.example.boardmvvm.viewModel.DetailViewModel
 
-class DetailActivity : AppCompatActivity(){
+class DetailActivity : AppCompatActivity() {
 
-    private val presenter: DetailContract.Presenter by lazy {
-        DetailPresenter(this, (application as BasicApp).getRepository())
+    private val binding: ActivityDetailBinding by lazy {
+        DataBindingUtil.setContentView(this, R.layout.activity_detail)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_detail)
+        binding.vm = ViewModelProviders.of(this).get(DetailViewModel::class.java)
+        binding.lifecycleOwner = this
 
-        presenter.onCreate()
+        initArticle()
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        presenter.onDestroy()
+    fun initArticle() {
+        val articleId = intent.extras!!.getLong("articleId")
+        binding.vm.loadArticle(articleId)
     }
 
-    fun getArticleIdFromIntent(): Long {
-        return intent.extras!!.getLong("articleId")
-    }
 
-    fun showArticle(title: String, content: String) {
-        detail_title_tv.text = title
-        detail_content_tv.text = content
-    }
 }
