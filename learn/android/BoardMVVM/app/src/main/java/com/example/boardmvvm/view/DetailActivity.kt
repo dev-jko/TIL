@@ -11,7 +11,7 @@ import com.example.boardmvvm.viewModel.DetailViewModel
 class DetailActivity : AppCompatActivity() {
 
     private val binding: ActivityDetailBinding by lazy {
-        DataBindingUtil.setContentView(this, R.layout.activity_detail)
+        DataBindingUtil.setContentView<ActivityDetailBinding>(this, R.layout.activity_detail)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -22,9 +22,9 @@ class DetailActivity : AppCompatActivity() {
         initArticle()
     }
 
-    fun initArticle() {
+    private fun initArticle() {
         val articleId = intent.extras!!.getLong("articleId")
-        binding.vm.loadArticle(articleId)
+        binding.vm!!.loadArticle(articleId)
     }
 
 

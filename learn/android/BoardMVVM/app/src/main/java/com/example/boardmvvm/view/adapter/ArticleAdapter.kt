@@ -1,52 +1,42 @@
 package com.example.boardmvvm.view.adapter
 
-import android.content.Context
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
+import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.boardmvvm.MyClickCallback
 import com.example.boardmvvm.R
 import com.example.boardmvvm.data.Article
+import com.example.boardmvvm.databinding.ArticleItemBinding
 
-class ArticleAdapter(private val callback: MyClickCallback) : RecyclerView.Adapter<ArticleAdapter.ViewHolder>(),
-    ArticleAdapterContract.Model,
-    ArticleAdapterContract.View {
+class ArticleAdapter(private val callback: MyClickCallback) : RecyclerView.Adapter<ArticleAdapter.ViewHolder>() {
 
     private var articles: List<Article> = emptyList()
 
-    override fun refresh() {
+    fun refresh(newArticles: List<Article>) {
+        articles = newArticles
         notifyDataSetChanged()
-    }
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val inflater = parent.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-        val view = inflater.inflate(R.layout.article_item, parent, false)
-        return ViewHolder(view)
     }
 
     override fun getItemCount(): Int {
         return articles.size
     }
 
-    override fun changeList(list: List<Article>) {
-        articles = list
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        val inflater = LayoutInflater.from(parent.context)
+        val binding = DataBindingUtil.inflate<ArticleItemBinding>(inflater, R.layout.article_item, parent, false)
+        return ViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(articles[position], callback)
     }
 
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        private val title: TextView = itemView.findViewById(R.id.title_tv)
-
+    class ViewHolder(private val binding: ArticleItemBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(article: Article, callback: MyClickCallback) {
-            title.text = article.title
-            itemView.setOnClickListener {
-                callback.onClick(article)
-            }
+            binding.article = article
+            binding.callback = callback
         }
     }
 

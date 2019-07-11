@@ -2,24 +2,23 @@ package com.example.boardmvvm.view
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import com.example.boardmvvm.BasicApp
 import com.example.boardmvvm.MyClickCallback
 import com.example.boardmvvm.R
 import com.example.boardmvvm.data.Article
 import com.example.boardmvvm.databinding.ActivityMainBinding
 import com.example.boardmvvm.view.adapter.ArticleAdapter
-import com.example.boardmvvm.view.adapter.ArticleAdapterContract
 import com.example.boardmvvm.viewModel.ListViewModel
-import kotlinx.android.synthetic.main.activity_main.*
 
-class ListActivity : AppCompatActivity(){
+class ListActivity : AppCompatActivity() {
 
     private val TAG = ListActivity::class.java.simpleName
     private val binding: ActivityMainBinding by lazy {
-        DataBindingUtil.setContentView(this, R.layout.activity_main)
+        DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
     }
     private val callback = object : MyClickCallback {
         override fun onClick(article: Article) {
@@ -34,19 +33,12 @@ class ListActivity : AppCompatActivity(){
         binding.vm = ViewModelProviders.of(this).get(ListViewModel::class.java)
         binding.lifecycleOwner = this
 
-        val adapter: ArticleAdapter =
-            ArticleAdapter(callback)
-        rv_article.adapter = adapter
-        adapterView = adapter
-
-        floatingActionButton.setOnClickListener {
-            presenter.onAddButtonClick()
-        }
-
-        presenter.onCreate()
+        val adapter: ArticleAdapter = ArticleAdapter(callback)
+        binding.rvArticle.adapter = adapter
+        binding.vm!!.articles.observe(this, Observer { adapter.refresh(it) })
     }
 
-    override fun startNewArticleActivity() {
+    fun startNewArticleActivity(view: View) {
         val intent = Intent(this, NewArticleActivity::class.java)
         startActivity(intent)
     }

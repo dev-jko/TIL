@@ -12,11 +12,11 @@
         <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_article"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                android:adapter=""
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"/>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:onClick="startNewArticleActivity"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:clickable="true" app:srcCompat="@android:drawable/ic_input_add"
