@@ -19,13 +19,9 @@ class DetailActivity : AppCompatActivity() {
         binding.vm = ViewModelProviders.of(this).get(DetailViewModel::class.java)
         binding.lifecycleOwner = this
 
-        initArticle()
-    }
+        binding.vm!!.initViewModel()
+        binding.vm!!.intent(intent)
 
-    private fun initArticle() {
-        val articleId = intent.extras!!.getLong("articleId")
-        binding.vm!!.loadArticle(articleId)
     }
-
 
 }
