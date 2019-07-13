@@ -1,5 +1,9 @@
 package com.example.boardmvvm
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MediatorLiveData
+import androidx.lifecycle.Observer
+import androidx.lifecycle.Transformations
 import com.example.boardmvvm.data.Article
 import io.reactivex.Completable
 import io.reactivex.Flowable
@@ -11,22 +15,19 @@ class ArticleRepository private constructor(
 ) : ArticleDataSource {
 
 
-    override fun getAllArticles(): Flowable<List<Article>> {
-        return Flowable.concatArray(
-            articleLocalDataSource.getAllArticles(),
-            articleRemoteDataSource.getAllArticles()
-        )
-
+    override fun getAllArticles(): LiveData<List<Article>> {
+        return articleLocalDataSource.getAllArticles()
+//        articleRemoteDataSource.getAllArticles()
     }
 
-    override fun getArticle(articleId: Long): Single<Article> {
+    override fun getArticle(articleId: Long): LiveData<Article> {
         // TODO add remote
         return articleLocalDataSource.getArticle(articleId)
     }
 
-    override fun insertArticle(article: Article): Completable {
+    override fun insertArticle(article: Article) {
         // TODO add remote
-        return articleLocalDataSource.insertArticle(article)
+        articleLocalDataSource.insertArticle(article)
     }
 
 

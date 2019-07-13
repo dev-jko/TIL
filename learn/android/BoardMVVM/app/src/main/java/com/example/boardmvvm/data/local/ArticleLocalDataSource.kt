@@ -1,5 +1,6 @@
 package com.example.boardmvvm.data.local
 
+import androidx.lifecycle.LiveData
 import com.example.boardmvvm.ArticleDataSource
 import com.example.boardmvvm.data.Article
 import io.reactivex.Completable
@@ -10,28 +11,28 @@ class ArticleLocalDataSource private constructor(
     val articleDao: ArticleDao
 ) : ArticleDataSource {
 
-    override fun getAllArticles(): Flowable<List<Article>> {
+    override fun getAllArticles(): LiveData<List<Article>> {
         return articleDao.getAllArticles()
     }
 
-    override fun getArticle(articleId: Long): Single<Article> {
+    override fun getArticle(articleId: Long): LiveData<Article> {
         return articleDao.getArticle(articleId)
     }
 
-    override fun insertArticle(article: Article): Completable {
-        return articleDao.insertArticle(article)
+    override fun insertArticle(article: Article) {
+        articleDao.insertArticle(article)
     }
 
     companion object {
-        private var INSTATNCE: ArticleLocalDataSource? = null
+        private var INSTANCE: ArticleLocalDataSource? = null
 
         fun getInstance(articleDao: ArticleDao): ArticleLocalDataSource {
-            if (INSTATNCE == null) {
+            if (INSTANCE == null) {
                 synchronized(this) {
-                    INSTATNCE = ArticleLocalDataSource(articleDao)
+                    INSTANCE = ArticleLocalDataSource(articleDao)
                 }
             }
-            return INSTATNCE!!
+            return INSTANCE!!
         }
     }
 }

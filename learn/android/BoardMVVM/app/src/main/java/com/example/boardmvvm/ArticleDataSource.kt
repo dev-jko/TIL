@@ -1,5 +1,6 @@
 package com.example.boardmvvm
 
+import androidx.lifecycle.LiveData
 import com.example.boardmvvm.data.Article
 import io.reactivex.Completable
 import io.reactivex.Flowable
@@ -7,9 +8,9 @@ import io.reactivex.Single
 
 interface ArticleDataSource {
 
-    fun getAllArticles(): Flowable<List<Article>>
+    fun getAllArticles(): LiveData<List<Article>>
 
-    fun getArticle(articleId: Long): Single<Article>
+    fun getArticle(articleId: Long): LiveData<Article>
 
-    fun insertArticle(article: Article): Completable
+    fun insertArticle(article: Article)
 }

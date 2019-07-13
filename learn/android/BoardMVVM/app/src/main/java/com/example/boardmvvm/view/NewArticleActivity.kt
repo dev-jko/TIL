@@ -8,6 +8,7 @@ import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.example.boardmvvm.R
 import com.example.boardmvvm.databinding.ActivityNewArticleBinding
@@ -31,6 +32,7 @@ class NewArticleActivity : AppCompatActivity() {
                 val value = s.toString()
                 binding.vm!!.title.postValue(value)
             }
+
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
         })
@@ -39,9 +41,13 @@ class NewArticleActivity : AppCompatActivity() {
                 val value = s.toString()
                 binding.vm!!.content.postValue(value)
             }
+
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
         })
+
+        binding.vm!!.finishActivity().observe(this, Observer { if (it) finish() })
+        binding.vm!!.makeToast().observe(this, Observer { makeToast(it.first, it.second) })
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -57,9 +63,8 @@ class NewArticleActivity : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
-
-    fun makeToast(message: String) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+    private fun makeToast(message: String, duration: Int) {
+        Toast.makeText(application, message, duration).show()
     }
 
 }

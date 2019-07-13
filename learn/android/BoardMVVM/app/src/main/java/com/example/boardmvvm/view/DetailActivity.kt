@@ -19,9 +19,7 @@ class DetailActivity : AppCompatActivity() {
         binding.vm = ViewModelProviders.of(this).get(DetailViewModel::class.java)
         binding.lifecycleOwner = this
 
-        binding.vm!!.initViewModel()
         binding.vm!!.intent(intent)
-
     }
 
 }

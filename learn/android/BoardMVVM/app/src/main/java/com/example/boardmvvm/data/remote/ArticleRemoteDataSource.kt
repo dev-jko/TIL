@@ -1,24 +1,22 @@
 package com.example.boardmvvm.data.remote
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.example.boardmvvm.ArticleDataSource
 import com.example.boardmvvm.data.Article
-import io.reactivex.Completable
-import io.reactivex.Flowable
-import io.reactivex.Single
 
 object ArticleRemoteDataSource : ArticleDataSource {
-    override fun getAllArticles(): Flowable<List<Article>> {
+    override fun getAllArticles(): LiveData<List<Article>> {
         // TODO
-        return Flowable.empty()
+        return MutableLiveData<List<Article>>()
     }
 
-    override fun getArticle(articleId: Long): Single<Article> {
+    override fun getArticle(articleId: Long): LiveData<Article> {
         // TODO
-        return Single.never()
+        return MutableLiveData<Article>()
     }
 
-    override fun insertArticle(article: Article): Completable {
+    override fun insertArticle(article: Article) {
         // TODO
-        return Completable.never()
     }
 }

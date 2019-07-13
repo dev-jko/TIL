@@ -2,7 +2,6 @@ package com.example.boardmvvm.view
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
@@ -35,10 +34,12 @@ class ListActivity : AppCompatActivity() {
 
         val adapter: ArticleAdapter = ArticleAdapter(callback)
         binding.rvArticle.adapter = adapter
+
         binding.vm!!.articles.observe(this, Observer { adapter.refresh(it) })
+        binding.vm!!.startNewArticleActivity().observe(this, Observer { if (it) startNewArticleActivity() })
     }
 
-    fun startNewArticleActivity(view: View) {
+    private fun startNewArticleActivity() {
         val intent = Intent(this, NewArticleActivity::class.java)
         startActivity(intent)
     }
