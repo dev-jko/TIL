@@ -16,10 +16,10 @@ class DetailActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding.vm = ViewModelProviders.of(this).get(DetailViewModel::class.java)
+        binding.vm = ViewModelProviders.of(this).get(DetailViewModel.ViewModel::class.java)
         binding.lifecycleOwner = this
 
-        binding.vm!!.intent(intent)
+        binding.vm!!.inputs.intent(intent)
     }
 
 }

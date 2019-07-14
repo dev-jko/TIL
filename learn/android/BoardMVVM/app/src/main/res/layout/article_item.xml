@@ -2,10 +2,10 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
         <variable name="article" type="com.example.boardmvvm.data.Article"/>
-        <variable name="callback" type="com.example.boardmvvm.MyClickCallback"/>
+        <variable name="delegate" type="com.example.boardmvvm.view.adapter.ArticleAdapter.ViewHolder.Delegate"/>
     </data>
     <androidx.cardview.widget.CardView
-            android:onClick="@{() -> callback.onClick(article)}"
+            android:onClick="@{() -> delegate.articleClicked(article)}"
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="80dp" app:cardElevation="5dp" app:cardCornerRadius="5dp"

@@ -6,7 +6,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import com.example.boardmvvm.MyClickCallback
 import com.example.boardmvvm.R
 import com.example.boardmvvm.data.Article
 import com.example.boardmvvm.databinding.ActivityMainBinding
@@ -19,24 +18,25 @@ class ListActivity : AppCompatActivity() {
     private val binding: ActivityMainBinding by lazy {
         DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
     }
-    private val callback = object : MyClickCallback {
-        override fun onClick(article: Article) {
-            val intent = Intent(this@ListActivity, DetailActivity::class.java)
-            intent.putExtra("articleId", article.articleId)
-            startActivity(intent)
-        }
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding.vm = ViewModelProviders.of(this).get(ListViewModel::class.java)
+        val vm = ViewModelProviders.of(this).get(ListViewModel.ViewModel::class.java)
+        binding.vm = vm
         binding.lifecycleOwner = this
 
-        val adapter: ArticleAdapter = ArticleAdapter(callback)
+        val adapter: ArticleAdapter = ArticleAdapter(vm)
         binding.rvArticle.adapter = adapter
 
-        binding.vm!!.articles.observe(this, Observer { adapter.refresh(it) })
-        binding.vm!!.startNewArticleActivity().observe(this, Observer { if (it) startNewArticleActivity() })
+        vm.outputs.articles().observe(this, Observer { articles -> adapter.refresh(articles) })
+        vm.outputs.startDetailActivity().observe(this, Observer { article -> startDetailActivity(article) })
+        vm.outputs.startNewArticleActivity().observe(this, Observer { isStart -> if (isStart) startNewArticleActivity() })
+    }
+
+    private fun startDetailActivity(article: Article) {
+        val intent = Intent(this@ListActivity, DetailActivity::class.java)
+        intent.putExtra("articleId", article.articleId)
+        startActivity(intent)
     }
 
     private fun startNewArticleActivity() {

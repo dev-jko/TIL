@@ -11,23 +11,41 @@ import com.example.boardmvvm.BasicApp
 import com.example.boardmvvm.data.Article
 import io.reactivex.disposables.CompositeDisposable
 
-class DetailViewModel(application: Application) : AndroidViewModel(application) {
-    private val repository: ArticleRepository by lazy { (application as BasicApp).getRepository() }
-    private val compositeDisposable = CompositeDisposable()
 
-    private val intent: MutableLiveData<Intent> = MutableLiveData<Intent>()
-    private val article: LiveData<Article> =
-        Transformations.switchMap(articleIdFromIntent()) { articleId -> repository.getArticle(articleId) }
+interface DetailViewModel {
 
-
-    private fun articleIdFromIntent(): LiveData<Long> =
-        Transformations.map(intent) { intent -> intent.getLongExtra("articleId", 1) }
-
-    override fun onCleared() {
-        compositeDisposable.dispose()
-        super.onCleared()
+    interface Inputs {
+        fun intent(intent: Intent)
     }
 
-    fun intent(intent: Intent) = this.intent.postValue(intent)
-    fun article(): LiveData<Article> = this.article
+    interface Outputs {
+        fun article():LiveData<Article>
+    }
+
+    class ViewModel(application: Application) : AndroidViewModel(application), Inputs, Outputs {
+        private val repository: ArticleRepository by lazy { (application as BasicApp).getRepository() }
+        private val compositeDisposable = CompositeDisposable()
+
+        private val intent: MutableLiveData<Intent> = MutableLiveData<Intent>()
+
+        private val article: LiveData<Article> =
+            Transformations.switchMap(articleIdFromIntent()) { articleId -> repository.getArticle(articleId) }
+
+        val inputs:Inputs = this
+        val outputs:Outputs = this
+
+        override fun article(): LiveData<Article> = this.article
+
+        private fun articleIdFromIntent(): LiveData<Long> =
+            Transformations.map(intent) { intent -> intent.getLongExtra("articleId", 1) }
+
+        override fun onCleared() {
+            compositeDisposable.dispose()
+            super.onCleared()
+        }
+
+        override fun intent(intent: Intent) {
+            this.intent.postValue(intent)
+        }
+    }
 }

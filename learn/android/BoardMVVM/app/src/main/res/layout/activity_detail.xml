@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools">
     <data>
-        <variable name="vm" type="com.example.boardmvvm.viewModel.DetailViewModel"/>
+        <variable name="vm" type="com.example.boardmvvm.viewModel.DetailViewModel.ViewModel"/>
     </data>
     <LinearLayout
             android:layout_width="match_parent"
@@ -10,12 +10,12 @@
 
         <TextView
                 android:layout_weight="1"
-                android:text="@{vm.article.title}"
+                android:text="@{vm.outputs.article().title}"
                 android:layout_width="match_parent"
                 android:layout_height="0dp" android:id="@+id/detail_title_tv"/>
         <TextView
                 android:layout_weight="6"
-                android:text="@{vm.article.title}"
+                android:text="@{vm.outputs.article().content}"
                 android:layout_width="match_parent"
                 android:layout_height="0dp" android:id="@+id/detail_content_tv"/>
     </LinearLayout>

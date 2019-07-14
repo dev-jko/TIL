@@ -24,30 +24,29 @@ class NewArticleActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding.vm = ViewModelProviders.of(this).get(NewArticleViewModel::class.java)
+        val vm = ViewModelProviders.of(this).get(NewArticleViewModel.ViewModel::class.java)
+        binding.vm = vm
         binding.lifecycleOwner = this
 
         binding.newTitleEt.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
                 val value = s.toString()
-                binding.vm!!.title.postValue(value)
+                vm.inputs.titleChanged(value)
             }
-
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
         })
         binding.newContentEt.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
                 val value = s.toString()
-                binding.vm!!.content.postValue(value)
+                vm.inputs.contentChanged(value)
             }
-
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
         })
 
-        binding.vm!!.finishActivity().observe(this, Observer { if (it) finish() })
-        binding.vm!!.makeToast().observe(this, Observer { makeToast(it.first, it.second) })
+        vm.outputs.finishActivity().observe(this, Observer { if (it) finish() })
+        vm.outputs.makeToast().observe(this, Observer { makeToast(it.first, it.second) })
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -58,7 +57,7 @@ class NewArticleActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         if (item!!.itemId == R.id.save_actionbar) {
-            binding.vm!!.onSaveButtonClicked()
+            binding.vm!!.inputs.saveClicked()
         }
         return super.onOptionsItemSelected(item)
     }

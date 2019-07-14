@@ -14,47 +14,73 @@ import io.reactivex.rxkotlin.addTo
 import io.reactivex.schedulers.Schedulers
 import java.util.concurrent.TimeUnit
 
-class NewArticleViewModel(application: Application) : AndroidViewModel(application) {
-    private val repository: ArticleRepository by lazy { (application as BasicApp).getRepository() }
-    private val compositeDisposable = CompositeDisposable()
+interface NewArticleViewModel {
 
-    val title: MutableLiveData<String> = MutableLiveData()
-    val content: MutableLiveData<String> = MutableLiveData()
-    private val finishActivity: MutableLiveData<Boolean> = MutableLiveData()
-    private val makeToast: MutableLiveData<Pair<String, Int>> = MutableLiveData()
-
-    fun finishActivity(): LiveData<Boolean> = finishActivity
-    fun makeToast(): LiveData<Pair<String, Int>> = makeToast
-
-    override fun onCleared() {
-        compositeDisposable.dispose()
-        super.onCleared()
+    interface Inputs {
+        fun titleChanged(title:String)
+        fun contentChanged(content:String)
+        fun saveClicked()
     }
 
-    fun onSaveButtonClicked() {
-        val newArticle = getNewArticle()
-        insertArticle(newArticle)
+    interface Outputs {
+        fun finishActivity(): LiveData<Boolean>
+        fun makeToast(): LiveData<Pair<String, Int>>
     }
 
-    private fun getNewArticle(): Article {
-        return Article(title.value!!, content.value!!)
-    }
+    class ViewModel(application: Application) : AndroidViewModel(application), Inputs, Outputs {
+        private val repository: ArticleRepository by lazy { (application as BasicApp).getRepository() }
+        private val compositeDisposable = CompositeDisposable()
 
-    private fun insertArticle(article: Article) {
-        Observable.fromCallable { repository.insertArticle(article) }
-            .subscribeOn(Schedulers.io())
-            .subscribe { onInsertionCompleted() }
-            .addTo(compositeDisposable)
-    }
+        private val title: MutableLiveData<String> = MutableLiveData()
+        private val content: MutableLiveData<String> = MutableLiveData()
+        private val finishActivity: MutableLiveData<Boolean> = MutableLiveData()
+        private val makeToast: MutableLiveData<Pair<String, Int>> = MutableLiveData()
 
-    private fun onInsertionCompleted() {
-        makeToast.postValue("글이 작성됐습니다." to Toast.LENGTH_SHORT)
-        Observable.just(1)
-            .subscribeOn(Schedulers.computation())
-            .delay(500, TimeUnit.MILLISECONDS)
-            .subscribe { finishActivity.postValue(true) }
-            .addTo(compositeDisposable)
-    }
+        val inputs: Inputs = this
+        val outputs: Outputs = this
 
+        override fun finishActivity(): LiveData<Boolean> = finishActivity
+        override fun makeToast(): LiveData<Pair<String, Int>> = makeToast
+
+        override fun onCleared() {
+            compositeDisposable.dispose()
+            super.onCleared()
+        }
+
+        override fun titleChanged(title: String) {
+            this.title.postValue(title)
+        }
+
+        override fun contentChanged(content: String) {
+            this.content.postValue(content)
+        }
+
+        override fun saveClicked() {
+            val newArticle = getNewArticle()
+            insertArticle(newArticle)
+        }
+
+        private fun getNewArticle(): Article {
+            return Article(title.value!!, content.value!!)
+        }
+
+        private fun insertArticle(article: Article) {
+            Observable.fromCallable { repository.insertArticle(article) }
+                .subscribeOn(Schedulers.io())
+                .subscribe { onInsertionCompleted() }
+                .addTo(compositeDisposable)
+        }
+
+        private fun onInsertionCompleted() {
+            makeToast.postValue("글이 작성됐습니다." to Toast.LENGTH_SHORT)
+            Observable.just(1)
+                .subscribeOn(Schedulers.computation())
+                .delay(500, TimeUnit.MILLISECONDS)
+                .subscribe { finishActivity.postValue(true) }
+                .addTo(compositeDisposable)
+        }
+
+
+    }
 
 }
