@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable name="article" type="com.example.boardmvvmrx.data.Article"/>
+        <variable name="delegate" type="com.example.boardmvvmrx.view.adapter.ArticleAdapter.ViewHolder.Delegate"/>
+    </data>
+    <androidx.cardview.widget.CardView
+            android:onClick="@{() -> delegate.articleClicked(article)}"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="80dp" app:cardElevation="5dp" app:cardCornerRadius="5dp"
+            app:cardMaxElevation="5dp"
+            android:layout_margin="5dp">
+
+        <TextView
+                android:text="@{article.title}"
+                android:textSize="30sp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" android:id="@+id/title_tv"
+        />
+    </androidx.cardview.widget.CardView>
+</layout>
