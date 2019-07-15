@@ -44,7 +44,7 @@ interface NewArticleViewModel {
 
         init {
             this.saveClicked
-                .debounce(800, TimeUnit.MILLISECONDS)
+                .throttleFirst(500, TimeUnit.MILLISECONDS)
                 .withLatestFrom<String, String, Article>(
                     this.titleChanged,
                     this.contentChanged,
@@ -91,7 +91,7 @@ interface NewArticleViewModel {
 
         private fun onInsertionCompleted() {
             this.makeToast.onNext("글이 작성됐습니다." to Toast.LENGTH_SHORT)
-            Observable.timer(500, TimeUnit.MILLISECONDS)
+            Observable.timer(600, TimeUnit.MILLISECONDS)
                 .subscribeOn(Schedulers.computation())
                 .subscribe { this.finishActivity.onNext(true) }
                 .addTo(compositeDisposable)

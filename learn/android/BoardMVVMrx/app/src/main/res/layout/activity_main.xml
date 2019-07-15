@@ -16,7 +16,6 @@
                 android:layout_height="match_parent"/>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:onClick="@{() -> vm.inputs.newArticleClicked()}"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:clickable="true" app:srcCompat="@android:drawable/ic_input_add"

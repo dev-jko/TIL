@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.example.boardmvvmrx.R
 import com.example.boardmvvmrx.data.Article
@@ -38,9 +37,16 @@ class ListActivity : AppCompatActivity() {
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { articles -> adapter.refresh(articles) }
             .addTo(compositeDisposable)
-        vm.outputs.startDetailActivity().observe(this, Observer { article -> startDetailActivity(article) })
+        vm.outputs.startDetailActivity()
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe { article -> startDetailActivity(article) }
+            .addTo(compositeDisposable)
         vm.outputs.startNewArticleActivity()
-            .observe(this, Observer { isStart -> if (isStart) startNewArticleActivity() })
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe { isStart -> if (isStart) startNewArticleActivity() }
+            .addTo(compositeDisposable)
+
+        binding.floatingActionButton.setOnClickListener { vm.inputs.newArticleClicked() }
     }
 
     override fun onDestroy() {

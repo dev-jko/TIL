@@ -36,13 +36,13 @@ class ArticleAdapter(private val delegate: Delegate) : RecyclerView.Adapter<Arti
 
     class ViewHolder(private val binding: ArticleItemBinding) : RecyclerView.ViewHolder(binding.root) {
 
-        interface Delegate{
-            fun articleClicked(article:Article)
+        interface Delegate {
+            fun articleClicked(article: Article)
         }
 
-        fun bind(article: Article, delegate:Delegate) {
-            binding.article = article
-            binding.delegate = delegate
+        fun bind(article: Article, delegate: Delegate) {
+            binding.titleTv.text = article.title
+            binding.root.setOnClickListener { delegate.articleClicked(article) }
         }
     }
 
