@@ -5,9 +5,9 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.example.boardmvvmrx.data.Article
+import io.reactivex.Completable
 import io.reactivex.Flowable
 import io.reactivex.Observable
-import io.reactivex.Single
 
 @Dao
 interface ArticleDao {
@@ -18,5 +18,5 @@ interface ArticleDao {
     fun getArticle(articleId: Long): Observable<Article>
 
     @Insert(onConflict = OnConflictStrategy.ABORT)
-    fun insertArticle(article: Article)
+    fun insertArticle(article: Article): Completable
 }

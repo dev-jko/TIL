@@ -1,6 +1,7 @@
 package com.example.boardmvvmrx
 
 import com.example.boardmvvmrx.data.Article
+import io.reactivex.Completable
 import io.reactivex.Flowable
 import io.reactivex.Observable
 
@@ -20,9 +21,9 @@ class ArticleRepository private constructor(
         return articleLocalDataSource.getArticle(articleId)
     }
 
-    override fun insertArticle(article: Article) {
+    override fun insertArticle(article: Article): Completable {
         // TODO add remote
-        articleLocalDataSource.insertArticle(article)
+        return articleLocalDataSource.insertArticle(article)
     }
 
 
