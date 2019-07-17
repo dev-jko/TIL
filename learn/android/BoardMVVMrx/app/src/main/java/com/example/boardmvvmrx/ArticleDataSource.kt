@@ -1,9 +1,9 @@
 package com.example.boardmvvmrx
 
 import com.example.boardmvvmrx.data.Article
-import io.reactivex.Completable
 import io.reactivex.Flowable
 import io.reactivex.Observable
+import io.reactivex.Single
 
 interface ArticleDataSource {
 
@@ -11,5 +11,7 @@ interface ArticleDataSource {
 
     fun getArticle(articleId: Long): Observable<Article>
 
-    fun insertArticle(article: Article): Completable
+    fun insertArticle(article: Article): Single<Long>
+
+    fun updateArticle(article: Article): Single<Int>
 }

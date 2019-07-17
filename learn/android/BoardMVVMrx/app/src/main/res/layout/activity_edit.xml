@@ -2,12 +2,21 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools"
 >
     <data>
-        <variable name="vm" type="com.example.boardmvvmrx.viewModel.EditViewModel.ViewModel"/>
+        <variable name="editVm" type="com.example.boardmvvmrx.viewModel.EditViewModel.ViewModel"/>
+        <variable name="detailVm" type="com.example.boardmvvmrx.viewModel.DetailViewModel.ViewModel"/>
     </data>
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:context=".view.EditActivity">
+            tools:context=".view.EditActivity" android:orientation="vertical">
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        <EditText
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="0dp" android:id="@+id/edit_title_et"/>
+        <EditText
+                android:layout_weight="6"
+                android:layout_width="match_parent"
+                android:layout_height="0dp" android:id="@+id/edit_content_et"/>
+    </LinearLayout>
 </layout>

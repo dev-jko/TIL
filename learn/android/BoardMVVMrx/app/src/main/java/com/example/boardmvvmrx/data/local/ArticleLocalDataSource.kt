@@ -2,9 +2,9 @@ package com.example.boardmvvmrx.data.local
 
 import com.example.boardmvvmrx.ArticleDataSource
 import com.example.boardmvvmrx.data.Article
-import io.reactivex.Completable
 import io.reactivex.Flowable
 import io.reactivex.Observable
+import io.reactivex.Single
 
 class ArticleLocalDataSource private constructor(
     private val articleDao: ArticleDao
@@ -18,8 +18,12 @@ class ArticleLocalDataSource private constructor(
         return articleDao.getArticle(articleId)
     }
 
-    override fun insertArticle(article: Article): Completable {
+    override fun insertArticle(article: Article): Single<Long> {
         return articleDao.insertArticle(article)
+    }
+
+    override fun updateArticle(article: Article): Single<Int> {
+        return articleDao.updateArticle(article)
     }
 
     companion object {

@@ -24,9 +24,7 @@ interface ListViewModel {
     }
 
     class ViewModel(application: Application) : AndroidViewModel(application), Inputs, Outputs {
-
         private val repository: ArticleRepository by lazy { (application as BasicApp).getRepository() }
-        private val compositeDisposable = CompositeDisposable()
 
         private val articleClicked: PublishSubject<Article> = PublishSubject.create()
         private val newArticleClicked: PublishSubject<Boolean> = PublishSubject.create()
@@ -50,11 +48,6 @@ interface ListViewModel {
 
         override fun articleClicked(article: Article) {
             this.articleClicked.onNext(article)
-        }
-
-        override fun onCleared() {
-            compositeDisposable.dispose()
-            super.onCleared()
         }
 
     }

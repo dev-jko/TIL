@@ -2,9 +2,9 @@ package com.example.boardmvvmrx.data.remote
 
 import com.example.boardmvvmrx.ArticleDataSource
 import com.example.boardmvvmrx.data.Article
-import io.reactivex.Completable
 import io.reactivex.Flowable
 import io.reactivex.Observable
+import io.reactivex.Single
 
 object ArticleRemoteDataSource : ArticleDataSource {
     override fun getAllArticles(): Flowable<List<Article>> {
@@ -17,8 +17,13 @@ object ArticleRemoteDataSource : ArticleDataSource {
         return Observable.empty()
     }
 
-    override fun insertArticle(article: Article): Completable {
+    override fun insertArticle(article: Article): Single<Long> {
         // TODO
-        return Completable.complete()
+        return Single.create { 1 }
+    }
+
+    override fun updateArticle(article: Article): Single<Int> {
+        // TODO
+        return Single.create { 1 }
     }
 }

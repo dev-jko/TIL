@@ -1,5 +1,6 @@
 package com.example.boardmvvmrx.view
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -33,19 +34,26 @@ class NewArticleActivity : AppCompatActivity() {
         binding.newTitleEt.addTextChanged(vm.inputs::titleChanged)
         binding.newContentEt.addTextChanged(vm.inputs::contentChanged)
 
+
         vm.outputs.finishActivity()
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { this@NewArticleActivity.finish() }
             .addTo(compositeDisposable)
+
         vm.outputs.makeToast()
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { this@NewArticleActivity.makeToast(it.first, it.second) }
+            .addTo(compositeDisposable)
+
+        vm.outputs.startDetailActivity()
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe { this@NewArticleActivity.startDetailActivity(it) }
             .addTo(compositeDisposable)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         super.onCreateOptionsMenu(menu)
-        menuInflater.inflate(R.menu.actionbar_actions, menu)
+        menuInflater.inflate(R.menu.save_actionbar_actions, menu)
         return true
     }
 
@@ -60,4 +68,14 @@ class NewArticleActivity : AppCompatActivity() {
         Toast.makeText(application, message, duration).show()
     }
 
+    private fun startDetailActivity(articleId: Long) {
+        val intent = Intent(this, DetailActivity::class.java)
+        intent.putExtra("articleId", articleId)
+        startActivity(intent)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        compositeDisposable.dispose()
+    }
 }
