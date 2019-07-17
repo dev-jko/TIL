@@ -14,4 +14,6 @@ interface ArticleDataSource {
     fun insertArticle(article: Article): Single<Long>
 
     fun updateArticle(article: Article): Single<Int>
+
+    fun deleteArticle(article: Article): Single<Int>
 }

@@ -26,4 +26,9 @@ object ArticleRemoteDataSource : ArticleDataSource {
         // TODO
         return Single.create { 1 }
     }
+
+    override fun deleteArticle(article: Article): Single<Int> {
+        // TODO
+        return Single.create { 1 }
+    }
 }

@@ -2,7 +2,6 @@ package com.example.boardmvvmrx.data.local
 
 import androidx.room.*
 import com.example.boardmvvmrx.data.Article
-import io.reactivex.Completable
 import io.reactivex.Flowable
 import io.reactivex.Observable
 import io.reactivex.Single
@@ -20,4 +19,7 @@ interface ArticleDao {
 
     @Update
     fun updateArticle(article: Article): Single<Int>
+
+    @Delete
+    fun deleteArticle(article: Article): Single<Int>
 }

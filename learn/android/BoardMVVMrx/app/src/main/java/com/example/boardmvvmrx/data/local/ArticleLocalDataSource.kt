@@ -26,6 +26,10 @@ class ArticleLocalDataSource private constructor(
         return articleDao.updateArticle(article)
     }
 
+    override fun deleteArticle(article: Article): Single<Int> {
+        return articleDao.deleteArticle(article)
+    }
+
     companion object {
         private var INSTANCE: ArticleLocalDataSource? = null
 

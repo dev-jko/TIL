@@ -32,6 +32,11 @@ class ArticleRepository private constructor(
         return articleLocalDataSource.updateArticle(article).subscribeOn(Schedulers.io())
     }
 
+    override fun deleteArticle(article: Article): Single<Int> {
+        // TODO add remote
+        return articleLocalDataSource.deleteArticle(article).subscribeOn(Schedulers.io())
+    }
+
     companion object {
         private var INSTANCE: ArticleRepository? = null
 

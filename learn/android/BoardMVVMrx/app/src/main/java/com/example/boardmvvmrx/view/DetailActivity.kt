@@ -23,13 +23,13 @@ class DetailActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val vm = ViewModelProviders.of(this).get(DetailViewModel.ViewModel::class.java)
-        binding.vm = vm
+        val detailVm = ViewModelProviders.of(this).get(DetailViewModel.ViewModel::class.java)
+        binding.detailVm = detailVm
         binding.lifecycleOwner = this
 
-        vm.inputs.intent(intent)
+        detailVm.inputs.intent(intent)
 
-        vm.outputs.article()
+        detailVm.outputs.article()
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { article ->
                 binding.detailTitleTv.text = article.title
@@ -37,10 +37,7 @@ class DetailActivity : AppCompatActivity() {
             }
             .addTo(compositeDisposable)
 
-        vm.outputs.startEditActivity()
-
-            .doOnNext { println("before subscribe $it") }
-
+        detailVm.outputs.startEditActivity()
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { startEditActivity(it) }
             .addTo(compositeDisposable)
@@ -61,7 +58,7 @@ class DetailActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         if (item!!.itemId == R.id.edit_actionbar) {
-            binding.vm!!.inputs.editClicked()
+            binding.detailVm!!.inputs.editClicked()
         }
         return super.onOptionsItemSelected(item)
     }
