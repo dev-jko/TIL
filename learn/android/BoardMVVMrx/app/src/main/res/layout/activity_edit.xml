@@ -2,8 +2,8 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools"
 >
     <data>
-        <variable name="editVm" type="com.example.boardmvvmrx.viewModel.EditViewModel.ViewModel"/>
-        <variable name="detailVm" type="com.example.boardmvvmrx.viewModel.DetailViewModel.ViewModel"/>
+        <variable name="editVm" type="com.nadarm.boardmvvmrx.viewModel.EditViewModel.ViewModel"/>
+        <variable name="detailVm" type="com.nadarm.boardmvvmrx.viewModel.DetailViewModel.ViewModel"/>
     </data>
     <LinearLayout
             android:layout_width="match_parent"
