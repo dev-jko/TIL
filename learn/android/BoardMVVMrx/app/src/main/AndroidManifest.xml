@@ -10,13 +10,13 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
-        <activity android:name="com.nadarm.boardmvvmrx.view.EditActivity">
+        <activity android:name="com.nadarm.boardmvvmrx.presentation.view.EditActivity">
         </activity>
-        <activity android:name="com.nadarm.boardmvvmrx.view.NewArticleActivity">
+        <activity android:name="com.nadarm.boardmvvmrx.presentation.view.NewArticleActivity">
         </activity>
-        <activity android:name="com.nadarm.boardmvvmrx.view.DetailActivity">
+        <activity android:name="com.nadarm.boardmvvmrx.presentation.view.DetailActivity">
         </activity>
-        <activity android:name="com.nadarm.boardmvvmrx.view.ListActivity">
+        <activity android:name="com.nadarm.boardmvvmrx.presentation.view.ListActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 

@@ -2,12 +2,12 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools"
         xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
-        <variable name="vm" type="com.nadarm.boardmvvmrx.viewModel.ListViewModel.ViewModel"/>
+        <variable name="vm" type="com.nadarm.boardmvvmrx.presentation.viewModel.ListViewModel.ViewModel"/>
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:context=".view.ListActivity">
+            tools:context=".presentation.view.ListActivity">
 
         <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_article"

@@ -1,13 +1,16 @@
-package com.nadarm.boardmvvmrx.viewModel
+package com.nadarm.boardmvvmrx.presentation.viewModel
 
 import android.app.Application
 import android.content.Intent
 import androidx.lifecycle.AndroidViewModel
-import com.nadarm.boardmvvmrx.ArticleRepository
 import com.nadarm.boardmvvmrx.BasicApp
-import com.nadarm.boardmvvmrx.data.Article
+import com.nadarm.boardmvvmrx.data.ArticleRepositoryImpl
+import com.nadarm.boardmvvmrx.domain.entity.Article
+import io.reactivex.BackpressureStrategy
+import io.reactivex.Flowable
 import io.reactivex.Observable
 import io.reactivex.functions.BiFunction
+import io.reactivex.processors.BehaviorProcessor
 import io.reactivex.schedulers.Schedulers
 import io.reactivex.subjects.BehaviorSubject
 import io.reactivex.subjects.PublishSubject
@@ -21,17 +24,17 @@ interface DetailViewModel {
     }
 
     interface Outputs {
-        fun article(): Observable<Article>
+        fun article(): Flowable<Article>
         fun startEditActivity(): Observable<Long>
     }
 
     class ViewModel(application: Application) : AndroidViewModel(application), Inputs, Outputs {
-        private val repository: ArticleRepository by lazy { (application as BasicApp).getRepository() }
+        private val repository: ArticleRepositoryImpl by lazy { (application as BasicApp).getRepository() }
 
         private val intent: PublishSubject<Intent> = PublishSubject.create()
         private val editClicked: PublishSubject<Unit> = PublishSubject.create()
 
-        private val article: BehaviorSubject<Article> = BehaviorSubject.create()
+        private val article: BehaviorProcessor<Article> = BehaviorProcessor.create()
         private val startEditActivity: BehaviorSubject<Long> = BehaviorSubject.create()
 
         val inputs: Inputs = this
@@ -43,7 +46,8 @@ interface DetailViewModel {
                 .subscribeOn(Schedulers.io())
 
             articleIdObservable
-                .flatMap(repository::getArticle)
+                .toFlowable(BackpressureStrategy.LATEST)
+                .flatMap { repository.getArticle(it) }
                 .subscribe(this.article)
 
             this.editClicked
@@ -52,7 +56,7 @@ interface DetailViewModel {
 
         }
 
-        override fun article(): Observable<Article> = this.article
+        override fun article(): Flowable<Article> = this.article
         override fun startEditActivity(): Observable<Long> = this.startEditActivity
 
         override fun intent(intent: Intent) {

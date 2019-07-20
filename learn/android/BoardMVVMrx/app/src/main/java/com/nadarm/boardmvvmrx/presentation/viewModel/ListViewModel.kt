@@ -1,11 +1,11 @@
-package com.nadarm.boardmvvmrx.viewModel
+package com.nadarm.boardmvvmrx.presentation.viewModel
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
-import com.nadarm.boardmvvmrx.ArticleRepository
+import com.nadarm.boardmvvmrx.data.ArticleRepositoryImpl
 import com.nadarm.boardmvvmrx.BasicApp
-import com.nadarm.boardmvvmrx.data.Article
-import com.nadarm.boardmvvmrx.view.adapter.ArticleAdapter
+import com.nadarm.boardmvvmrx.domain.entity.Article
+import com.nadarm.boardmvvmrx.presentation.view.adapter.ArticleAdapter
 import io.reactivex.Flowable
 import io.reactivex.Observable
 import io.reactivex.subjects.PublishSubject
@@ -23,7 +23,7 @@ interface ListViewModel {
     }
 
     class ViewModel(application: Application) : AndroidViewModel(application), Inputs, Outputs {
-        private val repository: ArticleRepository by lazy { (application as BasicApp).getRepository() }
+        private val repository: ArticleRepositoryImpl by lazy { (application as BasicApp).getRepository() }
 
         private val articleClicked: PublishSubject<Article> = PublishSubject.create()
         private val newArticleClicked: PublishSubject<Boolean> = PublishSubject.create()

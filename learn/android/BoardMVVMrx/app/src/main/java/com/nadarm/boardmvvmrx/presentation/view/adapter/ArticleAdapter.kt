@@ -1,4 +1,4 @@
-package com.nadarm.boardmvvmrx.view.adapter
+package com.nadarm.boardmvvmrx.presentation.view.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

@@ -1,20 +1,19 @@
 package com.nadarm.boardmvvmrx.data.local
 
-import com.nadarm.boardmvvmrx.ArticleDataSource
+import com.nadarm.boardmvvmrx.domain.repository.ArticleRepository
 import com.nadarm.boardmvvmrx.data.Article
 import io.reactivex.Flowable
-import io.reactivex.Observable
 import io.reactivex.Single
 
 class ArticleLocalDataSource private constructor(
     private val articleDao: ArticleDao
-) : ArticleDataSource {
+) : ArticleRepository {
 
     override fun getAllArticles(): Flowable<List<Article>> {
         return articleDao.getAllArticles()
     }
 
-    override fun getArticle(articleId: Long): Observable<Article> {
+    override fun getArticle(articleId: Long): Flowable<com.nadarm.boardmvvmrx.domain.entity.Article> {
         return articleDao.getArticle(articleId)
     }
 

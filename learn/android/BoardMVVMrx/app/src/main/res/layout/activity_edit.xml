@@ -2,13 +2,13 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools"
 >
     <data>
-        <variable name="editVm" type="com.nadarm.boardmvvmrx.viewModel.EditViewModel.ViewModel"/>
-        <variable name="detailVm" type="com.nadarm.boardmvvmrx.viewModel.DetailViewModel.ViewModel"/>
+        <variable name="editVm" type="com.nadarm.boardmvvmrx.presentation.viewModel.EditViewModel.ViewModel"/>
+        <variable name="detailVm" type="com.nadarm.boardmvvmrx.presentation.viewModel.DetailViewModel.ViewModel"/>
     </data>
     <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:context=".view.EditActivity" android:orientation="vertical">
+            tools:context=".presentation.view.EditActivity" android:orientation="vertical">
 
         <EditText
                 android:layout_weight="1"

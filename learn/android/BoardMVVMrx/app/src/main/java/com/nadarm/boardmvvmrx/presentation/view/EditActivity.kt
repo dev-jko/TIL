@@ -1,4 +1,4 @@
-package com.nadarm.boardmvvmrx.view
+package com.nadarm.boardmvvmrx.presentation.view
 
 import android.os.Bundle
 import android.view.Menu
@@ -10,8 +10,8 @@ import androidx.lifecycle.ViewModelProviders
 import com.nadarm.boardmvvmrx.R
 import com.nadarm.boardmvvmrx.databinding.ActivityEditBinding
 import com.nadarm.boardmvvmrx.util.addTextChanged
-import com.nadarm.boardmvvmrx.viewModel.DetailViewModel
-import com.nadarm.boardmvvmrx.viewModel.EditViewModel
+import com.nadarm.boardmvvmrx.presentation.viewModel.DetailViewModel
+import com.nadarm.boardmvvmrx.presentation.viewModel.EditViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.addTo

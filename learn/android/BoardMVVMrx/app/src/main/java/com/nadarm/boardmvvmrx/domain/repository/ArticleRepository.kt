@@ -1,15 +1,15 @@
-package com.nadarm.boardmvvmrx
+package com.nadarm.boardmvvmrx.domain.repository
 
-import com.nadarm.boardmvvmrx.data.Article
+
+import com.nadarm.boardmvvmrx.domain.entity.Article
 import io.reactivex.Flowable
-import io.reactivex.Observable
 import io.reactivex.Single
 
-interface ArticleDataSource {
+interface ArticleRepository {
 
     fun getAllArticles(): Flowable<List<Article>>
 
-    fun getArticle(articleId: Long): Observable<Article>
+    fun getArticle(articleId: Long): Flowable<Article>
 
     fun insertArticle(article: Article): Single<Long>
 

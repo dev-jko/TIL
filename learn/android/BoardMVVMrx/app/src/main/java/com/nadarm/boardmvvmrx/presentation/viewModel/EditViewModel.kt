@@ -1,11 +1,11 @@
-package com.nadarm.boardmvvmrx.viewModel
+package com.nadarm.boardmvvmrx.presentation.viewModel
 
 import android.app.Application
 import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
-import com.nadarm.boardmvvmrx.ArticleRepository
+import com.nadarm.boardmvvmrx.data.ArticleRepositoryImpl
 import com.nadarm.boardmvvmrx.BasicApp
-import com.nadarm.boardmvvmrx.data.Article
+import com.nadarm.boardmvvmrx.domain.entity.Article
 import io.reactivex.Observable
 import io.reactivex.functions.Function4
 import io.reactivex.schedulers.Schedulers
@@ -28,7 +28,7 @@ interface EditViewModel {
     }
 
     class ViewModel(application: Application) : AndroidViewModel(application), Inputs, Outputs {
-        private val repository: ArticleRepository by lazy { (application as BasicApp).getRepository() }
+        private val repository: ArticleRepositoryImpl by lazy { (application as BasicApp).getRepository() }
 
         private val titleChanged: PublishSubject<String> = PublishSubject.create()
         private val contentChanged: PublishSubject<String> = PublishSubject.create()
@@ -50,9 +50,7 @@ interface EditViewModel {
                     titleChanged,
                     contentChanged,
                     Function4<Unit, Long, String, String, Article> { _, articleId, title, content ->
-                        val article = Article(title, content)
-                        article.articleId = articleId
-                        return@Function4 article
+                        return@Function4 Article(articleId, title, content)
                     }
                 )
                 .flatMapSingle(repository::updateArticle)

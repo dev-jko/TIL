@@ -1,23 +1,22 @@
-package com.nadarm.boardmvvmrx
+package com.nadarm.boardmvvmrx.data
 
-import com.nadarm.boardmvvmrx.data.Article
+import com.nadarm.boardmvvmrx.domain.repository.ArticleRepository
 import io.reactivex.Flowable
-import io.reactivex.Observable
 import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers
 
-class ArticleRepository private constructor(
-    private val articleLocalDataSource: ArticleDataSource,
-    private val articleRemoteDataSource: ArticleDataSource
-) : ArticleDataSource {
+class ArticleRepositoryImpl private constructor(
+    private val articleLocalDataSource: ArticleRepository,
+    private val articleRemoteDataSource: ArticleRepository
+) : ArticleRepository {
 
 
     override fun getAllArticles(): Flowable<List<Article>> {
-        return articleLocalDataSource.getAllArticles().subscribeOn(Schedulers.io())
+        return articleLocalDataSource.getAllArticles().subscribeOn(Schedulers.io()).map { dataArticle -> com.nadarm.boardmvvmrx.domain.entity.Article(dataArticle) }
 //        articleRemoteDataSource.getAllArticles()
     }
 
-    override fun getArticle(articleId: Long): Observable<Article> {
+    override fun getArticle(articleId: Long): Flowable<com.nadarm.boardmvvmrx.domain.entity.Article> {
         // TODO add remote
         return articleLocalDataSource.getArticle(articleId).subscribeOn(Schedulers.io())
     }
@@ -38,15 +37,19 @@ class ArticleRepository private constructor(
     }
 
     companion object {
-        private var INSTANCE: ArticleRepository? = null
+        private var INSTANCE: ArticleRepositoryImpl? = null
 
         fun getInstance(
-            articleLocalDataSource: ArticleDataSource,
-            articleRemoteDataSource: ArticleDataSource
-        ): ArticleRepository {
+            articleLocalDataSource: ArticleRepository,
+            articleRemoteDataSource: ArticleRepository
+        ): ArticleRepositoryImpl {
             if (INSTANCE == null) {
                 synchronized(this) {
-                    INSTANCE = ArticleRepository(articleLocalDataSource, articleRemoteDataSource)
+                    INSTANCE =
+                        ArticleRepositoryImpl(
+                            articleLocalDataSource,
+                            articleRemoteDataSource
+                        )
                 }
             }
             return INSTANCE!!
