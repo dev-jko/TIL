@@ -4,8 +4,8 @@ import android.app.Application
 import android.content.Intent
 import androidx.lifecycle.AndroidViewModel
 import com.nadarm.boardmvvmrx.BasicApp
-import com.nadarm.boardmvvmrx.data.ArticleRepositoryImpl
-import com.nadarm.boardmvvmrx.domain.entity.Article
+import com.nadarm.boardmvvmrx.data.ArticleDataRepository
+import com.nadarm.boardmvvmrx.domain.model.Article
 import io.reactivex.BackpressureStrategy
 import io.reactivex.Flowable
 import io.reactivex.Observable
@@ -29,7 +29,7 @@ interface DetailViewModel {
     }
 
     class ViewModel(application: Application) : AndroidViewModel(application), Inputs, Outputs {
-        private val repository: ArticleRepositoryImpl by lazy { (application as BasicApp).getRepository() }
+        private val repository: ArticleDataRepository by lazy { (application as BasicApp).getRepository() }
 
         private val intent: PublishSubject<Intent> = PublishSubject.create()
         private val editClicked: PublishSubject<Unit> = PublishSubject.create()

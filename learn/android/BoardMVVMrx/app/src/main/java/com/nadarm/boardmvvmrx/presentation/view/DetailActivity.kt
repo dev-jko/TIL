@@ -25,8 +25,11 @@ class DetailActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         val detailVm = ViewModelProviders.of(this).get(DetailViewModel.ViewModel::class.java)
         val deleteVm = ViewModelProviders.of(this).get(DeleteViewModel.ViewModel::class.java)
+
+
         binding.detailVm = detailVm
         binding.deleteVm = deleteVm
         binding.lifecycleOwner = this

@@ -3,9 +3,9 @@ package com.nadarm.boardmvvmrx.presentation.viewModel
 import android.app.Application
 import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
-import com.nadarm.boardmvvmrx.data.ArticleRepositoryImpl
 import com.nadarm.boardmvvmrx.BasicApp
-import com.nadarm.boardmvvmrx.domain.entity.Article
+import com.nadarm.boardmvvmrx.domain.model.Article
+import com.nadarm.boardmvvmrx.domain.useCase.DeleteArticle
 import io.reactivex.Observable
 import io.reactivex.functions.BiFunction
 import io.reactivex.schedulers.Schedulers
@@ -26,7 +26,7 @@ interface DeleteViewModel {
     }
 
     class ViewModel(application: Application) : AndroidViewModel(application), Inputs, Outputs {
-        private val repository: ArticleRepositoryImpl by lazy { (application as BasicApp).getRepository() }
+        private val deleteArticleUseCase: DeleteArticle by lazy { DeleteArticle((application as BasicApp).getRepository()) }
 
         private val article: PublishSubject<Article> = PublishSubject.create()
         private val deleteClicked: PublishSubject<Unit> = PublishSubject.create()
@@ -42,7 +42,7 @@ interface DeleteViewModel {
             val deleteResult = this.deleteClicked
                 .throttleFirst(500, TimeUnit.MILLISECONDS)
                 .withLatestFrom(this.article, BiFunction<Unit, Article, Article> { _, article -> article })
-                .flatMapSingle(repository::deleteArticle)
+                .flatMapSingle(deleteArticleUseCase::execute)
                 .subscribeOn(Schedulers.io())
                 .share()
 

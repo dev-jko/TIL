@@ -1,22 +1,23 @@
 package com.nadarm.boardmvvmrx.data
 
+import com.nadarm.boardmvvmrx.domain.model.Article
 import com.nadarm.boardmvvmrx.domain.repository.ArticleRepository
 import io.reactivex.Flowable
 import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers
 
-class ArticleRepositoryImpl private constructor(
+class ArticleDataRepository private constructor(
     private val articleLocalDataSource: ArticleRepository,
     private val articleRemoteDataSource: ArticleRepository
 ) : ArticleRepository {
 
 
     override fun getAllArticles(): Flowable<List<Article>> {
-        return articleLocalDataSource.getAllArticles().subscribeOn(Schedulers.io()).map { dataArticle -> com.nadarm.boardmvvmrx.domain.entity.Article(dataArticle) }
+        return articleLocalDataSource.getAllArticles().subscribeOn(Schedulers.io())
 //        articleRemoteDataSource.getAllArticles()
     }
 
-    override fun getArticle(articleId: Long): Flowable<com.nadarm.boardmvvmrx.domain.entity.Article> {
+    override fun getArticle(articleId: Long): Flowable<Article> {
         // TODO add remote
         return articleLocalDataSource.getArticle(articleId).subscribeOn(Schedulers.io())
     }
@@ -37,16 +38,16 @@ class ArticleRepositoryImpl private constructor(
     }
 
     companion object {
-        private var INSTANCE: ArticleRepositoryImpl? = null
+        private var INSTANCE: ArticleDataRepository? = null
 
         fun getInstance(
             articleLocalDataSource: ArticleRepository,
             articleRemoteDataSource: ArticleRepository
-        ): ArticleRepositoryImpl {
+        ): ArticleDataRepository {
             if (INSTANCE == null) {
                 synchronized(this) {
                     INSTANCE =
-                        ArticleRepositoryImpl(
+                        ArticleDataRepository(
                             articleLocalDataSource,
                             articleRemoteDataSource
                         )

@@ -5,8 +5,8 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.nadarm.boardmvvmrx.R
-import com.nadarm.boardmvvmrx.data.Article
 import com.nadarm.boardmvvmrx.databinding.ArticleItemBinding
+import com.nadarm.boardmvvmrx.domain.model.Article
 
 class ArticleAdapter(private val delegate: Delegate) : RecyclerView.Adapter<ArticleAdapter.ViewHolder>() {
 

@@ -1,4 +1,4 @@
-package com.nadarm.boardmvvmrx.domain.entity
+package com.nadarm.boardmvvmrx.domain.model
 
 data class Article(
     val articleId: Long,

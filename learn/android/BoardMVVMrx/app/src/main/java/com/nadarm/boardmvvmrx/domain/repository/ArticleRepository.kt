@@ -1,7 +1,7 @@
 package com.nadarm.boardmvvmrx.domain.repository
 
 
-import com.nadarm.boardmvvmrx.domain.entity.Article
+import com.nadarm.boardmvvmrx.domain.model.Article
 import io.reactivex.Flowable
 import io.reactivex.Single
 

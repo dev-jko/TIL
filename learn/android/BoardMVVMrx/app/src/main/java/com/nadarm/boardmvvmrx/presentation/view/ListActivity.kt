@@ -6,8 +6,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProviders
 import com.nadarm.boardmvvmrx.R
-import com.nadarm.boardmvvmrx.data.Article
 import com.nadarm.boardmvvmrx.databinding.ActivityMainBinding
+import com.nadarm.boardmvvmrx.domain.model.Article
 import com.nadarm.boardmvvmrx.presentation.view.adapter.ArticleAdapter
 import com.nadarm.boardmvvmrx.presentation.viewModel.ListViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers

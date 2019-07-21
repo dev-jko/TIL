@@ -4,9 +4,9 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.nadarm.boardmvvmrx.data.Article
+import com.nadarm.boardmvvmrx.data.model.ArticleData
 
-@Database(entities = [Article::class], version = 1)
+@Database(entities = [ArticleData::class], version = 1)
 abstract class ArticleDatabase : RoomDatabase() {
 
     abstract fun articleDao(): ArticleDao
