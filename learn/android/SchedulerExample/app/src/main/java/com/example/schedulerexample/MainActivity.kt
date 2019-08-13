@@ -21,17 +21,23 @@ class MainActivity : AppCompatActivity() {
 
         (application as MyApplication).getComponent().inject(this)
 
-        Observable.interval(500, TimeUnit.MILLISECONDS, this.schedulers.computation())
+        Observable.interval(2000, TimeUnit.MILLISECONDS, this.schedulers.computation())
             .doOnNext { println("observable1 : computation - ${Thread.currentThread().name}") }
             .observeOn(schedulers.ui())
             .subscribe { println("observable1 : ui - ${Thread.currentThread().name}") }
             .addTo(compositeDisposable)
 
 
-        Observable.interval(600, TimeUnit.MILLISECONDS, this.schedulers.computation())
-            .doOnNext { println("observable1 : computation - ${Thread.currentThread().name}") }
+        Observable.interval(3000, TimeUnit.MILLISECONDS, this.schedulers.computation())
+            .doOnNext { println("observable2 : computation - ${Thread.currentThread().name}") }
             .observeOn(schedulers.ui())
             .subscribe { println("observable2 : ui - ${Thread.currentThread().name}") }
+            .addTo(compositeDisposable)
+
+        Observable.interval(4000, TimeUnit.MILLISECONDS, this.schedulers.computation())
+            .doOnNext { println("observable3 : computation - ${Thread.currentThread().name}") }
+            .observeOn(schedulers.ui())
+            .subscribe { println("observable3 : ui - ${Thread.currentThread().name}") }
             .addTo(compositeDisposable)
 
 
