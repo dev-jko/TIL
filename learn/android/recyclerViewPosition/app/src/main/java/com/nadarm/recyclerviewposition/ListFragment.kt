@@ -42,6 +42,7 @@ class ListFragment : Fragment() {
             .doOnSubscribe { println("doOnSubscribe") }
             .doOnNext { println("doOnNext") }
             .doOnComplete { println("doOnComplete") }
+            .doFinally { println("finally") }
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(adapter::refresh)
