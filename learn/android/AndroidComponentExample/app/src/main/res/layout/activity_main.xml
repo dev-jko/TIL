@@ -6,20 +6,12 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/buttonStart"
         android:layout_width="144dp"
         android:layout_height="83dp"
-        android:text="시작"
+        android:text="my service 시작"
         app:layout_constraintEnd_toStartOf="@+id/buttonEnd"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -28,9 +20,29 @@
         android:id="@+id/buttonEnd"
         android:layout_width="144dp"
         android:layout_height="83dp"
-        android:text="종료"
+        android:text="my service 종료"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/buttonStart"
         app:layout_constraintTop_toTopOf="parent" />
+
+
+
+    <Button
+        android:id="@+id/buttonStart2"
+        android:layout_width="144dp"
+        android:layout_height="83dp"
+        android:text="my intent service 시작"
+        app:layout_constraintEnd_toStartOf="@+id/buttonEnd"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/buttonStart"/>
+
+    <Button
+        android:id="@+id/buttonEnd2"
+        android:layout_width="144dp"
+        android:layout_height="83dp"
+        android:text="my intent service 종료"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/buttonStart2"
+        app:layout_constraintTop_toBottomOf="@id/buttonEnd" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

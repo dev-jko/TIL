@@ -19,5 +19,19 @@ class MainActivity : AppCompatActivity() {
         buttonEnd.setOnClickListener {
 
         }
+
+
+
+
+        buttonStart2.setOnClickListener {
+            val intent = Intent(this, MyIntentService::class.java)
+            startService(intent)
+        }
+
+        buttonEnd2.setOnClickListener {
+
+        }
+
+
     }
 }
