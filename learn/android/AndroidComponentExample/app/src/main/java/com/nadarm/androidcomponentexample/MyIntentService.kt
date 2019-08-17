@@ -46,7 +46,7 @@ class MyIntentService : IntentService(MyIntentService::class.java.simpleName) {
             )
             .addTo(compositeDisposable)
 
-        (1..10).toObservable()
+        (1..5).toObservable()
             .subscribe(
                 { println("My Intent Service - $myCount, iterable on next $it, ${Thread.currentThread().name}") },
                 { println("My Intent Service - $myCount, iterable on error, ${Thread.currentThread().name}") },
@@ -58,7 +58,7 @@ class MyIntentService : IntentService(MyIntentService::class.java.simpleName) {
 
     override fun onDestroy() {
         super.onDestroy()
-        compositeDisposable.clear()
+//        compositeDisposable.clear()
         println("My Intent Service - $myCount, on destroy, ${Thread.currentThread().name}")
     }
 }
