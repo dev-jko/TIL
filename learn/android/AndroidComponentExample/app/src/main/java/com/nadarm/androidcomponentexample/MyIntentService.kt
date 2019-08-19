@@ -54,11 +54,13 @@ class MyIntentService : IntentService(MyIntentService::class.java.simpleName) {
             )
             .addTo(compositeDisposable)
 
+        Thread.sleep(5000)
+
     }
 
     override fun onDestroy() {
         super.onDestroy()
-//        compositeDisposable.clear()
+        compositeDisposable.clear()
         println("My Intent Service - $myCount, on destroy, ${Thread.currentThread().name}")
     }
 }
