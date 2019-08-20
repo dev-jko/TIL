@@ -2,7 +2,9 @@ package com.nadarm.androidcomponentexample
 
 import android.app.IntentService
 import android.content.Intent
+import android.os.Binder
 import android.os.IBinder
+import android.widget.Toast
 import io.reactivex.Observable
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.addTo
@@ -13,11 +15,16 @@ class MyIntentService : IntentService(MyIntentService::class.java.simpleName) {
 
     companion object {
         var count = 0
+
     }
 
     private val myCount = count++
     private val compositeDisposable = CompositeDisposable()
+    private val binder: IBinder = MyBinder(this)
 
+    fun makeToast() {
+        Toast.makeText(this, "bind service $myCount, ${this@MyIntentService}", Toast.LENGTH_SHORT).show()
+    }
 
     override fun onCreate() {
         super.onCreate()
@@ -31,7 +38,12 @@ class MyIntentService : IntentService(MyIntentService::class.java.simpleName) {
 
     override fun onBind(intent: Intent?): IBinder? {
         println("My Intent Service - $myCount, on bind, ${Thread.currentThread().name}")
-        return super.onBind(intent)
+        return this.binder
+    }
+
+    override fun onUnbind(intent: Intent?): Boolean {
+        println("My Intent Service - $myCount, on unbind, ${Thread.currentThread().name}")
+        return super.onUnbind(intent)
     }
 
     override fun onHandleIntent(intent: Intent?) {
@@ -63,4 +75,13 @@ class MyIntentService : IntentService(MyIntentService::class.java.simpleName) {
         compositeDisposable.clear()
         println("My Intent Service - $myCount, on destroy, ${Thread.currentThread().name}")
     }
+
+
+    class MyBinder(
+        private val service: MyIntentService
+    ) : Binder() {
+        fun getService(): MyIntentService = this.service
+    }
+
+
 }
