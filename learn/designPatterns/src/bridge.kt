@@ -6,11 +6,13 @@ fun main() {
     warrior.handle()
     warrior.weapon = sword
     warrior.handle()
+    warrior.eat()
 
     val smith = Smith(bow)
     smith.handle()
     smith.weapon = sword
     smith.handle()
+    smith.drink()
 }
 
 interface Weapon {
@@ -27,12 +29,20 @@ class Warrior(var weapon: Weapon) : WeaponHandler {
         print("Warrior ")
         this.weapon.attack()
     }
+
+    fun eat(){
+        println("Warrior Eat")
+    }
 }
 
 class Smith(var weapon: Weapon) : WeaponHandler {
     override fun handle() {
         print("Smith ")
         this.weapon.repair()
+    }
+
+    fun drink(){
+        println("Smith Drink")
     }
 }
 
