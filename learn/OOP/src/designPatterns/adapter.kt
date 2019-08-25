@@ -1,3 +1,5 @@
+package designPatterns
+
 fun main() {
     val oldPhone = OldPhone()
     chargePhone(oldPhone)

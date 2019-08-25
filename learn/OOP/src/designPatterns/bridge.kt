@@ -1,3 +1,5 @@
+package designPatterns
+
 fun main() {
     val bow = Bow()
     val sword = Sword()
@@ -26,42 +28,42 @@ interface WeaponHandler {
 
 class Warrior(var weapon: Weapon) : WeaponHandler {
     override fun handle() {
-        print("Warrior ")
+        print("designPatterns.Warrior ")
         this.weapon.attack()
     }
 
     fun eat(){
-        println("Warrior Eat")
+        println("designPatterns.Warrior Eat")
     }
 }
 
 class Smith(var weapon: Weapon) : WeaponHandler {
     override fun handle() {
-        print("Smith ")
+        print("designPatterns.Smith ")
         this.weapon.repair()
     }
 
     fun drink(){
-        println("Smith Drink")
+        println("designPatterns.Smith Drink")
     }
 }
 
 class Bow : Weapon {
     override fun attack() {
-        println("Bow Attack")
+        println("designPatterns.Bow Attack")
     }
 
     override fun repair() {
-        println("Bow Repair")
+        println("designPatterns.Bow Repair")
     }
 }
 
 class Sword : Weapon {
     override fun attack() {
-        println("Sword Attack")
+        println("designPatterns.Sword Attack")
     }
 
     override fun repair() {
-        println("Sword Repair")
+        println("designPatterns.Sword Repair")
     }
 }
