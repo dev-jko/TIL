@@ -23,10 +23,23 @@ class M4ContainmentVessel(
     }
 
     private fun handleIncompleteEvent(potStatus: Int) {
-        TODO()
+
     }
 
     private fun handleBrewingEvent(potStatus: Int) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        when (potStatus) {
+            CoffeeMakerAPI.POT_NOT_EMPTY -> {
+                containerAvailable()
+                api.setWarmerState(CoffeeMakerAPI.WARMER_ON)
+            }
+            CoffeeMakerAPI.WARMER_EMPTY -> {
+                containerUnavailable()
+                api.setWarmerState(CoffeeMakerAPI.WARMER_OFF)
+            }
+            else -> {
+                containerAvailable()
+                api.setWarmerState(CoffeeMakerAPI.WARMER_OFF)
+            }
+        }
     }
 }
