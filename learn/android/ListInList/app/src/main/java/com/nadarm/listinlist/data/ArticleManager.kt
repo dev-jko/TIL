@@ -2,6 +2,10 @@ package com.nadarm.listinlist.data
 
 object ArticleManager {
 
+    private val _articles: MutableList<Article> = ArrayList<Article>()
+    val articles: List<Article> get() = _articles
+    private var index: Long = 0
+
     init {
         listOf(
             Article(1, "test1", "content"),
@@ -11,11 +15,6 @@ object ArticleManager {
             Article(5, "test5", "content")
         ).forEach { _articles.add(it) }
     }
-
-    private val _articles: MutableList<Article> = ArrayList<Article>()
-    val articles: List<Article> get() = _articles
-
-    private var index: Long = 0
 
     fun addArticle(article: Article) {
         article.id = index++

@@ -27,8 +27,11 @@ class MainActivity : AppCompatActivity() {
 
     private fun getListInList(): List<MainItem> {
         val result = ArrayList<MainItem>()
-        val temp: MainItem = MainItem.ArticlesItem(manager.articles)
+        result.add(MainItem.HeaderItem("인기"))
+        val temp: MainItem =
+            MainItem.ArticlesItem(manager.articles.map { MainItem.ArticlePreviewItem(it) })
         result.add(temp)
+        result.add(MainItem.HeaderItem("목록"))
         manager.articles.forEach {
             val item = MainItem.ArticleItem(it)
             result.add(item)

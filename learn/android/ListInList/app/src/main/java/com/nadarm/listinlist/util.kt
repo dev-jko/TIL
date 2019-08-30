@@ -7,8 +7,6 @@ import com.nadarm.listinlist.ui.MainListAdapter
 
 
 @BindingAdapter(value = ["newList", "listAdapter"], requireAll = true)
-fun bindList(view: View, newList: List<MainItem>?, listAdapter: MainListAdapter) {
-    if (newList != null) {
-        listAdapter.submitList(newList)
-    }
+fun bindList(view: View, newList: List<MainItem>, listAdapter: MainListAdapter) {
+    listAdapter.submitList(newList)
 }
