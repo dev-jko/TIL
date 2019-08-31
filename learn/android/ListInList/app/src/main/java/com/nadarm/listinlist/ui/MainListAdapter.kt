@@ -9,11 +9,14 @@ import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.nadarm.listinlist.BR
+import com.nadarm.listinlist.Callback
 import com.nadarm.listinlist.R
 import com.nadarm.listinlist.data.Article
 import com.nadarm.listinlist.databinding.ItemArticlesBinding
 
-class MainListAdapter : ListAdapter<MainItem, ViewHolder>(
+class MainListAdapter(
+    private val callback: Callback
+) : ListAdapter<MainItem, ViewHolder>(
     object : DiffUtil.ItemCallback<MainItem>() {
         override fun areItemsTheSame(oldItem: MainItem, newItem: MainItem): Boolean {
             return oldItem.getType() == newItem.getType()
@@ -46,17 +49,17 @@ class MainListAdapter : ListAdapter<MainItem, ViewHolder>(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.binding(getItem(position))
+        holder.binding(getItem(position), callback)
     }
 }
 
 class ViewHolder(private val binding: ViewDataBinding) : RecyclerView.ViewHolder(binding.root) {
-    fun binding(item: MainItem) {
+    fun binding(item: MainItem, callback: Callback) {
         binding.setVariable(BR.item, item)
+        binding.setVariable(BR.callback, callback)
         if (item.getType() == ItemType.ARTICLES) {
             LinearSnapHelper().attachToRecyclerView((binding as ItemArticlesBinding).subRecyclerView)
-//            PagerSnapHelper().attachToRecyclerView((binding as ItemArticlesBinding).subRecyclerView)
-            binding.setVariable(BR.adapter, MainListAdapter())
+            binding.setVariable(BR.adapter, MainListAdapter(callback))
         }
         binding.executePendingBindings()
     }

@@ -4,23 +4,27 @@
     <data>
 
         <variable
+            name="callback"
+            type="com.nadarm.listinlist.Callback" />
+
+        <variable
             name="item"
             type="com.nadarm.listinlist.ui.MainItem.HeaderItem" />
     </data>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:background="@color/colorPrimary"
         android:layout_height="50dp"
+        android:background="@color/colorPrimary"
         android:orientation="vertical">
 
         <TextView
             android:id="@+id/textView"
-            android:textColor="@color/colorWhite"
-            android:gravity="center_vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:gravity="center_vertical"
             android:text="@{item.getItem()}"
+            android:textColor="@color/colorWhite"
             android:textSize="20sp" />
     </LinearLayout>
 </layout>

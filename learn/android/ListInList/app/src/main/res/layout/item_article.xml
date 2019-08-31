@@ -8,6 +8,10 @@
             name="item"
             type="com.nadarm.listinlist.ui.MainItem.ArticleItem" />
 
+        <variable
+            name="callback"
+            type="com.nadarm.listinlist.Callback" />
+
     </data>
 
     <androidx.cardview.widget.CardView
@@ -15,6 +19,7 @@
         android:layout_height="80dp"
         android:layout_margin="5dp"
         android:elevation="10dp"
+        android:onClick="@{()->callback.callback(item)}"
         app:cardCornerRadius="10dp">
 
 

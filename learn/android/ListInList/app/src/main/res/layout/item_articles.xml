@@ -5,6 +5,10 @@
     <data>
 
         <variable
+            name="callback"
+            type="com.nadarm.listinlist.Callback" />
+
+        <variable
             name="item"
             type="com.nadarm.listinlist.ui.MainItem.ArticlesItem" />
 
@@ -19,17 +23,17 @@
         android:orientation="vertical">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:clipToPadding="false"
             android:id="@+id/subRecyclerView"
-            android:paddingTop="8dp"
-            android:paddingBottom="8dp"
-            android:paddingStart="15dp"
-            android:paddingEnd="15dp"
             listAdapter="@{adapter}"
             newList="@{item.getItem()}"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:clipToPadding="false"
             android:orientation="horizontal"
+            android:paddingStart="15dp"
+            android:paddingTop="8dp"
+            android:paddingEnd="15dp"
+            android:paddingBottom="8dp"
             app:adapter="@{adapter}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 

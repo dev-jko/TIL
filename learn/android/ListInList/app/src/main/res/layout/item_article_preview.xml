@@ -4,6 +4,10 @@
     <data>
 
         <variable
+            name="callback"
+            type="com.nadarm.listinlist.Callback" />
+
+        <variable
             name="item"
             type="com.nadarm.listinlist.ui.MainItem.ArticlePreviewItem" />
 
@@ -13,7 +17,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginStart="4dp"
-        android:layout_marginEnd="4dp">
+        android:layout_marginEnd="4dp"
+        android:onClick="@{()->callback.callback(item)}">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -31,10 +36,10 @@
             <TextView
                 android:id="@+id/textView_content"
                 android:layout_width="match_parent"
-                android:textSize="20sp"
                 android:layout_height="0dp"
                 android:layout_weight="0.7"
-                android:text="@{item.getItem().content}" />
+                android:text="@{item.getItem().content}"
+                android:textSize="20sp" />
 
         </LinearLayout>
 
