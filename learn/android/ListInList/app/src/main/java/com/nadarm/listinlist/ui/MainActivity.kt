@@ -1,6 +1,7 @@
 package com.nadarm.listinlist.ui
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -10,12 +11,12 @@ import com.nadarm.listinlist.data.ArticleManager
 import com.nadarm.listinlist.databinding.ActivityMainBinding
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), Callback {
 
     private val binding: ActivityMainBinding by lazy {
         DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
     }
-    private val adapter: ListAdapter<MainItem, ViewHolder> = MainListAdapter(ArticleClickCallback())
+    private val adapter: ListAdapter<MainItem, ViewHolder> = MainListAdapter(this)
     private val manager = ArticleManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,10 +41,7 @@ class MainActivity : AppCompatActivity() {
         return result
     }
 
-
-    class ArticleClickCallback : Callback {
-        override fun callback(item: MainItem) {
-
-        }
+    override fun callback(item: MainItem) {
+        Toast.makeText(this, "item : ${item.getItem()}", Toast.LENGTH_SHORT).show()
     }
 }
