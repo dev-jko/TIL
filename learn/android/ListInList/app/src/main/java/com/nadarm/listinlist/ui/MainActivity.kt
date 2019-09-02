@@ -16,14 +16,14 @@ class MainActivity : AppCompatActivity(), Callback {
     private val binding: ActivityMainBinding by lazy {
         DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
     }
-    private val adapter: ListAdapter<MainItem, ViewHolder> = MainListAdapter(this)
+    private val mainAdapter: ListAdapter<MainItem, ViewHolder> = MainListAdapter(this)
     private val manager = ArticleManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding.mainRecyclerView.adapter = adapter
+        binding.mainRecyclerView.adapter = mainAdapter
 
-        adapter.submitList(getListInList())
+        mainAdapter.submitList(getListInList())
     }
 
 

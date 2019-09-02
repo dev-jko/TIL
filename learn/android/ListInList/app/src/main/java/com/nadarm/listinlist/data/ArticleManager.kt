@@ -8,11 +8,11 @@ object ArticleManager {
 
     init {
         listOf(
-            Article(1, "test1", "content"),
-            Article(2, "test2", "content"),
-            Article(3, "test3", "content"),
-            Article(4, "test4", "content"),
-            Article(5, "test5", "content")
+            Article("test1", "content"),
+            Article("test2", "content"),
+            Article("test3", "content"),
+            Article("test4", "content"),
+            Article("test5", "content")
         ).forEach { _articles.add(it) }
     }
 
@@ -21,8 +21,17 @@ object ArticleManager {
         _articles.add(article)
     }
 
+
     fun getArticle(id: Long): Article? {
         return _articles.find { it.id == id }
+    }
+
+    fun updateArticle(article: Article) {
+        val i = _articles.indexOfFirst { it.id == article.id }
+        if (i >= 0) {
+            _articles[i] = article
+        }
+
     }
 
 }
