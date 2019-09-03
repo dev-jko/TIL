@@ -1,17 +1,23 @@
 package com.nadarm.listinlist.di
 
 import android.app.Application
-import dagger.Module
-import dagger.Provides
-import javax.inject.Singleton
+import dagger.android.AndroidInjector
+import dagger.android.DispatchingAndroidInjector
+import dagger.android.HasAndroidInjector
+import javax.inject.Inject
 
-@Module
-object AndroidApp : Application() {
+class AndroidApp : Application(), HasAndroidInjector {
 
-    val appComponent: AppComponent = DaggerAppComponent.builder().build()
+    @Inject
+    lateinit var dispatchingAndroidInjector: DispatchingAndroidInjector<Any>
 
-    @Singleton
-    @JvmStatic
-    @Provides
-    fun provideApplication(): Application = this
+    override fun onCreate() {
+        super.onCreate()
+        DaggerAppComponent.builder().build().inject(this)
+    }
+
+    override fun androidInjector(): AndroidInjector<Any> {
+        return dispatchingAndroidInjector
+    }
+
 }

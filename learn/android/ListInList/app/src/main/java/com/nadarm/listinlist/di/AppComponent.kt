@@ -1,12 +1,13 @@
 package com.nadarm.listinlist.di
 
-import com.nadarm.listinlist.data.DataProvideModule
+import android.app.Application
 import dagger.Component
 import javax.inject.Singleton
 
 @Singleton
-@Component(modules = [AndroidApp::class, DataProvideModule::class])
+@Component(modules = [MainActivityModule::class])
 interface AppComponent {
 
+    fun inject(app: Application)
 
 }
