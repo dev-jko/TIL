@@ -1,22 +1,17 @@
 package com.nadarm.firstmac
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity() {
+class Main2Activity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        println("${this.javaClass.simpleName} - onCreate")
+        setContentView(R.layout.activity_main2)
 
-        tv.setOnClickListener {
-            val intent = Intent(this, Main2Activity::class.java)
-            startActivity(intent)
-        }
+        println("${this.javaClass.simpleName} - onCreate")
     }
+
 
     override fun onStart() {
         super.onStart()

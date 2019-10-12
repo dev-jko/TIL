@@ -27,3 +27,19 @@ if let converted = Int(number) {
 } else {
     print("else")
 }
+
+var myNum = 0
+let timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true){_ in
+    myNum += 1
+    print(myNum)
+}
+
+timer.invalidate()
+
+//while true {
+//    if myNum == 5 {
+//        timer.invalidate()
+//    }
+//    print("while \(myNum)")
+//}
+
