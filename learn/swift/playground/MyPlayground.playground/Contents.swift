@@ -292,3 +292,156 @@ class Dog2:Animal {
     var age:Int?
 }
 
+enum Month:Int {
+    case january = 1
+    case february
+    case march
+    
+    func description() ->String {
+        switch self {
+        case .january:
+            return "1월"
+        case .february:
+            return "2dnjf"
+        case .march:
+            return "3dnjf"
+        }
+    }
+}
+
+let jan = Month.january
+print(jan)
+print(jan.description())
+
+let feb = Month(rawValue: 2)
+print(feb)
+
+enum Spoon {
+    case dirt
+    case bronze
+    case silver
+    case gold
+    
+    func description() -> String {
+        switch self {
+        case .dirt:
+            return "dirt"
+        case .bronze:
+            return "bronze"
+        default:
+            return "spoon"
+        }
+    }
+}
+
+let spoon:Spoon = .gold
+let spoon2 = Spoon.gold
+
+func doSomething(with spoon:Spoon){
+    print(spoon.description())
+}
+
+doSomething(with: .silver)
+
+
+enum NetworkError {
+    case invalidParameter(String, String)
+    case timeout
+    
+    var message:String {
+        "message"
+    }
+}
+
+let error:NetworkError = .invalidParameter("email", "invalid")
+
+if case .invalidParameter(let field, let message) = error {
+    print(field)
+    print(message)
+}
+
+switch error {
+case .invalidParameter(let field, let message):
+    print(field)
+    print(message)
+default:
+    break
+}
+
+
+let age5:Int? = 20
+switch age5 {
+case .none:
+    print("정보 없음")
+case .some(let x) where x < 20:
+    print("청소년")
+case .some(let x) where x < 65:
+    print("성인")
+default:
+    print("어르신")
+}
+
+
+protocol Sendable {
+    var from:String? { get }
+    var to: String { get }
+    
+    func send()
+}
+
+struct Mail:Sendable {
+    var from: String?
+    var to: String
+    
+    func send() {
+        print("send a mail from \(self.from ?? "") to \(self.to)")
+    }
+}
+
+func sendAnything(sendable:Sendable) {
+    sendable.send()
+}
+
+let mail = Mail(from: "email", to: "kjd")
+sendAnything(sendable: mail)
+
+let anyNumber:Any = 10
+//let number10:Int? = anyNumber as? Int
+
+if let number10 = anyNumber as? Int {
+    print(number10 + 1)
+}
+
+print(anyNumber is Int)
+
+
+struct OddEvenFilter:ExpressibleByArrayLiteral{
+    typealias ArrayLiteralElement = Int
+    
+    init(arrayLiteral elements: Self.ArrayLiteralElement...) {
+        elements.forEach { i in
+            if i % 2 == 0 {
+                evens.append(i)
+            }else{
+                odds.append(i)
+            }
+        }
+    }
+    
+    var odds: [Int] = []
+    var evens: [Int] = []
+}
+
+let oddEvenFilter:OddEvenFilter = [1,2,3,4,5,6]
+print(oddEvenFilter.evens)
+print(oddEvenFilter.odds)
+
+extension String {
+    
+    func myReversed(){
+        print(self.reversed())
+    }
+}
+
+let str12 = "hi"
+str12.myReversed()
