@@ -33,9 +33,9 @@ def dfs(k, N, used, user_id, ban):
 
 
 inputs = [
-    [["frodo", "fradi", "crodo", "abc123", "frodoc"], ["fr*d*", "abc1**"]], #	2
-    [["frodo", "fradi", "crodo", "abc123", "frodoc"], ["*rodo", "*rodo", "******"]], #	2
-    [["frodo", "fradi", "crodo", "abc123", "frodoc"], ["fr*d*", "*rodo", "******", "******"]] #	3
+    [["frodo", "fradi", "crodo", "abc123", "frodoc"], ["fr*d*", "abc1**"]],  # 2
+    [["frodo", "fradi", "crodo", "abc123", "frodoc"], ["*rodo", "*rodo", "******"]],  # 2
+    [["frodo", "fradi", "crodo", "abc123", "frodoc"], ["fr*d*", "*rodo", "******", "******"]]  # 3
 ]
 for input123123 in inputs:
     print(solution(*input123123))

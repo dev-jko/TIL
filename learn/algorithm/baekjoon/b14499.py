@@ -66,7 +66,7 @@ N, M, x, y, K = map(int, input().split())
 data = [list(map(int, input().split())) for _ in range(N)]
 cmds = list(map(int, input().split()))
 dice = Dice(x, y)
-for cmd in cmds:
-    result = dice.move(cmd)
+for used in cmds:
+    result = dice.move(used)
     if result is not None:
         print(result)

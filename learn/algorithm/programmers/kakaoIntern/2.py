@@ -4,12 +4,14 @@ def solution(s):
     for i in s:
         result.append(list(i.split(',')))
     result.sort(key=lambda x: -len(x))
+    print(result)
     answer = []
     while result:
         t = result.pop().pop()
         answer.append(int(t))
         for i in range(len(result)):
             result[i].remove(t)
+        print(result)
     return answer
 
 
